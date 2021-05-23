@@ -1,4 +1,4 @@
-# Trello Clone
+# React Trello Clone
 
 This is a very simplified version of Trello using React and Firebase.
 
