@@ -7,12 +7,11 @@ import WrappedSignUpForm from './SignUpForm';
 
 class SignUpScreen extends Component {
   async onSubmit(email, password, username) {
-    const { history } = this.props;
     return auth
       .doCreateUserWithEmailAndPassword(email, password)
       .then(authUser => {
         db.doCreateUser(authUser.user.uid, username, email);
-        history.push(routes.BOARDS);
+        window.history.push(routes.BOARDS);
       });
   }
 

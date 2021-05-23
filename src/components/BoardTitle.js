@@ -66,7 +66,6 @@ export default class BoardTitle extends Component {
               <Input
                 value={boardTitle}
                 onChange={this.handleBoardTitleChange}
-                autoFocus
               />
             </Form>
           ) : (

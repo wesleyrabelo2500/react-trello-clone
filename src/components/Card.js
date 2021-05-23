@@ -78,7 +78,6 @@ export default class Card extends Component {
             <TitleInput
               value={this.state.title}
               onChange={event => this.handleTitleChange(event)}
-              autoFocus
             />
           </form>
         ) : (

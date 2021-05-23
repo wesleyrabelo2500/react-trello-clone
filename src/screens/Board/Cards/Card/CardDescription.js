@@ -54,7 +54,6 @@ export default class CartDescription extends Component {
               onChange={event => this.handleDescriptionChange(event)}
               value={this.state.description}
               autosize
-              autoFocus
             />
             <SaveButton
               disabled={!isValid}

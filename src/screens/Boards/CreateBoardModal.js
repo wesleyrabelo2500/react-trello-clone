@@ -58,7 +58,6 @@ export default class CreateBoardModal extends Component {
             placeholder="Add board title"
             onChange={event => this.handleBoardTitleChange(event)}
             value={this.state.boardTitle}
-            autoFocus
           />
           {isValid && (
             <AButton
