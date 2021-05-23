@@ -1,15 +1,13 @@
-import React from 'react';
 import styled from 'styled-components';
 import { Button } from 'antd';
+import React from 'react';
 
 const Loading = styled.div`
-  text-align: center;
+    text-align: center;
 `;
 
-const Loader = () => (
-  <Loading>
-    <Button shape="circle" loading />
-  </Loading>
+export const Loader = () => (
+    <Loading>
+        <Button shape="circle" loading />
+    </Loading>
 );
-
-export default Loader;
