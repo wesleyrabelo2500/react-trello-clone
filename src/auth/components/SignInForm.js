@@ -1,11 +1,12 @@
 import { Form, Icon, Input } from 'antd';
-import React, { useState } from 'react';
-import { doSignInWithEmailAndPassword } from '../api/auth';
+import React, { Component } from 'react';
+
 import { BOARDS } from '../../core/routes/routes';
-// import { byPropKey } from '../../utils';
-import { FormContainer } from './FormContainer';
+import { byPropKey } from '../../utils';
+import { doSignInWithEmailAndPassword } from '../api/auth';
 import { ErrorMessage } from './ErrorMessage';
 import { FormButton } from './FormButton';
+import { FormContainer } from './FormContainer';
 
 const SignInForm = ({ history, form }) => {
     const [email, setEmail] = useState('');
