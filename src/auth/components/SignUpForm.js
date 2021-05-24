@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import { byPropKey } from '../../utils';
 import { FormContainer } from './FormContainer';
 import { Form, Icon, Input } from 'antd';
 import { FormButton } from './FormButton';
@@ -8,19 +7,28 @@ import { ErrorMessage } from './ErrorMessage';
 const SignUpForm = ({ form, onSubmit }) => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
-    const [passwordOne, setPasswordOne] = useState('');
-    // eslint-disable-next-line
-    const [passwordTwo, setPasswordTwo] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [confirmPassword, serConfirmPassword] = useState('');
     const [error, setError] = useState(null);
 
     const FormItem = Form.Item;
 
     const onsubmit = event => {
-        onSubmit(email, passwordOne, username).catch(error => {
-            setError(error.message);
-        });
-
         event.preventDefault();
+        const submitButton = document.querySelector('.signup-form-button');
+        submitButton.disabled = true;
+        if (newPassword !== confirmPassword) {
+            setError('new password and confirm password do not match');
+        } else {
+            onSubmit(email, newPassword, username)
+                .then(() => {
+                    submitButton.disabled = false;
+                })
+                .catch(error => {
+                    submitButton.disabled = false;
+                    setError(error.message);
+                });
+        }
     };
 
     const { getFieldDecorator } = form;
@@ -52,31 +60,31 @@ const SignUpForm = ({ form, onSubmit }) => {
                     )}
                 </FormItem>
                 <FormItem>
-                    {getFieldDecorator('passwordOne', {
-                        rules: [{ required: true, message: 'Please input your passwordOne!' }],
+                    {getFieldDecorator('newPassword', {
+                        rules: [{ required: true, message: 'Please input your new password!' }],
                     })(
                         <Input
                             prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                             type="password"
                             placeholder="Password"
-                            onChange={event => setPasswordOne(event.target.value)}
+                            onChange={event => setNewPassword(event.target.value)}
                         />
                     )}
                 </FormItem>
                 <FormItem>
-                    {getFieldDecorator('passwordTwo', {
-                        rules: [{ required: true, message: 'Please input your passwordTwo!' }],
+                    {getFieldDecorator('confirmPassword', {
+                        rules: [{ required: true, message: 'Please input your confirm password!' }],
                     })(
                         <Input
                             prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                             type="password"
                             placeholder="Confirm password"
-                            onChange={event => setPasswordTwo(event.target.value)}
+                            onChange={event => serConfirmPassword(event.target.value)}
                         />
                     )}
                 </FormItem>
                 <FormItem>
-                    <FormButton type="primary" htmlType="submit" className="login-form-button">
+                    <FormButton type="primary" htmlType="submit" className="login-form-button signup-form-button">
                         Sign Up
                     </FormButton>
                 </FormItem>

@@ -16,12 +16,16 @@ const SignInForm = ({ history, form }) => {
 
     const onSubmit = async event => {
         event.preventDefault();
+        const submitButton = document.querySelector('.login-form-button');
+        submitButton.disabled = true;
 
         return await doSignInWithEmailAndPassword(email, password)
             .then(() => {
+                submitButton.disabled = false;
                 history.push(BOARDS);
             })
             .catch(error => {
+                submitButton.disabled = false;
                 setError(error.message);
             });
     };
@@ -56,7 +60,7 @@ const SignInForm = ({ history, form }) => {
                     )}
                 </FormItem>
                 <FormItem>
-                    <FormButton type="primary" htmlType="submit">
+                    <FormButton type="primary" htmlType="submit" className="login-form-button">
                         Log in
                     </FormButton>
                 </FormItem>
