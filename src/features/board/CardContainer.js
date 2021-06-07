@@ -27,10 +27,6 @@ class CardContainer extends Component {
         modalIsVisible: false,
     };
 
-    moveCard = (oldListKey, newListKey, cardKey, card) => {
-        this.props.onMoveCard(oldListKey, newListKey, cardKey, card);
-    };
-
     showModal = () => {
         this.setState({
             modalIsVisible: true,

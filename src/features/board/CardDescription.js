@@ -2,8 +2,6 @@ import { Input, Button } from 'antd';
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-const { TextArea } = Input;
-
 export class CardDescription extends Component {
     state = {
         description: '',
@@ -27,9 +25,7 @@ export class CardDescription extends Component {
     handleSubmitForm = (event, callback, listKey, cardKey, card) => {
         event.preventDefault();
 
-        const updatedCard = { ...card };
-        updatedCard.description = this.state.description;
-        callback(listKey, cardKey, updatedCard).then(() => {
+        callback(listKey, cardKey, { ...card, description: this.state.description }).then(() => {
             this.handleDisableEditMode();
         });
     };
@@ -73,7 +69,7 @@ export class CardDescription extends Component {
     }
 }
 
-const StyledTextArea = styled(TextArea)`
+const StyledTextArea = styled(Input.TextArea)`
     margin-bottom: 10px !important;
 `;
 

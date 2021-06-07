@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 import { CardDescription } from './CardDescription';
-import { CardDetail } from './CardDetail';
-import { CardLabel } from './CardLabel';
+import { LABELS } from '../../core/constants';
+import { Label } from './Label';
 
 export class CardModal extends Component {
     state = {
@@ -54,3 +54,44 @@ const Details = styled.div`
 const StyledIcon = styled(Icon)`
     color: #798d99 !important;
 `;
+
+export const CardDetail = props => {
+    return (
+        <CardDetailWrapper>
+            <CardDetailHead>
+                <CardDetailIcon>{props.icon}</CardDetailIcon>
+                <div>{props.title}</div>
+            </CardDetailHead>
+            <div>{props.content}</div>
+        </CardDetailWrapper>
+    );
+};
+
+const CardDetailWrapper = styled.div`
+    width: 100%;
+`;
+
+const CardDetailHead = styled.div`
+    display: flex;
+`;
+
+const CardDetailIcon = styled.div`
+    width: 7%;
+`;
+
+class CardLabel extends Component {
+    render() {
+        const { card, listKey, onEditCard } = this.props;
+        return LABELS.map((label, index) => (
+            <Label
+                key={index}
+                color={label.color}
+                text={label.text}
+                active={card.label === label.text}
+                card={card}
+                listKey={listKey}
+                onClick={onEditCard}
+            />
+        ));
+    }
+}

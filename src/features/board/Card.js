@@ -21,11 +21,6 @@ export class Card extends Component {
         this.setState(() => ({ showEditIcons: false }));
     };
 
-    handleEnableEdit = () => {
-        const { title } = this.props.card;
-        this.setState(() => ({ editMode: true, title }));
-    };
-
     handleDisableEdit = () => {
         this.setState(() => ({ editMode: false }));
     };
