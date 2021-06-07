@@ -6,7 +6,7 @@ import { AuthUserContext } from './auth/utils/AuthUserContext';
 import { withAuthentication } from './auth/utils/AuthHOC';
 
 // core
-import AuthorizedNavigation from './core/navigation/AuthorizedNavigation';
+import AuthorizedNavigation from './core/layout/AuthNavigation';
 import { ACCOUNT, BOARD, BOARDS, LANDING, PASSWORD_FORGET, SIGN_IN, SIGN_UP } from './core/routes/routes';
 
 // pages
