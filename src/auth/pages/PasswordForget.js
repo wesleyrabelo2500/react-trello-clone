@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { isEmail } from 'validator';
 
 import { byPropKey } from '../../shared/utils';
-import { doPasswordReset } from '../api/auth';
+import { passwordReset } from '../api/auth';
 import { ErrorMessage } from '../components/ErrorMessage';
 import { FormButton } from '../components/FormButton';
 import { FormContainer } from '../components/FormContainer';
@@ -31,7 +31,7 @@ class PasswordForgetScreen extends Component {
             this.setState(byPropKey('error', error.message));
         });
 
-        return doPasswordReset(email);
+        return passwordReset(email);
     }
 
     resetEmailInputErr = () => {

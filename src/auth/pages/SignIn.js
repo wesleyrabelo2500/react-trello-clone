@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { FormContainer } from '../components/FormContainer';
 import { BOARDS, PASSWORD_FORGET, SIGN_UP } from '../../core/routes/routes';
-import { doSignInWithEmailAndPassword } from '../api/auth';
+import { signInWithEmailAndPassword } from '../api/auth';
 import { EMAIL_ERROR_TYPES } from '../constants';
 import { FormButton } from '../components/FormButton';
 import { ErrorMessage } from '../components/ErrorMessage';
@@ -28,7 +28,7 @@ const SignInForm = ({ form }) => {
         });
 
         submitButton.disabled = true;
-        return await doSignInWithEmailAndPassword(email, password)
+        return await signInWithEmailAndPassword(email, password)
             .then(() => {
                 submitButton.disabled = false;
                 window.location = BOARDS;

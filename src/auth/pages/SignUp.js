@@ -4,8 +4,8 @@ import { Form, Icon, Input } from 'antd';
 import { isEmail } from 'validator';
 
 import { BOARDS } from '../../core/routes/routes';
-import { doCreateUser } from '../../core/api/db';
-import { doCreateUserWithEmailAndPassword } from '../api/auth';
+import { createUser } from '../../core/api/http';
+import { createUserWithEmailAndPassword } from '../api/auth';
 import { EMAIL_ERROR_TYPES } from '../constants';
 import { FormContainer } from '../components/FormContainer';
 import { FormButton } from '../components/FormButton';
@@ -127,8 +127,8 @@ const SignUpForm = ({ form, onSubmit }) => {
 
 class SignUpScreen extends Component {
     async onSubmit(email, password, username) {
-        return doCreateUserWithEmailAndPassword(email, password).then(authUser => {
-            doCreateUser(authUser.user.uid, username, email);
+        return createUserWithEmailAndPassword(email, password).then(authUser => {
+            createUser(authUser.user.uid, username, email);
             window.history.push(BOARDS);
         });
     }

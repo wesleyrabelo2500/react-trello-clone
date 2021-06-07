@@ -2,7 +2,7 @@ import { DropTarget } from 'react-dnd';
 import React, { Component } from 'react';
 
 import CardContainer from './CardContainer';
-import { doAddCard, doDeleteCard, doEditCard, doMoveCard, onceGetCard } from '../../core/api/db';
+import { addCard, deleteCard, card, moveCard, getCard } from '../../core/api/http';
 import { FormCreation } from './FormCreation';
 import { ItemTypes } from '../../core/constants';
 import { mergeDataWithKey } from '../../shared/utils';
@@ -27,7 +27,7 @@ class Cards extends Component {
     };
 
     componentDidMount = () => {
-        onceGetCard(this.props.list.key).then(snapshot => {
+        getCard(this.props.list.key).then(snapshot => {
             const snapshotVal = snapshot.val();
             if (!snapshotVal) {
                 return;
@@ -42,8 +42,8 @@ class Cards extends Component {
 
     handleCreateCard = cardTitle => {
         const { list } = this.props;
-        return doAddCard(list.key, cardTitle)
-            .then(() => onceGetCard(list.key))
+        return addCard(list.key, cardTitle)
+            .then(() => getCard(list.key))
             .then(snapshot => {
                 const snapshotVal = snapshot.val();
                 if (!snapshotVal) {
@@ -59,7 +59,7 @@ class Cards extends Component {
     };
 
     handleEditCard = (listKey, cardKey, card) => {
-        return doEditCard(listKey, cardKey, card).then(() => {
+        return card(listKey, cardKey, card).then(() => {
             const updatedCards = { ...this.state.cards };
             const cardIndex = updatedCards[listKey].findIndex(card => card.key === cardKey);
             updatedCards[listKey][cardIndex] = {
@@ -74,7 +74,7 @@ class Cards extends Component {
     };
 
     moveCard = (component, oldListKey, newListKey, cardKey, card) => {
-        doMoveCard(oldListKey, newListKey, cardKey, card).then(() => {
+        moveCard(oldListKey, newListKey, cardKey, card).then(() => {
             const cardItems = this.state.cards[oldListKey].filter(card => card.key !== cardKey);
             const updatedCards = { ...this.state.cards };
             updatedCards[oldListKey] = cardItems;
@@ -93,7 +93,7 @@ class Cards extends Component {
     };
 
     handleDeleteCard = (listKey, cardKey) => {
-        return doDeleteCard(listKey, cardKey).then(() => {
+        return deleteCard(listKey, cardKey).then(() => {
             const updatedCards = { ...this.state.cards };
             updatedCards[listKey] = this.state.cards[listKey].filter(card => card.key !== cardKey);
             this.setState({

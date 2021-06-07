@@ -6,11 +6,11 @@ import { darken } from 'polished';
 
 import { ACCOUNT, BOARDS } from '../routes/routes';
 import { Button } from '../../shared/components/Button';
-import { doSignOut } from '../../auth/api/auth';
+import { signOut } from '../../auth/api/auth';
 
 class NavigationAuth extends Component {
     signOut() {
-        return doSignOut();
+        return signOut();
     }
 
     render() {

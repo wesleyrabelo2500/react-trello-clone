@@ -1,7 +1,7 @@
 import { Form, Icon, Input } from 'antd';
 import React, { Component } from 'react';
 
-import { doPasswordUpdate } from '../api/auth';
+import { passwordUpdate } from '../api/auth';
 import { byPropKey } from '../../shared/utils';
 import { ErrorMessage } from '../components/ErrorMessage';
 import { FormButton } from '../components/FormButton';
@@ -22,7 +22,7 @@ class AccountScreen extends Component {
         event.preventDefault();
 
         // TODO: add spinners
-        return doPasswordUpdate(this.state.passwordOne)
+        return passwordUpdate(this.state.passwordOne)
             .then(() => {
                 this.props.form.setFieldsValue({
                     passwordOne: '',

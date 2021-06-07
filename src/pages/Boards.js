@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 
 import { CreateBoardModal } from '../features/boards/CreateBoardModal';
-import { doCreateBoard, onceGetBoards } from '../core/api/db';
+import { createBoard, getBoards } from '../core/api/http';
 import { Spinner } from '../shared/components/Spinner';
 import { isEmpty, mergeDataWithKey } from '../shared/utils';
 import { withAuthorization } from '../auth/utils/AuthHOC';
@@ -21,7 +21,7 @@ class BoardsScreen extends Component {
         this.setState({
             isLoading: true,
         });
-        onceGetBoards()
+        getBoards()
             .then(snapshot => {
                 if (!snapshot.val()) {
                     return;
@@ -38,7 +38,7 @@ class BoardsScreen extends Component {
     };
 
     handleCreateBoard = board => {
-        return doCreateBoard(board).then(response => {
+        return createBoard(board).then(response => {
             let updatedBoards = this.state.boards;
             updatedBoards.push(response);
             this.setState({

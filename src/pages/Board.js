@@ -9,14 +9,14 @@ import { BoardTitle } from '../features/board/BoardTitle';
 import Cards from '../features/board/Cards';
 import {
     doCreateList,
-    doDeleteBoard,
+    deleteBoard,
     doDeleteList,
-    doEditBoard,
-    doUpdateBoard,
-    doUpdateList,
-    onceGetBoard,
+    editBoard,
+    updateBoard,
+    updateList,
+    getBoard,
     onceGetLists,
-} from '../core/api/db';
+} from '../core/api/http';
 import { FormCreation } from '../features/board/FormCreation';
 import { ListHeader } from '../features/board/ListHeader';
 import { Spinner } from '../shared/components/Spinner';
@@ -36,7 +36,7 @@ class BoardScreen extends Component {
             isLoading: true,
         });
         const boardKey = this.getBoardKey();
-        Promise.all([onceGetBoard(boardKey), onceGetLists(boardKey)])
+        Promise.all([getBoard(boardKey), onceGetLists(boardKey)])
             .then(snapshots => {
                 const board = snapshots[0].val();
                 const lists = mergeDataWithKey(snapshots[1].val());
@@ -62,7 +62,7 @@ class BoardScreen extends Component {
 
     handleUpdateList = (listKey, title) => {
         const { boardKey } = this.state;
-        return doUpdateList(boardKey, listKey, { title }).then(response => {
+        return updateList(boardKey, listKey, { title }).then(response => {
             const lists = [...this.state.lists];
             lists[lists.findIndex(list => list.key === listKey)] = {
                 ...response,
@@ -88,7 +88,7 @@ class BoardScreen extends Component {
         const { boardKey } = this.state;
         const updatedBoard = { ...this.state.board };
         updatedBoard.favorite = !updatedBoard.favorite;
-        return doEditBoard(boardKey, updatedBoard).then(() => {
+        return editBoard(boardKey, updatedBoard).then(() => {
             this.setState(() => ({
                 board: updatedBoard,
             }));
@@ -96,13 +96,13 @@ class BoardScreen extends Component {
     };
 
     handleDeleteBoard = boardKey => {
-        return doDeleteBoard(boardKey).then(() => {
+        return deleteBoard(boardKey).then(() => {
             this.props.history.push('/boards');
         });
     };
 
     handleUpdateBoard = (boardKey, title) => {
-        return doUpdateBoard(boardKey, title).then(() => {
+        return updateBoard(boardKey, title).then(() => {
             const updatedBoard = { ...this.state.board, ...title };
             this.setState({
                 board: updatedBoard,
