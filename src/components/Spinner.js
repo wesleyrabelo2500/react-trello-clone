@@ -6,7 +6,7 @@ const Loading = styled.div`
     text-align: center;
 `;
 
-export const Loader = () => (
+export const Spinner = () => (
     <Loading>
         <Button shape="circle" loading />
     </Loading>

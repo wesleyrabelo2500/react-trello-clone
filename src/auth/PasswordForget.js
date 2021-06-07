@@ -7,7 +7,7 @@ import { doPasswordReset } from './api/auth';
 import { ErrorMessage } from './components/ErrorMessage';
 import { FormButton } from './components/FormButton';
 import { FormContainer } from './components/FormContainer';
-import { EMAIL_ERROR_TYPES } from './components/constants';
+import { EMAIL_ERROR_TYPES } from './constants';
 
 const FormItem = Form.Item;
 
@@ -16,8 +16,8 @@ const INITIAL_STATE = {
     error: null,
     emailInputErr: {
         status: '',
-        message: ''
-    }
+        message: '',
+    },
 };
 
 class PasswordForgetScreen extends Component {
@@ -37,23 +37,27 @@ class PasswordForgetScreen extends Component {
     }
 
     resetEmailInputErr = () => {
-        this.setState(byPropKey('emailInputErr', {
-            status: '',
-            message: ''
-        }));
+        this.setState(
+            byPropKey('emailInputErr', {
+                status: '',
+                message: '',
+            })
+        );
     };
 
     handleEmailInputBlur = event => {
         const isEmailValid = isEmail(event.target.value);
         if (!isEmailValid) {
-            this.setState(byPropKey('emailInputErr', {
-                status: EMAIL_ERROR_TYPES.INVALID.STATUS,
-                message: EMAIL_ERROR_TYPES.INVALID.MESSAGE
-            }));
+            this.setState(
+                byPropKey('emailInputErr', {
+                    status: EMAIL_ERROR_TYPES.INVALID.STATUS,
+                    message: EMAIL_ERROR_TYPES.INVALID.MESSAGE,
+                })
+            );
         } else {
             this.resetEmailInputErr();
         }
-    }
+    };
 
     render() {
         const { getFieldDecorator } = this.props.form;
@@ -63,10 +67,7 @@ class PasswordForgetScreen extends Component {
             <FormContainer>
                 <h1 className="title">Password Forget</h1>
                 <Form onSubmit={event => this.handleSubmit(event)} className="login-form">
-                    <FormItem
-                        validateStatus={this.state.emailInputErr.status}
-                        help={this.state.emailInputErr.message}
-                    >
+                    <FormItem validateStatus={this.state.emailInputErr.status} help={this.state.emailInputErr.message}>
                         {getFieldDecorator('email', {
                             rules: [{ required: true, message: 'Please input your email!' }],
                         })(

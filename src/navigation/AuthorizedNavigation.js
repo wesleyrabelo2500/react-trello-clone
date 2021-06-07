@@ -2,10 +2,10 @@ import { Dropdown, Icon, Menu } from 'antd';
 import { Link, withRouter } from 'react-router-dom';
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { darken } from 'polished';
 
 import { ACCOUNT, BOARDS } from '../core/routes/routes';
 import { Button } from '../components/Button';
-import { Nav, NavItems, NavUser } from './styled';
 import { SignOutButton } from '../auth/SignOut';
 
 class NavigationAuth extends Component {
@@ -42,6 +42,29 @@ const StyledButton = styled(Button)`
     }
     &:active {
         background: hsla(0, 0%, 100%, 0.1);
+    }
+`;
+
+const Nav = styled.nav`
+    background: ${darken(0.075, '#0079BF')};
+    padding: 4px;
+    margin-bottom: 20px;
+`;
+
+const NavItems = styled.div`
+    display: inline-block;
+    margin-right: 10px;
+    a {
+        display: inline-block;
+    }
+`;
+
+const NavUser = styled.div`
+    position: absolute;
+    right: 0;
+    top: 4px;
+    div {
+        display: inline-block;
     }
 `;
 

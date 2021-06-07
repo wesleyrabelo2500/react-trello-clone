@@ -6,7 +6,7 @@ import { Boards, BoardTypes, BoardTypeTitle } from './styled';
 import { BoardLink, NewBoard } from './components/BoardsButtons';
 import { CreateBoardModal } from './CreateBoardModal';
 import { doCreateBoard, onceGetBoards } from '../../core/api/db';
-import { Loader } from '../../components/Loader';
+import { Spinner } from '../../components/Spinner';
 import { isEmpty, mergeDataWithKey } from '../../utils';
 import { withAuthorization } from '../../auth/utils/AuthHOC';
 
@@ -64,7 +64,7 @@ class BoardsScreen extends Component {
         const starredBoards = boards.filter(board => board.favorite);
 
         return isLoading ? (
-            <Loader />
+            <Spinner />
         ) : (
             <Boards>
                 {!isEmpty(starredBoards) && (

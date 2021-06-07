@@ -19,7 +19,7 @@ import {
 } from '../../core/api/db';
 import { FormCreation } from './FormCreation';
 import { ListHeader } from './components/ListHeader';
-import { Loader } from '../../components/Loader';
+import { Spinner } from '../../components/Spinner';
 import { isEmpty, mergeDataWithKey } from '../../utils';
 import { withAuthorization } from '../../auth/utils/AuthHOC';
 
@@ -117,7 +117,7 @@ class BoardScreen extends Component {
     render() {
         const { board, lists, boardKey } = this.state;
         return this.state.isLoading ? (
-            <Loader />
+            <Spinner />
         ) : (
             !isEmpty(board) && (
                 <React.Fragment>
