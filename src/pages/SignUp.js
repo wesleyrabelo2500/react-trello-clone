@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { Form, Icon, Input } from 'antd';
 import { isEmail } from 'validator';
 
-import { BOARDS } from '../core/routes/routes';
+import { LANDING } from '../core/routes/routes';
 import { createUser } from '../core/api/db';
 import { createUserWithEmailAndPassword } from '../core/api/auth';
 import { EMAIL_ERROR_TYPES } from '../features/auth/constants';
@@ -129,7 +129,7 @@ class SignUpScreen extends Component {
     async onSubmit(email, password, username) {
         return createUserWithEmailAndPassword(email, password).then(authUser => {
             createUser(authUser.user.uid, username, email);
-            window.history.push(BOARDS);
+            window.location = LANDING;
         });
     }
 

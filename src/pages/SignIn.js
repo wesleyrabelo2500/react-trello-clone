@@ -4,7 +4,7 @@ import { isEmail } from 'validator';
 import { Link } from 'react-router-dom';
 
 import { FormContainer } from '../features/auth/components/FormContainer';
-import { BOARDS, PASSWORD_FORGET, SIGN_UP } from '../core/routes/routes';
+import { LANDING, PASSWORD_FORGET, SIGN_UP } from '../core/routes/routes';
 import { signInWithEmailAndPassword } from '../core/api/auth';
 import { EMAIL_ERROR_TYPES } from '../features/auth/constants';
 import { FormButton } from '../features/auth/components/FormButton';
@@ -31,7 +31,7 @@ const SignInForm = ({ form }) => {
         return await signInWithEmailAndPassword(email, password)
             .then(() => {
                 submitButton.disabled = false;
-                window.location = BOARDS;
+                window.location = LANDING;
             })
             .catch(error => {
                 submitButton.disabled = false;
