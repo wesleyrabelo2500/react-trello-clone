@@ -2,12 +2,12 @@ import { Form, Icon, Input } from 'antd';
 import React, { Component } from 'react';
 import { isEmail } from 'validator';
 
-import { byPropKey } from '../utils';
-import { doPasswordReset } from './api/auth';
-import { ErrorMessage } from './components/ErrorMessage';
-import { FormButton } from './components/FormButton';
-import { FormContainer } from './components/FormContainer';
-import { EMAIL_ERROR_TYPES } from './constants';
+import { byPropKey } from '../../shared/utils';
+import { doPasswordReset } from '../api/auth';
+import { ErrorMessage } from '../components/ErrorMessage';
+import { FormButton } from '../components/FormButton';
+import { FormContainer } from '../components/FormContainer';
+import { EMAIL_ERROR_TYPES } from '../constants';
 
 const FormItem = Form.Item;
 

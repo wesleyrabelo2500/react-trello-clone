@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Label } from './Label';
-import { LABELS } from '../../../core/constants';
+import { LABELS } from '../../core/constants';
 
 export class CardLabel extends Component {
     render() {

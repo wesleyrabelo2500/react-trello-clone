@@ -2,9 +2,9 @@ import { Icon, Input } from 'antd';
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import { GrayButton } from '../../../components/Button';
+import { GrayButton } from '../../shared/components/Button';
 import { Label } from './Label';
-import { LABELS } from '../../../core/constants';
+import { LABELS } from '../../core/constants';
 
 export class Card extends Component {
     state = {

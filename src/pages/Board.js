@@ -3,10 +3,10 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import { List } from 'antd';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import styled from 'styled-components';
 
-import { AddList, Lists } from './styled';
-import { BoardTitle } from './components/BoardTitle';
-import Cards from './Cards';
+import { BoardTitle } from '../features/board/BoardTitle';
+import Cards from '../features/board/Cards';
 import {
     doCreateList,
     doDeleteBoard,
@@ -16,12 +16,12 @@ import {
     doUpdateList,
     onceGetBoard,
     onceGetLists,
-} from '../../core/api/db';
-import { FormCreation } from './FormCreation';
-import { ListHeader } from './components/ListHeader';
-import { Spinner } from '../../components/Spinner';
-import { isEmpty, mergeDataWithKey } from '../../utils';
-import { withAuthorization } from '../../auth/utils/AuthHOC';
+} from '../core/api/db';
+import { FormCreation } from '../features/board/FormCreation';
+import { ListHeader } from '../features/board/ListHeader';
+import { Spinner } from '../shared/components/Spinner';
+import { isEmpty, mergeDataWithKey } from '../shared/utils';
+import { withAuthorization } from '../auth/utils/AuthHOC';
 
 class BoardScreen extends Component {
     state = {
@@ -157,3 +157,22 @@ const authCondition = authUser => !!authUser;
 export const WrapperBoardScreen = withRouter(
     withAuthorization(authCondition)(DragDropContext(HTML5Backend)(BoardScreen))
 );
+
+const AddList = styled.div`
+    width: 272px;
+    margin: 0 4px;
+    display: inline-block;
+`;
+
+export const Lists = styled.div`
+    background-color: #0079bf;
+    flex: 1;
+    display: flex;
+    overflow: auto;
+    white-space: nowrap;
+    padding: 0 1rem;
+
+    > div {
+        margin-right: 1rem;
+    }
+`;

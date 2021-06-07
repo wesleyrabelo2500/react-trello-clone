@@ -1,12 +1,11 @@
 import { DropTarget } from 'react-dnd';
-import { findIndex } from 'lodash';
 import React, { Component } from 'react';
 
 import CardContainer from './CardContainer';
 import { doAddCard, doDeleteCard, doEditCard, doMoveCard, onceGetCard } from '../../core/api/db';
 import { FormCreation } from './FormCreation';
 import { ItemTypes } from '../../core/constants';
-import { mergeDataWithKey } from '../../utils';
+import { mergeDataWithKey } from '../../shared/utils';
 
 const cardTarget = {
     drop(props, monitor, component) {
@@ -61,7 +60,7 @@ class Cards extends Component {
     handleEditCard = (listKey, cardKey, card) => {
         return doEditCard(listKey, cardKey, card).then(() => {
             const updatedCards = { ...this.state.cards };
-            const cardIndex = findIndex(updatedCards[listKey], card => card.key === cardKey);
+            const cardIndex = updatedCards[listKey].findIndex(card => card.key === cardKey);
             updatedCards[listKey][cardIndex] = {
                 ...updatedCards[listKey][cardIndex],
                 ...card,
@@ -95,8 +94,7 @@ class Cards extends Component {
     handleDeleteCard = (listKey, cardKey) => {
         return doDeleteCard(listKey, cardKey).then(() => {
             const updatedCards = { ...this.state.cards };
-            const listCards = this.state.cards[listKey].filter(card => card.key !== cardKey);
-            updatedCards[listKey] = listCards;
+            updatedCards[listKey] = this.state.cards[listKey].filter(card => card.key !== cardKey);
             this.setState({
                 cards: updatedCards,
             });

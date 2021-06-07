@@ -2,12 +2,15 @@ import { Input, Modal } from 'antd';
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import { BoardForm } from './styled';
-import { Button } from '../../components/Button';
+import { Button } from '../../shared/components/Button';
 import { DEFAULT_COLOR } from '../../core/constants';
 
 const StyledInput = styled(Input)`
     margin-bottom: 10px !important;
+`;
+
+const BoardForm = styled.form`
+    width: 100%;
 `;
 
 export class CreateBoardModal extends Component {

@@ -3,12 +3,12 @@ import { Form, Icon, Input } from 'antd';
 import { isEmail } from 'validator';
 import { Link } from 'react-router-dom';
 
-import { FormContainer } from './components/FormContainer';
-import { BOARDS, PASSWORD_FORGET, SIGN_UP } from '../core/routes/routes';
-import { doSignInWithEmailAndPassword } from './api/auth';
-import { EMAIL_ERROR_TYPES } from './constants';
-import { FormButton } from './components/FormButton';
-import { ErrorMessage } from './components/ErrorMessage';
+import { FormContainer } from '../components/FormContainer';
+import { BOARDS, PASSWORD_FORGET, SIGN_UP } from '../../core/routes/routes';
+import { doSignInWithEmailAndPassword } from '../api/auth';
+import { EMAIL_ERROR_TYPES } from '../constants';
+import { FormButton } from '../components/FormButton';
+import { ErrorMessage } from '../components/ErrorMessage';
 
 export const PasswordForgetLink = () => (
     <p>

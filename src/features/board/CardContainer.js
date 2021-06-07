@@ -1,9 +1,9 @@
 import { DragSource } from 'react-dnd';
 import React, { Component } from 'react';
 
-import { Card } from './components/Card';
+import { Card } from './Card';
 import { CardModal } from './CardModal';
-import { ItemTypes } from '../../core/constants/index';
+import { ItemTypes } from '../../core/constants';
 
 const cardSource = {
     beginDrag(props) {

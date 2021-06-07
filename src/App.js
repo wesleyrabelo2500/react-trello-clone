@@ -1,18 +1,25 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 
-import { GlobalStyle } from './global-styles';
+// auth
 import { AuthUserContext } from './auth/utils/AuthUserContext';
-import AuthorizedNavigation from './navigation/AuthorizedNavigation';
-import { ACCOUNT, BOARD, BOARDS, LANDING, PASSWORD_FORGET, SIGN_IN, SIGN_UP } from './core/routes/routes';
-import { WrappedSignUpScreen } from './auth/SignUp';
-import { SignInScreen } from './auth/SignIn';
-import PasswordForgetScreen from './auth/PasswordForget';
-import { WrapperBoardsScreen } from './pages/boards/Boards';
-import { WrapperAccountScreen } from './auth/Account';
-import { WrapperBoardScreen } from './pages/board/Board';
-import { NotFoundScreen } from './pages/not-found/NotFound';
 import { withAuthentication } from './auth/utils/AuthHOC';
+
+// core
+import AuthorizedNavigation from './core/navigation/AuthorizedNavigation';
+import { ACCOUNT, BOARD, BOARDS, LANDING, PASSWORD_FORGET, SIGN_IN, SIGN_UP } from './core/routes/routes';
+
+// pages
+import { WrappedSignUpScreen } from './auth/pages/SignUp';
+import { SignInScreen } from './auth/pages/SignIn';
+import PasswordForgetScreen from './auth/pages/PasswordForget';
+import { WrapperBoardsScreen } from './pages/Boards';
+import { WrapperAccountScreen } from './auth/pages/Account';
+import { WrapperBoardScreen } from './pages/Board';
+import { NotFoundScreen } from './pages/NotFound';
+
+// styles
+import { GlobalStyle } from './styles/global-styles';
 
 export const Content = withAuthentication(() => (
     <Router>
