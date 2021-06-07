@@ -51,6 +51,7 @@ class Cards extends Component {
                 }
                 const updatedCards = { ...this.state.cards };
                 updatedCards[list.key] = mergeDataWithKey(snapshotVal);
+
                 this.setState({
                     cards: updatedCards,
                 });

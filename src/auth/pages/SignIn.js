@@ -10,19 +10,7 @@ import { EMAIL_ERROR_TYPES } from '../constants';
 import { FormButton } from '../components/FormButton';
 import { ErrorMessage } from '../components/ErrorMessage';
 
-export const PasswordForgetLink = () => (
-    <p>
-        <Link to={PASSWORD_FORGET}>Forgot Password?</Link>
-    </p>
-);
-
-export const SignUpLink = () => (
-    <p>
-        Don't have an account? <Link to={SIGN_UP}>Sign Up</Link>
-    </p>
-);
-
-const SignInForm = ({ history, form }) => {
+const SignInForm = ({ form }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
@@ -31,18 +19,19 @@ const SignInForm = ({ history, form }) => {
         message: '',
     });
 
-    const FormItem = Form.Item;
-
     const onSubmit = async event => {
         event.preventDefault();
         const submitButton = document.querySelector('.login-form-button');
-        submitButton.disabled = true;
-        resetEmailInputErr();
+        setEmailInputErr({
+            status: '',
+            message: '',
+        });
 
+        submitButton.disabled = true;
         return await doSignInWithEmailAndPassword(email, password)
             .then(() => {
                 submitButton.disabled = false;
-                history.push(BOARDS);
+                window.location = BOARDS;
             })
             .catch(error => {
                 submitButton.disabled = false;
@@ -50,31 +39,24 @@ const SignInForm = ({ history, form }) => {
             });
     };
 
-    const { getFieldDecorator } = form;
-
-    const resetEmailInputErr = () => {
-        setEmailInputErr({
-            status: '',
-            message: '',
-        });
-    };
-
     const handleEmailInputBlur = event => {
-        const isEmailValid = isEmail(event.target.value);
-        if (!isEmailValid) {
-            setEmailInputErr({
-                status: EMAIL_ERROR_TYPES.INVALID.STATUS,
-                message: EMAIL_ERROR_TYPES.INVALID.MESSAGE,
-            });
+        if (isEmail(event.target.value)) {
+            return;
         }
+
+        setEmailInputErr({
+            status: EMAIL_ERROR_TYPES.INVALID.STATUS,
+            message: EMAIL_ERROR_TYPES.INVALID.MESSAGE,
+        });
     };
 
     return (
         <FormContainer>
             <h1>Sign In</h1>
+
             <Form onSubmit={onSubmit}>
-                <FormItem validateStatus={emailInputErr.status} help={emailInputErr.message}>
-                    {getFieldDecorator('email', {
+                <Form.Item validateStatus={emailInputErr.status} help={emailInputErr.message}>
+                    {form.getFieldDecorator('email', {
                         rules: [{ required: true, message: 'Please input your email!' }],
                     })(
                         <Input
@@ -84,9 +66,10 @@ const SignInForm = ({ history, form }) => {
                             onBlur={handleEmailInputBlur}
                         />
                     )}
-                </FormItem>
-                <FormItem>
-                    {getFieldDecorator('password', {
+                </Form.Item>
+
+                <Form.Item>
+                    {form.getFieldDecorator('password', {
                         rules: [{ required: true, message: 'Please input your Password!' }],
                     })(
                         <Input
@@ -96,12 +79,14 @@ const SignInForm = ({ history, form }) => {
                             placeholder="Password"
                         />
                     )}
-                </FormItem>
-                <FormItem>
+                </Form.Item>
+
+                <Form.Item>
                     <FormButton type="primary" htmlType="submit" className="login-form-button">
                         Log in
                     </FormButton>
-                </FormItem>
+                </Form.Item>
+
                 <ErrorMessage>{error}</ErrorMessage>
             </Form>
         </FormContainer>
@@ -113,7 +98,11 @@ export const WrappedSignInForm = Form.create()(SignInForm);
 export const SignInScreen = ({ history }) => (
     <FormContainer>
         <WrappedSignInForm history={history} />
-        <PasswordForgetLink />
-        <SignUpLink />
+        <p>
+            <Link to={PASSWORD_FORGET}>Forgot Password?</Link>
+        </p>
+        <p>
+            Don't have an account? <Link to={SIGN_UP}>Sign Up</Link>
+        </p>
     </FormContainer>
 );

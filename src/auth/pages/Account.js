@@ -9,8 +9,6 @@ import { FormButton } from '../components/FormButton';
 import { FormContainer } from '../components/FormContainer';
 import { withAuthorization } from '../utils/AuthHOC';
 
-const FormItem = Form.Item;
-
 const INITIAL_STATE = {
     passwordOne: '',
     passwordTwo: '',
@@ -23,9 +21,8 @@ class AccountScreen extends Component {
     handleSubmit = event => {
         event.preventDefault();
 
-        const { passwordOne } = this.state;
-
-        return doPasswordUpdate(passwordOne)
+        // TODO: add spinners
+        return doPasswordUpdate(this.state.passwordOne)
             .then(() => {
                 this.props.form.setFieldsValue({
                     passwordOne: '',
@@ -45,44 +42,42 @@ class AccountScreen extends Component {
                 {authUser => (
                     <FormContainer>
                         <h2>Account: {authUser.email}</h2>
-                        <div>
-                            <Form onSubmit={event => this.handleSubmit(event)} className="login-form">
-                                <FormItem>
-                                    {getFieldDecorator('passwordOne', {
-                                        rules: [{ required: true, message: 'Please input your Password!' }],
-                                    })(
-                                        <Input
-                                            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                            onChange={event =>
-                                                this.setState(byPropKey('passwordOne', event.target.value))
-                                            }
-                                            type="password"
-                                            placeholder="Password"
-                                        />
-                                    )}
-                                </FormItem>
-                                <FormItem>
-                                    {getFieldDecorator('passwordTwo', {
-                                        rules: [{ required: true, message: 'Please input your Password!' }],
-                                    })(
-                                        <Input
-                                            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                            onChange={event =>
-                                                this.setState(byPropKey('passwordTwo', event.target.value))
-                                            }
-                                            type="password"
-                                            placeholder="Password"
-                                        />
-                                    )}
-                                </FormItem>
-                                <FormItem>
-                                    <FormButton type="primary" htmlType="submit">
-                                        Reset my password
-                                    </FormButton>
-                                </FormItem>
-                                <ErrorMessage>{error}</ErrorMessage>
-                            </Form>
-                        </div>
+
+                        <Form onSubmit={event => this.handleSubmit(event)} className="login-form">
+                            <Form.Item>
+                                {getFieldDecorator('passwordOne', {
+                                    rules: [{ required: true, message: 'Please input your Password!' }],
+                                })(
+                                    <Input
+                                        prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                        onChange={event => this.setState(byPropKey('passwordOne', event.target.value))}
+                                        type="password"
+                                        placeholder="Password"
+                                    />
+                                )}
+                            </Form.Item>
+
+                            <Form.Item>
+                                {getFieldDecorator('passwordTwo', {
+                                    rules: [{ required: true, message: 'Please input your Password!' }],
+                                })(
+                                    <Input
+                                        prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                        onChange={event => this.setState(byPropKey('passwordTwo', event.target.value))}
+                                        type="password"
+                                        placeholder="Password"
+                                    />
+                                )}
+                            </Form.Item>
+
+                            <Form.Item>
+                                <FormButton type="primary" htmlType="submit">
+                                    Reset my password
+                                </FormButton>
+                            </Form.Item>
+
+                            <ErrorMessage>{error}</ErrorMessage>
+                        </Form>
                     </FormContainer>
                 )}
             </AuthUserContext.Consumer>
@@ -90,6 +85,4 @@ class AccountScreen extends Component {
     }
 }
 
-const authCondition = authUser => !!authUser;
-
-export const WrapperAccountScreen = withAuthorization(authCondition)(Form.create()(AccountScreen));
+export const WrapperAccountScreen = withAuthorization(authUser => !!authUser)(Form.create()(AccountScreen));

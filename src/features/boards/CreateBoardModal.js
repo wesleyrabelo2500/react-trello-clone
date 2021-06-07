@@ -1,8 +1,7 @@
-import { Input, Modal } from 'antd';
+import { Button, Input, Modal } from 'antd';
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import { Button } from '../../shared/components/Button';
 import { DEFAULT_COLOR } from '../../core/constants';
 
 const StyledInput = styled(Input)`
@@ -40,15 +39,8 @@ export class CreateBoardModal extends Component {
         });
     };
 
-    handleBoardColorChange = event => {
-        this.setState({
-            boardColor: event,
-        });
-    };
-
     render() {
         const { onCloseModal, onCreateBoard, visible } = this.props;
-        const isValid = this.state.boardTitle;
 
         return (
             <Modal
@@ -65,16 +57,9 @@ export class CreateBoardModal extends Component {
                         onChange={event => this.handleBoardTitleChange(event)}
                         value={this.state.boardTitle}
                     />
-                    {isValid && (
-                        <Button
-                            disabled={!isValid}
-                            type="primary"
-                            onClick={event => this.handleCreateBoard(event, onCreateBoard)}
-                            key="0"
-                        >
-                            Create
-                        </Button>
-                    )}
+                    <Button type="primary" onClick={event => this.handleCreateBoard(event, onCreateBoard)}>
+                        Create
+                    </Button>
                 </BoardForm>
             </Modal>
         );

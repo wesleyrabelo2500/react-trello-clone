@@ -22,52 +22,48 @@ const SignUpForm = ({ form, onSubmit }) => {
         message: '',
     });
 
-    const FormItem = Form.Item;
-
-    const onsubmit = event => {
+    const handleSubmit = event => {
         event.preventDefault();
-        const submitButton = document.querySelector('.signup-form-button');
-        submitButton.disabled = true;
-        resetEmailInputErr();
+
         if (newPassword !== confirmPassword) {
             setError('new password and confirm password do not match');
-        } else {
-            onSubmit(email, newPassword, username)
-                .then(() => {
-                    submitButton.disabled = false;
-                })
-                .catch(error => {
-                    submitButton.disabled = false;
-                    setError(error.message);
-                });
+            return;
         }
-    };
 
-    const { getFieldDecorator } = form;
+        const submitButton = document.querySelector('.signup-form-button');
 
-    const resetEmailInputErr = () => {
         setEmailInputErr({
             status: '',
             message: '',
         });
+        submitButton.disabled = true;
+        onSubmit(email, newPassword, username)
+            .then(() => {
+                submitButton.disabled = false;
+            })
+            .catch(error => {
+                submitButton.disabled = false;
+                setError(error.message);
+            });
     };
 
     const handleEmailInputBlur = event => {
-        const isEmailValid = isEmail(event.target.value);
-        if (!isEmailValid) {
-            setEmailInputErr({
-                status: EMAIL_ERROR_TYPES.INVALID.STATUS,
-                message: EMAIL_ERROR_TYPES.INVALID.MESSAGE,
-            });
+        if (isEmail(event.target.value)) {
+            return;
         }
+
+        setEmailInputErr({
+            status: EMAIL_ERROR_TYPES.INVALID.STATUS,
+            message: EMAIL_ERROR_TYPES.INVALID.MESSAGE,
+        });
     };
 
     return (
         <FormContainer>
             <h1 className="title">Sign Up</h1>
-            <Form onSubmit={event => onsubmit(event)} className="login-form">
-                <FormItem>
-                    {getFieldDecorator('username', {
+            <Form onSubmit={event => handleSubmit(event)} className="login-form">
+                <Form.Item>
+                    {form.getFieldDecorator('username', {
                         rules: [{ required: true, message: 'Please input your username!' }],
                     })(
                         <Input
@@ -76,9 +72,10 @@ const SignUpForm = ({ form, onSubmit }) => {
                             onChange={event => setUsername(event.target.value)}
                         />
                     )}
-                </FormItem>
-                <FormItem validateStatus={emailInputErr.status} help={emailInputErr.message}>
-                    {getFieldDecorator('email', {
+                </Form.Item>
+
+                <Form.Item validateStatus={emailInputErr.status} help={emailInputErr.message}>
+                    {form.getFieldDecorator('email', {
                         rules: [{ required: true, message: 'Please input your email!' }],
                     })(
                         <Input
@@ -88,9 +85,10 @@ const SignUpForm = ({ form, onSubmit }) => {
                             onBlur={handleEmailInputBlur}
                         />
                     )}
-                </FormItem>
-                <FormItem>
-                    {getFieldDecorator('newPassword', {
+                </Form.Item>
+
+                <Form.Item>
+                    {form.getFieldDecorator('newPassword', {
                         rules: [{ required: true, message: 'Please input your new password!' }],
                     })(
                         <Input
@@ -100,9 +98,10 @@ const SignUpForm = ({ form, onSubmit }) => {
                             onChange={event => setNewPassword(event.target.value)}
                         />
                     )}
-                </FormItem>
-                <FormItem>
-                    {getFieldDecorator('confirmPassword', {
+                </Form.Item>
+
+                <Form.Item>
+                    {form.getFieldDecorator('confirmPassword', {
                         rules: [{ required: true, message: 'Please input your confirm password!' }],
                     })(
                         <Input
@@ -112,19 +111,19 @@ const SignUpForm = ({ form, onSubmit }) => {
                             onChange={event => serConfirmPassword(event.target.value)}
                         />
                     )}
-                </FormItem>
-                <FormItem>
+                </Form.Item>
+
+                <Form.Item>
                     <FormButton type="primary" htmlType="submit" className="login-form-button signup-form-button">
                         Sign Up
                     </FormButton>
-                </FormItem>
+                </Form.Item>
+
                 <ErrorMessage>{error}</ErrorMessage>
             </Form>
         </FormContainer>
     );
 };
-
-const WrappedSignUpForm = Form.create()(SignUpForm);
 
 class SignUpScreen extends Component {
     async onSubmit(email, password, username) {
@@ -135,8 +134,10 @@ class SignUpScreen extends Component {
     }
 
     render() {
+        const WrappedSignUpForm = Form.create()(SignUpForm);
+
         return <WrappedSignUpForm onSubmit={this.onSubmit} />;
     }
 }
 
-export const WrappedSignUpScreen = withRouter(SignUpScreen);
+export const WrappedSignUpPage = withRouter(SignUpScreen);

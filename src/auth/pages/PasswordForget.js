@@ -9,8 +9,6 @@ import { FormButton } from '../components/FormButton';
 import { FormContainer } from '../components/FormContainer';
 import { EMAIL_ERROR_TYPES } from '../constants';
 
-const FormItem = Form.Item;
-
 const INITIAL_STATE = {
     email: '',
     error: null,
@@ -46,17 +44,17 @@ class PasswordForgetScreen extends Component {
     };
 
     handleEmailInputBlur = event => {
-        const isEmailValid = isEmail(event.target.value);
-        if (!isEmailValid) {
-            this.setState(
-                byPropKey('emailInputErr', {
-                    status: EMAIL_ERROR_TYPES.INVALID.STATUS,
-                    message: EMAIL_ERROR_TYPES.INVALID.MESSAGE,
-                })
-            );
-        } else {
+        if (isEmail(event.target.value)) {
             this.resetEmailInputErr();
+            return;
         }
+
+        this.setState(
+            byPropKey('emailInputErr', {
+                status: EMAIL_ERROR_TYPES.INVALID.STATUS,
+                message: EMAIL_ERROR_TYPES.INVALID.MESSAGE,
+            })
+        );
     };
 
     render() {
@@ -67,7 +65,7 @@ class PasswordForgetScreen extends Component {
             <FormContainer>
                 <h1 className="title">Password Forget</h1>
                 <Form onSubmit={event => this.handleSubmit(event)} className="login-form">
-                    <FormItem validateStatus={this.state.emailInputErr.status} help={this.state.emailInputErr.message}>
+                    <Form.Item validateStatus={this.state.emailInputErr.status} help={this.state.emailInputErr.message}>
                         {getFieldDecorator('email', {
                             rules: [{ required: true, message: 'Please input your email!' }],
                         })(
@@ -78,12 +76,14 @@ class PasswordForgetScreen extends Component {
                                 onBlur={event => this.handleEmailInputBlur(event)}
                             />
                         )}
-                    </FormItem>
-                    <FormItem>
+                    </Form.Item>
+
+                    <Form.Item>
                         <FormButton type="primary" htmlType="submit" className="login-form-button">
                             Restore
                         </FormButton>
-                    </FormItem>
+                    </Form.Item>
+
                     <ErrorMessage>{error}</ErrorMessage>
                 </Form>
             </FormContainer>

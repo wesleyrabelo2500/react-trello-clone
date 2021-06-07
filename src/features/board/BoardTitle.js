@@ -96,7 +96,7 @@ const StyledBoardTitle = styled.div`
     background: #0079bf;
     display: flex;
     position: relative;
-    padding: 8px 8px 2px;
+    padding: 8px 8px 12px;
 `;
 
 const Favorite = styled.div``;

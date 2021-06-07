@@ -4,11 +4,17 @@ import React, { Component } from 'react';
 export class FormCreation extends Component {
     state = {
         text: '',
+        loading: false,
     };
 
     handleCreate = (event, callback, text) => {
         event.preventDefault();
-        callback(text).then(() => this.setState(() => ({ text: '' })));
+        if (this.state.loading) {
+            return;
+        }
+
+        this.setState(() => ({ loading: true }));
+        callback(text).then(() => this.setState(() => ({ text: '', loading: false })));
     };
 
     handleInputChange = event => {
@@ -24,6 +30,7 @@ export class FormCreation extends Component {
                     onChange={event => this.handleInputChange(event)}
                     value={this.state.text}
                     placeholder={placeholder}
+                    disabled={this.state.loading}
                 />
             </form>
         );

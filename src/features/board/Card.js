@@ -72,9 +72,6 @@ export class Card extends Component {
                     <React.Fragment>
                         {showEditIcons && (
                             <Edit onClick={event => event.stopPropagation()}>
-                                <GrayButton onClick={this.handleEnableEdit}>
-                                    <Icon type="edit" />
-                                </GrayButton>
                                 <GrayButton onClick={() => this.handleDeleteCard(onDeleteCard, listKey, card.key)}>
                                     <Icon type="delete" />
                                 </GrayButton>

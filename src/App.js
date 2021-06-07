@@ -10,7 +10,7 @@ import AuthorizedNavigation from './core/navigation/AuthorizedNavigation';
 import { ACCOUNT, BOARD, BOARDS, LANDING, PASSWORD_FORGET, SIGN_IN, SIGN_UP } from './core/routes/routes';
 
 // pages
-import { WrappedSignUpScreen } from './auth/pages/SignUp';
+import { WrappedSignUpPage } from './auth/pages/SignUp';
 import { SignInScreen } from './auth/pages/SignIn';
 import PasswordForgetScreen from './auth/pages/PasswordForget';
 import { WrapperBoardsScreen } from './pages/Boards';
@@ -30,7 +30,7 @@ export const Content = withAuthentication(() => (
 
             <Switch className="container">
                 {<Route exact path={LANDING} render={() => <Redirect to={BOARDS} />} />}
-                <Route exact path={SIGN_UP} component={WrappedSignUpScreen} />
+                <Route exact path={SIGN_UP} component={WrappedSignUpPage} />
                 <Route exact path={SIGN_IN} component={SignInScreen} />
                 <Route exact path={PASSWORD_FORGET} component={PasswordForgetScreen} />
                 {<Route exact path={BOARDS} component={WrapperBoardsScreen} />}

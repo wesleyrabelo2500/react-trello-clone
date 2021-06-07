@@ -6,9 +6,13 @@ import { darken } from 'polished';
 
 import { ACCOUNT, BOARDS } from '../routes/routes';
 import { Button } from '../../shared/components/Button';
-import { SignOutButton } from '../../auth/pages/SignOut';
+import { doSignOut } from '../../auth/api/auth';
 
 class NavigationAuth extends Component {
+    signOut() {
+        return doSignOut();
+    }
+
     render() {
         return (
             <Nav>
@@ -20,7 +24,21 @@ class NavigationAuth extends Component {
                     </Link>
                 </NavItems>
                 <NavUser>
-                    <Dropdown overlay={menu} trigger={['click']}>
+                    <Dropdown
+                        overlay={
+                            <Menu>
+                                <Menu.Item key="0">
+                                    <Icon type="user" theme="outlined" />
+                                    <StyledLink to={ACCOUNT}>Settings</StyledLink>
+                                </Menu.Item>
+                                <Menu.Divider />
+                                <Menu.Item key="1" onClick={this.signOut}>
+                                    <Icon type="logout" theme="outlined" /> Sign Out
+                                </Menu.Item>
+                            </Menu>
+                        }
+                        trigger={['click']}
+                    >
                         <StyledButton>
                             <Icon type="setting" theme="outlined" />
                         </StyledButton>
@@ -67,19 +85,5 @@ const NavUser = styled.div`
         display: inline-block;
     }
 `;
-
-const menu = (
-    <Menu>
-        <Menu.Item key="0">
-            <Icon type="user" theme="outlined" />
-            <StyledLink to={ACCOUNT}>Settings</StyledLink>
-        </Menu.Item>
-        <Menu.Divider />
-        <Menu.Item key="1">
-            <Icon type="logout" theme="outlined" />
-            <SignOutButton />
-        </Menu.Item>
-    </Menu>
-);
 
 export default withRouter(NavigationAuth);

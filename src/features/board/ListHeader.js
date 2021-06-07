@@ -38,53 +38,44 @@ export class ListHeader extends Component {
         const { listTitle, listKey, onEditList, onDeleteList } = this.props;
         const { edit, title } = this.state;
         return (
-            <StyledListHeader>
-                <TitleWrapper>
-                    {edit ? (
-                        <form
-                            onSubmit={event => this.handleFormSubmit(event, onEditList, listKey, title)}
-                            onBlur={event => this.handleFormSubmit(event, onEditList, listKey, title)}
-                        >
-                            <InputTitle value={title} onChange={this.handleInputChange} />
-                        </form>
-                    ) : (
-                        <Title onClick={this.handleEnableEdit}>{listTitle}</Title>
-                    )}
-                </TitleWrapper>
-                <EditButton>
-                    <Dropdown
-                        overlay={
-                            <Menu>
-                                <Menu.Item key="1" onClick={event => this.handleDeleteList(onDeleteList, listKey)}>
-                                    Delete This List
-                                </Menu.Item>
-                            </Menu>
-                        }
-                        trigger={['click']}
+            <Header>
+                {edit ? (
+                    <form
+                        onSubmit={event => this.handleFormSubmit(event, onEditList, listKey, title)}
+                        onBlur={event => this.handleFormSubmit(event, onEditList, listKey, title)}
                     >
-                        <StyledButton>
-                            <Icon type="ellipsis" />
-                        </StyledButton>
-                    </Dropdown>
-                </EditButton>
-            </StyledListHeader>
+                        <InputTitle value={title} onChange={this.handleInputChange} />
+                    </form>
+                ) : (
+                    <h3 onClick={this.handleEnableEdit}>{listTitle}</h3>
+                )}
+                <Dropdown
+                    overlay={
+                        <Menu>
+                            <Menu.Item key="1" onClick={event => this.handleDeleteList(onDeleteList, listKey)}>
+                                Delete This List
+                            </Menu.Item>
+                        </Menu>
+                    }
+                    trigger={['click']}
+                >
+                    <StyledButton>
+                        <Icon type="ellipsis" />
+                    </StyledButton>
+                </Dropdown>
+            </Header>
         );
     }
 }
 
-const StyledListHeader = styled.div`
-    margin-bottom: 3px;
-`;
-
-const TitleWrapper = styled.div`
-    display: inline-flex;
-    width: 87%;
-`;
-
-const EditButton = styled.div`
-    width: 13%;
-    display: inline-flex;
-    text-align: center;
+const Header = styled.div`
+    display: flex;
+    margin-bottom: 5px;
+    background: #fff;
+    justify-content: space-between;
+    border-radius: 5px;
+    padding: 0 10px;
+    align-items: center;
 `;
 
 const StyledButton = styled(Button)`
@@ -96,11 +87,6 @@ const StyledButton = styled(Button)`
         background: ${darken(0.1, '#dfe3e6')};
     }
     color: gray;
-`;
-
-const Title = styled.h3`
-    padding-left: 5px;
-    cursor: pointer;
 `;
 
 const InputTitle = styled(Input)`
