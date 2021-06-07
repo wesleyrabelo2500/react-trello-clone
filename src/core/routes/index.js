@@ -3,14 +3,14 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 
 import { ACCOUNT, BOARD, BOARDS, LANDING, PASSWORD_FORGET, SIGN_IN, SIGN_UP } from './routes';
 import { Navigation } from '../../navigation/Navigation';
-import { NotFoundScreen } from '../../screens/NotFound/NotFound';
+import { NotFoundScreen } from '../../pages/not-found/NotFound';
 import PasswordForgetScreen from '../../auth/PasswordForget';
 import { SignInScreen } from '../../auth/SignIn';
 import { withAuthentication } from '../../auth/utils/AuthHOC';
 import { WrappedSignUpScreen } from '../../auth/SignUp';
 import { WrapperAccountScreen } from '../../auth/Account';
-import { WrapperBoardScreen } from '../../screens/Board/Board';
-import { WrapperBoardsScreen } from '../../screens/Boards/Boards';
+import { WrapperBoardScreen } from '../../pages/board/Board';
+import { WrapperBoardsScreen } from '../../pages/boards/Boards';
 
 const Routes = () => (
     <Router>
