@@ -1,12 +1,12 @@
 import { Form, Icon, Input } from 'antd';
 import React, { Component } from 'react';
 
-import { AuthUserContext } from '../utils/AuthUserContext';
-import { byPropKey } from '../../shared/utils';
 import { doPasswordUpdate } from '../api/auth';
+import { byPropKey } from '../../shared/utils';
 import { ErrorMessage } from '../components/ErrorMessage';
 import { FormButton } from '../components/FormButton';
 import { FormContainer } from '../components/FormContainer';
+import { AuthUserContext } from '../utils/AuthUserContext';
 import { withAuthorization } from '../utils/AuthHOC';
 
 const INITIAL_STATE = {
@@ -41,7 +41,7 @@ class AccountScreen extends Component {
             <AuthUserContext.Consumer>
                 {authUser => (
                     <FormContainer>
-                        <h2>Account: {authUser.email}</h2>
+                        <h3>Account: {authUser.email}</h3>
 
                         <Form onSubmit={event => this.handleSubmit(event)} className="login-form">
                             <Form.Item>
