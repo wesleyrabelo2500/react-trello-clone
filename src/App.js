@@ -2,19 +2,19 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 
 // auth
-import { AuthUserContext } from './auth/utils/AuthUserContext';
-import { withAuthentication } from './auth/utils/AuthHOC';
+import { AuthUserContext } from './features/auth/utils/AuthUserContext';
+import { withAuthentication } from './features/auth/utils/AuthHOC';
 
 // core
 import AuthorizedNavigation from './core/layout/AuthNavigation';
 import { ACCOUNT, BOARD, BOARDS, LANDING, PASSWORD_FORGET, SIGN_IN, SIGN_UP } from './core/routes/routes';
 
 // pages
-import { WrappedSignUpPage } from './auth/pages/SignUp';
-import { SignInScreen } from './auth/pages/SignIn';
-import PasswordForgetScreen from './auth/pages/PasswordForget';
+import { WrappedSignUpPage } from './pages/SignUp';
+import { SignInScreen } from './pages/SignIn';
+import PasswordForgetScreen from './pages/PasswordForget';
 import { WrapperBoardsScreen } from './pages/Boards';
-import { WrapperAccountScreen } from './auth/pages/Account';
+import { WrapperAccountScreen } from './pages/Account';
 import { WrapperBoardScreen } from './pages/Board';
 import { NotFoundScreen } from './pages/NotFound';
 

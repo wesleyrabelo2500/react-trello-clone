@@ -2,7 +2,7 @@ import { DropTarget } from 'react-dnd';
 import React, { Component } from 'react';
 
 import CardContainer from './CardContainer';
-import { addCard, deleteCard, card, moveCard, getCard } from '../../core/api/http';
+import { addCard, deleteCard, card, moveCard, getCard } from '../../core/api/db';
 import { FormCreation } from './FormCreation';
 import { ItemTypes } from '../../core/constants';
 import { mergeDataWithKey } from '../../shared/utils';

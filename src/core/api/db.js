@@ -1,5 +1,5 @@
 import { db } from './firebase';
-import { getUser } from '../../auth/api/auth';
+import { getUser } from './auth';
 
 const boardsRef = db.ref('boards');
 const listsRef = db.ref('lists');

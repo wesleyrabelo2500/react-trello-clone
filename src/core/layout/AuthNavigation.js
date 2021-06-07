@@ -6,7 +6,7 @@ import { darken } from 'polished';
 
 import { ACCOUNT, BOARDS } from '../routes/routes';
 import { Button } from '../../shared/components/Button';
-import { signOut } from '../../auth/api/auth';
+import { signOut } from '../api/auth';
 
 class NavigationAuth extends Component {
     signOut() {

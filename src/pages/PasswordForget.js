@@ -2,12 +2,12 @@ import { Form, Icon, Input } from 'antd';
 import React, { Component } from 'react';
 import { isEmail } from 'validator';
 
-import { byPropKey } from '../../shared/utils';
-import { passwordReset } from '../api/auth';
-import { ErrorMessage } from '../components/ErrorMessage';
-import { FormButton } from '../components/FormButton';
-import { FormContainer } from '../components/FormContainer';
-import { EMAIL_ERROR_TYPES } from '../constants';
+import { byPropKey } from '../shared/utils';
+import { passwordReset } from '../core/api/auth';
+import { ErrorMessage } from '../features/auth/components/ErrorMessage';
+import { FormButton } from '../features/auth/components/FormButton';
+import { FormContainer } from '../features/auth/components/FormContainer';
+import { EMAIL_ERROR_TYPES } from '../features/auth/constants';
 
 const INITIAL_STATE = {
     email: '',
