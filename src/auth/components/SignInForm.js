@@ -1,9 +1,8 @@
 import { Form, Icon, Input } from 'antd';
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import { isEmail } from 'validator';
 
 import { BOARDS } from '../../core/routes/routes';
-import { byPropKey } from '../../utils';
 import { doSignInWithEmailAndPassword } from '../api/auth';
 import { ErrorMessage } from './ErrorMessage';
 import { FormButton } from './FormButton';

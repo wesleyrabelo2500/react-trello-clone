@@ -1,5 +1,4 @@
 import { DragDropContext } from 'react-dnd';
-import { findIndex, isEmpty } from 'lodash';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { List } from 'antd';
 import React, { Component } from 'react';
@@ -21,7 +20,7 @@ import {
 import { FormCreation } from './FormCreation';
 import { ListHeader } from './components/ListHeader';
 import { Loader } from '../../components/Loader';
-import { mergeDataWithKey } from '../../utils';
+import { isEmpty, mergeDataWithKey } from '../../utils';
 import { withAuthorization } from '../../auth/utils/AuthHOC';
 
 class BoardScreen extends Component {
@@ -65,7 +64,7 @@ class BoardScreen extends Component {
         const { boardKey } = this.state;
         return doUpdateList(boardKey, listKey, { title }).then(response => {
             const lists = [...this.state.lists];
-            lists[findIndex(lists, list => list.key === listKey)] = {
+            lists[lists.findIndex(list => list.key === listKey)] = {
                 ...response,
                 key: listKey,
             };

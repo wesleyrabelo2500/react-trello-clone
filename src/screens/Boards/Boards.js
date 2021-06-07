@@ -1,5 +1,4 @@
 import { Icon } from 'antd';
-import { isEmpty } from 'lodash';
 import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 
@@ -8,7 +7,7 @@ import { BoardLink, NewBoard } from './components/BoardsButtons';
 import { CreateBoardModal } from './CreateBoardModal';
 import { doCreateBoard, onceGetBoards } from '../../core/api/db';
 import { Loader } from '../../components/Loader';
-import { mergeDataWithKey } from '../../utils';
+import { isEmpty, mergeDataWithKey } from '../../utils';
 import { withAuthorization } from '../../auth/utils/AuthHOC';
 
 class BoardsScreen extends Component {

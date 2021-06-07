@@ -1,4 +1,3 @@
-import { find } from 'lodash';
 import { Icon, Input } from 'antd';
 import React, { Component } from 'react';
 import styled from 'styled-components';
@@ -91,7 +90,7 @@ export class Card extends Component {
 }
 
 function getColor(labels, text) {
-    const label = find(labels, label => label.text === text);
+    const label = labels.find(label => label.text === text);
     return label.color;
 }
 
