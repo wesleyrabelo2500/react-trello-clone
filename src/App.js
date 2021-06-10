@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 
 // auth
-import { AuthUserContext } from './features/auth/utils/AuthUserContext';
-import { withAuthentication } from './features/auth/utils/AuthHOC';
+import { AuthUserContext } from './auth/utils/AuthUserContext';
+import { withAuthentication } from './auth/utils/AuthHOC';
 
 // core
 import AuthorizedNavigation from './core/layout/AuthNavigation';
