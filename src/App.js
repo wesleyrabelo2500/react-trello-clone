@@ -19,7 +19,7 @@ import { WrapperBoardScreen } from './pages/Board';
 import { NotFoundScreen } from './pages/NotFound';
 
 // styles
-import { GlobalStyle } from './styles/global-styles';
+import { GlobalStyle } from './global-styles';
 
 export const Content = withAuthentication(() => (
     <Router>
