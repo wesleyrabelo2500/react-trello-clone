@@ -3,12 +3,15 @@ import { Form, Icon, Input } from 'antd';
 import { isEmail } from 'validator';
 import { Link } from 'react-router-dom';
 
+import { auth, provider } from '../core/api/firebase';
 import { FormContainer } from '../auth/components/FormContainer';
-import { LANDING, PASSWORD_FORGET, SIGN_UP } from '../core/routes/routes';
+import { BOARDS, LANDING, PASSWORD_FORGET, SIGN_UP } from '../core/routes/routes';
 import { signInWithEmailAndPassword } from '../core/api/auth';
 import { EMAIL_ERROR_TYPES } from '../auth/constants';
 import { FormButton } from '../auth/components/FormButton';
 import { ErrorMessage } from '../auth/components/ErrorMessage';
+import { useStateValue } from '../core/api/StateProvider';
+import { actionTypes } from '../core/api/reducer';
 
 const SignInForm = ({ form }) => {
     const [email, setEmail] = useState('');
@@ -18,6 +21,19 @@ const SignInForm = ({ form }) => {
         status: '',
         message: '',
     });
+    const [, dispatch] = useStateValue();
+
+    const signInWithGoogle = () => {
+        auth.signInWithPopup(provider)
+            .then(result => {
+                dispatch({
+                    type: actionTypes.SET_USER,
+                    user: result.user,
+                });
+                window.location = BOARDS;
+            })
+            .catch(error => alert(error.message));
+    };
 
     const onSubmit = async event => {
         event.preventDefault();
@@ -82,9 +98,15 @@ const SignInForm = ({ form }) => {
                 </Form.Item>
 
                 <Form.Item>
-                    <FormButton type="primary" htmlType="submit" className="login-form-button">
-                        Log in
-                    </FormButton>
+                    <div className="login-buttons">
+                        <FormButton type="primary" htmlType="submit" className="login-form-button">
+                            Log in
+                        </FormButton>
+                        or
+                        <FormButton type="danger" htmlType="submit" className="login-form-button" onClick={signInWithGoogle}>
+                            Continue with Google
+                        </FormButton>
+                    </div>
                 </Form.Item>
 
                 <ErrorMessage>{error}</ErrorMessage>

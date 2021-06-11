@@ -71,4 +71,9 @@ body {
     background: #0079bf;
   }
 }
+.login-buttons{
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+}
 `;
