@@ -21,6 +21,13 @@ import { NotFoundScreen } from './pages/NotFound';
 // styles
 import { GlobalStyle } from './global-styles';
 
+//React-Bootstrap styles
+import Navbar from 'react-bootstrap/Navbar';
+import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
+
+
+
 export const Content = withAuthentication(() => (
     <Router>
         <React.Fragment>
@@ -42,13 +49,36 @@ export const Content = withAuthentication(() => (
     </Router>
 ));
 
+
+
 export default class App extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            renderContent: false,
+        }
+
+    }
+    buttonHandler = () => {
+        this.setState({renderContent: true})
+    }
+
+
     render() {
+        console.log(this.state.renderContent)
         return (
-            <React.Fragment>
-                <GlobalStyle />
-                <Content />
-            </React.Fragment>
+            <div>
+                <React.Fragment>
+                    <Navbar bg="dark">
+                        <Container>
+                            <Navbar.Brand style={{color:'white'}} href="/">Brand link</Navbar.Brand>
+                            <Button onClick={this.buttonHandler}>Log In</Button>
+                        </Container>
+                    </Navbar>
+                    {this.state.renderContent ?  <Content /> : null } 
+                    <GlobalStyle />
+                </React.Fragment>
+            </div>
         );
     }
 }
