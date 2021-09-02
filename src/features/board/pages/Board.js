@@ -159,9 +159,7 @@ export const WrapperBoardScreen = withRouter(
 );
 
 const AddList = styled.div`
-    width: 272px;
-    margin: 0 4px;
-    display: inline-block;
+    width: 250px;
 `;
 
 export const Lists = styled.div`
@@ -170,7 +168,7 @@ export const Lists = styled.div`
     display: flex;
     overflow: auto;
     white-space: nowrap;
-    padding: 0 1rem;
+    padding: 0 10px;
 
     > div {
         margin-right: 1rem;

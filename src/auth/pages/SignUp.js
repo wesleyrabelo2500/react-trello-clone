@@ -1,7 +1,6 @@
 import React, { Component, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Form, Icon, Input } from 'antd';
-import { isEmail } from 'validator';
 
 import { LANDING } from '../../routes';
 import { createUser } from '../../core/api/db';
@@ -48,10 +47,6 @@ const SignUpForm = ({ form, onSubmit }) => {
     };
 
     const handleEmailInputBlur = event => {
-        if (isEmail(event.target.value)) {
-            return;
-        }
-
         setEmailInputErr({
             status: EMAIL_ERROR_TYPES.INVALID.STATUS,
             message: EMAIL_ERROR_TYPES.INVALID.MESSAGE,

@@ -8,7 +8,6 @@ import { Spinner } from '../../../shared/components/Spinner';
 import { isEmpty, mergeDataWithKey } from '../../../shared/utils';
 import { withAuthorization } from '../../../auth/utils/AuthHOC';
 import styled from 'styled-components';
-import { darken } from 'polished';
 
 class BoardsScreen extends Component {
     state = {
@@ -118,8 +117,9 @@ class BoardsScreen extends Component {
 }
 
 const BoardTypes = styled.div`
-    margin-bottom: 10px;
     margin: auto;
+    padding: 0 10px;
+    margin-bottom: 20px;
 `;
 
 const BoardTypeTitle = styled.h4`
@@ -137,29 +137,13 @@ export const StyledBoardLink = styled.div`
     position: relative;
     display: inline-block;
     padding: 4px;
-    width: 15%;
+    width: 250px;
     height: 80px;
     background-color: ${props => props.color};
     color: white;
     margin: 0.5%;
     border-radius: 4px;
     transition: all 0.3s;
-    &:hover {
-        background: ${props => darken(0.075, props.color)};
-    }
-    @media only screen and (max-width: 400px) and (min-width: 82px) {
-        width: 96%;
-        margin: 2%;
-    }
-    @media only screen and (max-width: 720px) and (min-width: 400px) {
-        width: 48%;
-    }
-    @media only screen and (max-width: 1024px) and (min-width: 720px) {
-        width: 30%;
-    }
-    @media only screen and (max-width: 1480px) and (min-width: 1024px) {
-        width: 20%;
-    }
 `;
 
 export const StyledNewBoard = styled(StyledBoardLink)`

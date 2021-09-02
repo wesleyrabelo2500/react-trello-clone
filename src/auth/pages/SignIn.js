@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Form, Icon, Input } from 'antd';
-import { isEmail } from 'validator';
 import { Link } from 'react-router-dom';
 
 import { auth, provider } from '../../core/api/firebase';
@@ -56,10 +55,6 @@ const SignInForm = ({ form }) => {
     };
 
     const handleEmailInputBlur = event => {
-        if (isEmail(event.target.value)) {
-            return;
-        }
-
         setEmailInputErr({
             status: EMAIL_ERROR_TYPES.INVALID.STATUS,
             message: EMAIL_ERROR_TYPES.INVALID.MESSAGE,

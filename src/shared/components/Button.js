@@ -1,4 +1,3 @@
-import { darken } from 'polished';
 import styled from 'styled-components';
 
 export const Button = styled.div`
@@ -10,16 +9,10 @@ export const Button = styled.div`
     line-height: 32px;
     margin-right: 4px;
     min-width: 32px;
-    padding: 0 5px;
     text-decoration: none;
     text-align: center;
     &:hover {
-        background: ${darken(0.075, '#0079BF')};
-        color: #fff;
         cursor: pointer;
-    }
-    &:active {
-        background: ;
     }
     i {
         font-size: 1rem !important;
@@ -34,7 +27,7 @@ export const GrayButton = styled(Button)`
     line-height: inherit;
     min-width: auto;
     &:hover {
-        background: ${darken(0.075, '#eee')};
-        color: ${darken(0.075, 'gray')};
+        background: #eee;
+        color: gray;
     }
 `;

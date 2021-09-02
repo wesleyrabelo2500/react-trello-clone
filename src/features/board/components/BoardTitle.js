@@ -1,4 +1,3 @@
-import { darken } from 'polished';
 import { Icon, Menu, Dropdown, Input } from 'antd';
 import React, { Component } from 'react';
 import styled from 'styled-components';
@@ -122,5 +121,5 @@ const MenuButtonText = styled.span`
 `;
 
 const StyledButton = styled(Button)`
-    background: ${props => (props.active ? darken(0.075, '#0079BF') : '')};
+    background: ${props => (props.active ? '#0079BF' : '')};
 `;

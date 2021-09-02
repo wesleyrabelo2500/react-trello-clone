@@ -93,6 +93,7 @@ const CardBlock = styled.div`
     border-radius: 3px;
     padding: 6px 10px 6px;
     box-shadow: 0px 1px 0px grey;
+    min-width: 250px;
     &:hover {
         background: ${props => (props.editMode ? '#fff' : '#efefef')};
         cursor: pointer;

@@ -1,6 +1,5 @@
 import { Form, Icon, Input } from 'antd';
 import React, { Component } from 'react';
-import { isEmail } from 'validator';
 
 import { byPropKey } from '../../shared/utils';
 import { passwordReset } from '../api/auth';
@@ -44,11 +43,6 @@ class PasswordForgetScreen extends Component {
     };
 
     handleEmailInputBlur = event => {
-        if (isEmail(event.target.value)) {
-            this.resetEmailInputErr();
-            return;
-        }
-
         this.setState(
             byPropKey('emailInputErr', {
                 status: EMAIL_ERROR_TYPES.INVALID.STATUS,

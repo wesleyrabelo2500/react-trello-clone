@@ -1,4 +1,3 @@
-import { darken } from 'polished';
 import { Dropdown, Icon, Input, Menu } from 'antd';
 import React, { Component } from 'react';
 import styled from 'styled-components';
@@ -47,7 +46,7 @@ export class ListHeader extends Component {
                         <InputTitle value={title} onChange={this.handleInputChange} />
                     </form>
                 ) : (
-                    <h3 onClick={this.handleEnableEdit}>{listTitle}</h3>
+                    <h4 onClick={this.handleEnableEdit}>{listTitle}</h4>
                 )}
                 <Dropdown
                     overlay={
@@ -74,17 +73,17 @@ const Header = styled.div`
     background: #fff;
     justify-content: space-between;
     border-radius: 5px;
-    padding: 0 10px;
+    padding: 0 0px 0 10px;
     align-items: center;
 `;
 
 const StyledButton = styled(Button)`
     &:hover {
-        background: ${darken(0.075, '#dfe3e6')};
+        background: '#dfe3e6';
         color: gray;
     }
     &:active {
-        background: ${darken(0.1, '#dfe3e6')};
+        background: '#dfe3e6';
     }
     color: gray;
 `;

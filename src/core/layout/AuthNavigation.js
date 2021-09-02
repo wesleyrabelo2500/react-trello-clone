@@ -2,7 +2,6 @@ import { Dropdown, Icon, Menu } from 'antd';
 import { Link, withRouter } from 'react-router-dom';
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { darken } from 'polished';
 
 import { ACCOUNT, BOARDS } from '../../routes';
 import { Button } from '../../shared/components/Button';
@@ -64,7 +63,7 @@ const StyledButton = styled(Button)`
 `;
 
 const Nav = styled.nav`
-    background: ${darken(0.075, '#0079BF')};
+    background: #0079bf;
     padding: 4px;
     margin-bottom: 20px;
 `;
