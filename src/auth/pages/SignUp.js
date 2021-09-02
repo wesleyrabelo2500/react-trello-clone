@@ -3,13 +3,13 @@ import { withRouter } from 'react-router-dom';
 import { Form, Icon, Input } from 'antd';
 import { isEmail } from 'validator';
 
-import { LANDING } from '../core/routes/routes';
-import { createUser } from '../core/api/db';
-import { createUserWithEmailAndPassword } from '../core/api/auth';
-import { EMAIL_ERROR_TYPES } from '../auth/constants';
-import { FormContainer } from '../auth/components/FormContainer';
-import { FormButton } from '../auth/components/FormButton';
-import { ErrorMessage } from '../auth/components/ErrorMessage';
+import { LANDING } from '../../routes';
+import { createUser } from '../../core/api/db';
+import { createUserWithEmailAndPassword } from '../api/auth';
+import { EMAIL_ERROR_TYPES } from '../constants';
+import { FormContainer } from '../components/common/FormContainer';
+import { FormButton } from '../components/common/FormButton';
+import { ErrorMessage } from '../components/common/ErrorMessage';
 
 const SignUpForm = ({ form, onSubmit }) => {
     const [username, setUsername] = useState('');

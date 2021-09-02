@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 
+// core
+import AuthorizedNavigation from './core/layout/AuthNavigation';
+import { ACCOUNT, BOARD, BOARDS, LANDING, PASSWORD_FORGET, SIGN_IN, SIGN_UP } from './routes';
+
 // auth
 import { AuthUserContext } from './auth/utils/AuthUserContext';
 import { withAuthentication } from './auth/utils/AuthHOC';
-
-// core
-import AuthorizedNavigation from './core/layout/AuthNavigation';
-import { ACCOUNT, BOARD, BOARDS, LANDING, PASSWORD_FORGET, SIGN_IN, SIGN_UP } from './core/routes/routes';
+import { WrappedSignUpPage } from './auth/pages/SignUp';
+import { SignInScreen } from './auth/pages/SignIn';
+import PasswordForgetScreen from './auth/pages/PasswordForget';
+import { WrapperAccountScreen } from './auth/pages/Account';
 
 // pages
-import { WrappedSignUpPage } from './pages/SignUp';
-import { SignInScreen } from './pages/SignIn';
-import PasswordForgetScreen from './pages/PasswordForget';
 import { WrapperBoardsScreen } from './pages/Boards';
-import { WrapperAccountScreen } from './pages/Account';
 import { WrapperBoardScreen } from './pages/Board';
 import { NotFoundScreen } from './pages/NotFound';
 

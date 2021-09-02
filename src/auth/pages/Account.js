@@ -1,13 +1,13 @@
 import { Form, Icon, Input } from 'antd';
 import React, { Component } from 'react';
 
-import { passwordUpdate } from '../core/api/auth';
-import { byPropKey } from '../shared/utils';
-import { ErrorMessage } from '../auth/components/ErrorMessage';
-import { FormButton } from '../auth/components/FormButton';
-import { FormContainer } from '../auth/components/FormContainer';
-import { AuthUserContext } from '../auth/utils/AuthUserContext';
-import { withAuthorization } from '../auth/utils/AuthHOC';
+import { passwordUpdate } from '../api/auth';
+import { byPropKey } from '../../shared/utils';
+import { ErrorMessage } from '../components/common/ErrorMessage';
+import { FormButton } from '../components/common/FormButton';
+import { FormContainer } from '../components/common/FormContainer';
+import { AuthUserContext } from '../utils/AuthUserContext';
+import { withAuthorization } from '../utils/AuthHOC';
 
 const INITIAL_STATE = {
     passwordOne: '',

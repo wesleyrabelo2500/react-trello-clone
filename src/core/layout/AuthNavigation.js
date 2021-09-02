@@ -4,9 +4,9 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { darken } from 'polished';
 
-import { ACCOUNT, BOARDS } from '../routes/routes';
+import { ACCOUNT, BOARDS } from '../../routes';
 import { Button } from '../../shared/components/Button';
-import { signOut } from '../api/auth';
+import { signOut } from '../../auth/api/auth';
 
 class NavigationAuth extends Component {
     signOut() {

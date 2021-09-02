@@ -3,15 +3,15 @@ import { Form, Icon, Input } from 'antd';
 import { isEmail } from 'validator';
 import { Link } from 'react-router-dom';
 
-import { auth, provider } from '../core/api/firebase';
-import { FormContainer } from '../auth/components/FormContainer';
-import { BOARDS, LANDING, PASSWORD_FORGET, SIGN_UP } from '../core/routes/routes';
-import { signInWithEmailAndPassword } from '../core/api/auth';
-import { EMAIL_ERROR_TYPES } from '../auth/constants';
-import { FormButton } from '../auth/components/FormButton';
-import { ErrorMessage } from '../auth/components/ErrorMessage';
-import { useStateValue } from '../core/api/StateProvider';
-import { actionTypes } from '../core/api/reducer';
+import { auth, provider } from '../../core/api/firebase';
+import { BOARDS, LANDING, PASSWORD_FORGET, SIGN_UP } from '../../routes';
+import { signInWithEmailAndPassword } from '../api/auth';
+import { EMAIL_ERROR_TYPES } from '../constants';
+import { FormButton } from '../components/common/FormButton';
+import { ErrorMessage } from '../components/common/ErrorMessage';
+import { FormContainer } from '../components/common/FormContainer';
+import { useStateValue } from '../../core/api/StateProvider';
+import { actionTypes } from '../../core/api/reducer';
 
 const SignInForm = ({ form }) => {
     const [email, setEmail] = useState('');
@@ -103,7 +103,12 @@ const SignInForm = ({ form }) => {
                             Log in
                         </FormButton>
                         or
-                        <FormButton type="danger" htmlType="submit" className="login-form-button" onClick={signInWithGoogle}>
+                        <FormButton
+                            type="danger"
+                            htmlType="submit"
+                            className="login-form-button"
+                            onClick={signInWithGoogle}
+                        >
                             Continue with Google
                         </FormButton>
                     </div>
