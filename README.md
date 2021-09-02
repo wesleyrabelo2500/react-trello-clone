@@ -8,7 +8,7 @@ For a live demo of the project have a look at https://trello-board-b720f.firebas
 
 ## Important
 
-Your node.js version should be 7.0.0
+Your node.js version should be 8.9.0
 
 ## Usage
 
