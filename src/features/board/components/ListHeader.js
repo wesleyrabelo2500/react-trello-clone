@@ -46,7 +46,7 @@ export class ListHeader extends Component {
                         <InputTitle value={title} onChange={this.handleInputChange} />
                     </form>
                 ) : (
-                    <h4 onClick={this.handleEnableEdit}>{listTitle}</h4>
+                    <h4 onClick={this.handleEnableEdit} role="presentation">{listTitle}</h4>
                 )}
                 <Dropdown
                     overlay={
