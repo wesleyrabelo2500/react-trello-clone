@@ -96,6 +96,9 @@ export const StyledTextArea = styled(Input.TextArea)`
 
 export const SaveButton = styled(Button)`
     margin-right: 5px;
+    background: #0079bf;
+    display: inline-block;
+    padding: 0 10px;
 `;
 
 export const Detail = styled.span`
