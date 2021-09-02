@@ -1,25 +1,17 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
-
-// core
-import AuthorizedNavigation from './core/layout/AuthNavigation';
-import { ACCOUNT, BOARD, BOARDS, LANDING, PASSWORD_FORGET, SIGN_IN, SIGN_UP } from './routes';
-
-// auth
-import { AuthUserContext } from './auth/utils/AuthUserContext';
-import { withAuthentication } from './auth/utils/AuthHOC';
-import { WrappedSignUpPage } from './auth/pages/SignUp';
-import { SignInScreen } from './auth/pages/SignIn';
-import PasswordForgetScreen from './auth/pages/PasswordForget';
 import { WrapperAccountScreen } from './auth/pages/Account';
-
-// pages
-import { WrapperBoardsScreen } from './features/boards/pages/Boards';
+import PasswordForgetScreen from './auth/pages/PasswordForget';
+import { SignInScreen } from './auth/pages/SignIn';
+import { WrappedSignUpPage } from './auth/pages/SignUp';
+import { withAuthentication } from './auth/utils/AuthHOC';
+import { AuthUserContext } from './auth/utils/AuthUserContext';
+import AuthorizedNavigation from './core/layout/AuthNavigation';
 import { WrapperBoardScreen } from './features/board/pages/Board';
-import { NotFoundScreen } from './pages/NotFound';
-
-// styles
+import BoardsPage from './features/boards/pages/Boards';
 import { GlobalStyle } from './global-styles';
+import { NotFoundScreen } from './pages/NotFound';
+import { ACCOUNT, BOARD, BOARDS, LANDING, PASSWORD_FORGET, SIGN_IN, SIGN_UP } from './routes';
 
 export const Content = withAuthentication(() => (
     <Router>
@@ -33,7 +25,7 @@ export const Content = withAuthentication(() => (
                 <Route exact path={SIGN_UP} component={WrappedSignUpPage} />
                 <Route exact path={SIGN_IN} component={SignInScreen} />
                 <Route exact path={PASSWORD_FORGET} component={PasswordForgetScreen} />
-                {<Route exact path={BOARDS} component={WrapperBoardsScreen} />}
+                {<Route exact path={BOARDS} component={BoardsPage} />}
                 <Route exact path={ACCOUNT} component={WrapperAccountScreen} />
                 <Route exact path={BOARD} component={WrapperBoardScreen} />
                 <Route component={NotFoundScreen} />

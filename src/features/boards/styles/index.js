@@ -16,8 +16,6 @@ export const BoardTypeTitle = styled.h4`
     margin-bottom: 0px;
 `;
 
-export const Boards = styled.div``;
-
 export const StyledBoardLink = styled.div`
     position: relative;
     display: inline-block;
