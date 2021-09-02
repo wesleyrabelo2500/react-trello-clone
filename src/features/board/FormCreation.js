@@ -9,7 +9,7 @@ export class FormCreation extends Component {
 
     handleCreate = (event, callback, text) => {
         event.preventDefault();
-        if (this.state.loading) {
+        if (this.state.loading || !text || !text.trim()) {
             return;
         }
 
