@@ -3,10 +3,9 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import { List } from 'antd';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import styled from 'styled-components';
 
 import { BoardTitle } from '../components/BoardTitle';
-import Cards from '../components/Cards';
+import Cards from '../containers/Cards';
 import {
     doCreateList,
     deleteBoard,
@@ -22,6 +21,7 @@ import { ListHeader } from '../components/ListHeader';
 import { Spinner } from '../../../shared/components/Spinner';
 import { isEmpty, mergeDataWithKey } from '../../../shared/utils';
 import { withAuthorization } from '../../../auth/utils/AuthHOC';
+import { AddList, Lists } from '../styles';
 
 class BoardScreen extends Component {
     state = {
@@ -157,20 +157,3 @@ const authCondition = authUser => !!authUser;
 export const WrapperBoardScreen = withRouter(
     withAuthorization(authCondition)(DragDropContext(HTML5Backend)(BoardScreen))
 );
-
-const AddList = styled.div`
-    width: 250px;
-`;
-
-export const Lists = styled.div`
-    background-color: #0079bf;
-    flex: 1;
-    display: flex;
-    overflow: auto;
-    white-space: nowrap;
-    padding: 0 10px;
-
-    > div {
-        margin-right: 1rem;
-    }
-`;

@@ -1,8 +1,8 @@
 import { Icon, Menu, Dropdown, Input } from 'antd';
 import React, { Component } from 'react';
-import styled from 'styled-components';
 
 import { Button } from '../../../shared/components/Button';
+import { StyledBoardTitle, MenuButtonText, ShowMenuButton, Favorite, Form, StyledButton, StyledIcon } from '../styles';
 
 export class BoardTitle extends Component {
     state = {
@@ -85,41 +85,3 @@ export class BoardTitle extends Component {
         );
     }
 }
-
-const Form = styled.form`
-    margin-right: 5px !important;
-`;
-
-const StyledBoardTitle = styled.div`
-    margin-top: -20px;
-    background: #0079bf;
-    display: flex;
-    position: relative;
-    padding: 8px 8px 12px;
-`;
-
-const Favorite = styled.div``;
-
-const ShowMenuButton = styled.div`
-    color: white;
-    position: absolute;
-    right: 0;
-    text-decoration: underline;
-    div {
-        font-weight: normal;
-    }
-`;
-
-const StyledIcon = styled(Icon)`
-    &.active {
-        color: #f2d600;
-    }
-`;
-
-const MenuButtonText = styled.span`
-    padding-left: 5px;
-`;
-
-const StyledButton = styled(Button)`
-    background: ${props => (props.active ? '#0079BF' : '')};
-`;

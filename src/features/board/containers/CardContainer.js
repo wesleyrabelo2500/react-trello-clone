@@ -1,8 +1,8 @@
 import { DragSource } from 'react-dnd';
 import React, { Component } from 'react';
 
-import { Card } from './Card';
-import { CardModal } from './CardModal';
+import { Card } from '../components/Card';
+import { CardModal } from '../components/CardModal';
 import { ItemTypes } from '../../../core/constants';
 
 const cardSource = {

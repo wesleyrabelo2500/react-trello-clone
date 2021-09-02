@@ -1,10 +1,10 @@
-import { Icon, Input } from 'antd';
+import { Icon } from 'antd';
 import React, { Component } from 'react';
-import styled from 'styled-components';
 
 import { GrayButton } from '../../../shared/components/Button';
 import { Label } from './Label';
 import { LABELS } from '../../../core/constants';
+import { TitleInput, CardBlock, Edit } from '../styles';
 
 export class Card extends Component {
     state = {
@@ -85,36 +85,3 @@ function getColor(labels, text) {
     const label = labels.find(label => label.text === text);
     return label.color;
 }
-
-const CardBlock = styled.div`
-    position: relative;
-    background: white;
-    margin-bottom: 7px;
-    border-radius: 3px;
-    padding: 6px 10px 6px;
-    box-shadow: 0px 1px 0px grey;
-    min-width: 250px;
-    &:hover {
-        background: ${props => (props.editMode ? '#fff' : '#efefef')};
-        cursor: pointer;
-    }
-`;
-
-const TitleInput = styled(Input)`
-    border: none !important;
-    outline: none !important;
-    height: 20px !important;
-    padding-left: 0 !important;
-    &:focus {
-        box-shadow: none !important;
-    }
-`;
-
-const Edit = styled.div`
-    position: absolute;
-    right: 4px;
-    top: 4px;
-    > div {
-        display: inline-block;
-    }
-`;

@@ -1,10 +1,10 @@
 import { Icon, Modal } from 'antd';
 import React, { Component } from 'react';
-import styled from 'styled-components';
 
 import { CardDescription } from './CardDescription';
 import { LABELS } from '../../../core/constants';
 import { Label } from './Label';
+import { Details, StyledIcon, CardDetailWrapper, CardDetailHead, CardDetailIcon } from '../styles';
 
 export class CardModal extends Component {
     state = {
@@ -40,21 +40,6 @@ export class CardModal extends Component {
     }
 }
 
-const Details = styled.div`
-    flex-direction: column;
-    width: 100%;
-    > div {
-        margin-bottom: 16px;
-        &:last-child {
-            margin-bottom: 0;
-        }
-    }
-`;
-
-const StyledIcon = styled(Icon)`
-    color: #798d99 !important;
-`;
-
 export const CardDetail = props => {
     return (
         <CardDetailWrapper>
@@ -66,18 +51,6 @@ export const CardDetail = props => {
         </CardDetailWrapper>
     );
 };
-
-const CardDetailWrapper = styled.div`
-    width: 100%;
-`;
-
-const CardDetailHead = styled.div`
-    display: flex;
-`;
-
-const CardDetailIcon = styled.div`
-    width: 7%;
-`;
 
 class CardLabel extends Component {
     render() {

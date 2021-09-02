@@ -1,6 +1,7 @@
-import { Input, Button } from 'antd';
+import { Button } from 'antd';
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { StyledTextArea, SaveButton, Detail } from '../styles';
 
 export class CardDescription extends Component {
     state = {
@@ -68,17 +69,5 @@ export class CardDescription extends Component {
         );
     }
 }
-
-const StyledTextArea = styled(Input.TextArea)`
-    margin-bottom: 10px !important;
-`;
-
-const SaveButton = styled(Button)`
-    margin-right: 5px;
-`;
-
-const Detail = styled.span`
-    cursor: pointer;
-`;
 
 const DescriptionPlaceholder = styled.div``;

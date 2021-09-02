@@ -1,8 +1,6 @@
-import { Dropdown, Icon, Input, Menu } from 'antd';
+import { Dropdown, Icon, Menu } from 'antd';
 import React, { Component } from 'react';
-import styled from 'styled-components';
-
-import { Button } from '../../../shared/components/Button';
+import { Header, StyledButton, InputTitle } from '../styles';
 
 export class ListHeader extends Component {
     state = {
@@ -66,32 +64,3 @@ export class ListHeader extends Component {
         );
     }
 }
-
-const Header = styled.div`
-    display: flex;
-    margin-bottom: 5px;
-    background: #fff;
-    justify-content: space-between;
-    border-radius: 5px;
-    padding: 0 0px 0 10px;
-    align-items: center;
-`;
-
-const StyledButton = styled(Button)`
-    &:hover {
-        background: '#dfe3e6';
-        color: gray;
-    }
-    &:active {
-        background: '#dfe3e6';
-    }
-    color: gray;
-`;
-
-const InputTitle = styled(Input)`
-    height: 25px !important;
-    margin-bottom: 0.5em !important;
-    font-weight: bold;
-    padding: 4px 5px !important;
-    font-size: 1.17em !important;
-`;

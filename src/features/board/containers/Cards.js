@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 import CardContainer from './CardContainer';
 import { addCard, deleteCard, updateCard, moveCard, getCard } from '../../../core/api/db';
-import { FormCreation } from './FormCreation';
+import { FormCreation } from '../components/FormCreation';
 import { ItemTypes } from '../../../core/constants';
 import { mergeDataWithKey } from '../../../shared/utils';
 
