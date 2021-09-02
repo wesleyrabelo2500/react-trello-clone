@@ -15,7 +15,7 @@ export class CreateBoardModal extends Component {
             title: this.state.boardTitle,
             color: DEFAULT_COLOR,
         };
-        if (!board.title) {
+        if (!board.title || !board.title.trim()) {
             return;
         }
         return callback(board).then(() => {
