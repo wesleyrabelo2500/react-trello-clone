@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 import { Card } from './Card';
 import { CardModal } from './CardModal';
-import { ItemTypes } from '../../core/constants';
+import { ItemTypes } from '../../../core/constants';
 
 const cardSource = {
     beginDrag(props) {

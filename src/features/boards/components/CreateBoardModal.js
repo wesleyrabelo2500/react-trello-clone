@@ -2,7 +2,7 @@ import { Button, Input, Modal } from 'antd';
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import { DEFAULT_COLOR } from '../../core/constants';
+import { DEFAULT_COLOR } from '../../../core/constants';
 
 const StyledInput = styled(Input)`
     margin-bottom: 10px !important;

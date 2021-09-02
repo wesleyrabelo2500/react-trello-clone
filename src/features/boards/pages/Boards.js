@@ -2,11 +2,11 @@ import { Icon } from 'antd';
 import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 
-import { CreateBoardModal } from '../features/boards/CreateBoardModal';
-import { createBoard, getBoards } from '../core/api/db';
-import { Spinner } from '../shared/components/Spinner';
-import { isEmpty, mergeDataWithKey } from '../shared/utils';
-import { withAuthorization } from '../auth/utils/AuthHOC';
+import { CreateBoardModal } from '../components/CreateBoardModal';
+import { createBoard, getBoards } from '../../../core/api/db';
+import { Spinner } from '../../../shared/components/Spinner';
+import { isEmpty, mergeDataWithKey } from '../../../shared/utils';
+import { withAuthorization } from '../../../auth/utils/AuthHOC';
 import styled from 'styled-components';
 import { darken } from 'polished';
 

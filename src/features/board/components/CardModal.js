@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 import { CardDescription } from './CardDescription';
-import { LABELS } from '../../core/constants';
+import { LABELS } from '../../../core/constants';
 import { Label } from './Label';
 
 export class CardModal extends Component {

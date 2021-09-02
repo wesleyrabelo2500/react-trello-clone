@@ -5,8 +5,8 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { BoardTitle } from '../features/board/BoardTitle';
-import Cards from '../features/board/Cards';
+import { BoardTitle } from '../components/BoardTitle';
+import Cards from '../components/Cards';
 import {
     doCreateList,
     deleteBoard,
@@ -16,12 +16,12 @@ import {
     updateList,
     getBoard,
     onceGetLists,
-} from '../core/api/db';
-import { FormCreation } from '../features/board/FormCreation';
-import { ListHeader } from '../features/board/ListHeader';
-import { Spinner } from '../shared/components/Spinner';
-import { isEmpty, mergeDataWithKey } from '../shared/utils';
-import { withAuthorization } from '../auth/utils/AuthHOC';
+} from '../../../core/api/db';
+import { FormCreation } from '../components/FormCreation';
+import { ListHeader } from '../components/ListHeader';
+import { Spinner } from '../../../shared/components/Spinner';
+import { isEmpty, mergeDataWithKey } from '../../../shared/utils';
+import { withAuthorization } from '../../../auth/utils/AuthHOC';
 
 class BoardScreen extends Component {
     state = {

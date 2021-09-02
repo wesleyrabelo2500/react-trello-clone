@@ -14,8 +14,8 @@ import PasswordForgetScreen from './auth/pages/PasswordForget';
 import { WrapperAccountScreen } from './auth/pages/Account';
 
 // pages
-import { WrapperBoardsScreen } from './pages/Boards';
-import { WrapperBoardScreen } from './pages/Board';
+import { WrapperBoardsScreen } from './features/boards/pages/Boards';
+import { WrapperBoardScreen } from './features/board/pages/Board';
 import { NotFoundScreen } from './pages/NotFound';
 
 // styles
