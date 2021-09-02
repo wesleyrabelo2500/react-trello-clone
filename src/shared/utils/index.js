@@ -16,4 +16,5 @@ export function byPropKey(propertyName, value) {
     };
 }
 
-export const isEmpty = obj => [Object, Array].includes((obj || {}).constructor) && !Object.entries((obj || {})).length;
+export const isEmpty = (obj) =>
+    [Object, Array].includes((obj || {}).constructor) && !Object.entries(obj || {}).length;

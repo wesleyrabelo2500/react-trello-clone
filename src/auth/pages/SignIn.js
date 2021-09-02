@@ -24,17 +24,17 @@ const SignInForm = ({ form }) => {
 
     const signInWithGoogle = () => {
         auth.signInWithPopup(provider)
-            .then(result => {
+            .then((result) => {
                 dispatch({
                     type: actionTypes.SET_USER,
                     user: result.user,
                 });
                 window.location = BOARDS;
             })
-            .catch(error => alert(error.message));
+            .catch((error) => alert(error.message));
     };
 
-    const onSubmit = async event => {
+    const onSubmit = async (event) => {
         event.preventDefault();
         const submitButton = document.querySelector('.login-form-button');
         setEmailInputErr({
@@ -48,13 +48,13 @@ const SignInForm = ({ form }) => {
                 submitButton.disabled = false;
                 window.location = LANDING;
             })
-            .catch(error => {
+            .catch((error) => {
                 submitButton.disabled = false;
                 setError(error.message);
             });
     };
 
-    const handleEmailInputBlur = event => {
+    const handleEmailInputBlur = (event) => {
         setEmailInputErr({
             status: EMAIL_ERROR_TYPES.INVALID.STATUS,
             message: EMAIL_ERROR_TYPES.INVALID.MESSAGE,
@@ -73,7 +73,7 @@ const SignInForm = ({ form }) => {
                         <Input
                             prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                             placeholder="Email"
-                            onChange={event => setEmail(event.target.value)}
+                            onChange={(event) => setEmail(event.target.value)}
                             onBlur={handleEmailInputBlur}
                         />
                     )}
@@ -85,7 +85,7 @@ const SignInForm = ({ form }) => {
                     })(
                         <Input
                             prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                            onChange={event => setPassword(event.target.value)}
+                            onChange={(event) => setPassword(event.target.value)}
                             type="password"
                             placeholder="Password"
                         />

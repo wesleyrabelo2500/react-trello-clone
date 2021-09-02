@@ -25,7 +25,7 @@ export const Content = withAuthentication(() => (
     <Router>
         <React.Fragment>
             <AuthUserContext.Consumer>
-                {authUser => (authUser ? <AuthorizedNavigation /> : <div />)}
+                {(authUser) => (authUser ? <AuthorizedNavigation /> : <div />)}
             </AuthUserContext.Consumer>
 
             <Switch className="container">

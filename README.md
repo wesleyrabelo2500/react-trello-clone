@@ -18,11 +18,9 @@ Your node.js version should be 7.0.0
 $ git clone https://github.com/bmarvinb/trello-clone.git
 ```
 
-
 ```
 $ cd react-trello-clone
 ```
-
 
 -   Install npm
 

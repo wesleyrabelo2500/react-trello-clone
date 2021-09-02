@@ -2,7 +2,15 @@ import { Icon, Menu, Dropdown, Input } from 'antd';
 import React, { Component } from 'react';
 
 import { Button } from '../../../shared/components/Button';
-import { StyledBoardTitle, MenuButtonText, ShowMenuButton, Favorite, Form, StyledButton, StyledIcon } from '../styles';
+import {
+    StyledBoardTitle,
+    MenuButtonText,
+    ShowMenuButton,
+    Favorite,
+    Form,
+    StyledButton,
+    StyledIcon,
+} from '../styles';
 
 export class BoardTitle extends Component {
     state = {
@@ -23,7 +31,7 @@ export class BoardTitle extends Component {
         });
     };
 
-    handleBoardTitleChange = event => {
+    handleBoardTitleChange = (event) => {
         this.setState({
             boardTitle: event.target.value,
         });
@@ -42,7 +50,8 @@ export class BoardTitle extends Component {
     };
 
     render() {
-        const { title, favorite, boardKey, onAddToFavorites, deleteBoard, updateBoard } = this.props;
+        const { title, favorite, boardKey, onAddToFavorites, deleteBoard, updateBoard } =
+            this.props;
 
         const { edit, boardTitle } = this.state;
         return (
@@ -50,7 +59,9 @@ export class BoardTitle extends Component {
                 <h3>
                     {edit ? (
                         <Form
-                            onSubmit={event => this.handleSubmitForm(event, updateBoard, boardKey, boardTitle)}
+                            onSubmit={(event) =>
+                                this.handleSubmitForm(event, updateBoard, boardKey, boardTitle)
+                            }
                             onBlur={this.handleDisableEdit}
                         >
                             <Input value={boardTitle} onChange={this.handleBoardTitleChange} />

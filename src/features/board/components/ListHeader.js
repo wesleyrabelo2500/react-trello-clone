@@ -17,7 +17,7 @@ export class ListHeader extends Component {
         this.setState(() => ({ edit: false }));
     };
 
-    handleInputChange = event => {
+    handleInputChange = (event) => {
         this.setState({ title: event.target.value });
     };
 
@@ -38,8 +38,10 @@ export class ListHeader extends Component {
             <Header>
                 {edit ? (
                     <form
-                        onSubmit={event => this.handleFormSubmit(event, onEditList, listKey, title)}
-                        onBlur={event => this.handleFormSubmit(event, onEditList, listKey, title)}
+                        onSubmit={(event) =>
+                            this.handleFormSubmit(event, onEditList, listKey, title)
+                        }
+                        onBlur={(event) => this.handleFormSubmit(event, onEditList, listKey, title)}
                     >
                         <InputTitle value={title} onChange={this.handleInputChange} />
                     </form>
@@ -49,7 +51,10 @@ export class ListHeader extends Component {
                 <Dropdown
                     overlay={
                         <Menu>
-                            <Menu.Item key="1" onClick={event => this.handleDeleteList(onDeleteList, listKey)}>
+                            <Menu.Item
+                                key="1"
+                                onClick={(event) => this.handleDeleteList(onDeleteList, listKey)}
+                            >
                                 Delete This List
                             </Menu.Item>
                         </Menu>

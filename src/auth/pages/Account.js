@@ -18,7 +18,7 @@ const INITIAL_STATE = {
 class AccountScreen extends Component {
     state = { ...INITIAL_STATE };
 
-    handleSubmit = event => {
+    handleSubmit = (event) => {
         event.preventDefault();
 
         // TODO: add spinners
@@ -29,7 +29,7 @@ class AccountScreen extends Component {
                     passwordTwo: '',
                 });
             })
-            .catch(error => {
+            .catch((error) => {
                 this.setState(byPropKey('error', error.message));
             });
     };
@@ -39,18 +39,29 @@ class AccountScreen extends Component {
         const { error } = this.state;
         return (
             <AuthUserContext.Consumer>
-                {authUser => (
+                {(authUser) => (
                     <FormContainer>
                         <h3>Account: {authUser.email}</h3>
 
-                        <Form onSubmit={event => this.handleSubmit(event)} className="login-form">
+                        <Form onSubmit={(event) => this.handleSubmit(event)} className="login-form">
                             <Form.Item>
                                 {getFieldDecorator('passwordOne', {
-                                    rules: [{ required: true, message: 'Please input your Password!' }],
+                                    rules: [
+                                        { required: true, message: 'Please input your Password!' },
+                                    ],
                                 })(
                                     <Input
-                                        prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                        onChange={event => this.setState(byPropKey('passwordOne', event.target.value))}
+                                        prefix={
+                                            <Icon
+                                                type="lock"
+                                                style={{ color: 'rgba(0,0,0,.25)' }}
+                                            />
+                                        }
+                                        onChange={(event) =>
+                                            this.setState(
+                                                byPropKey('passwordOne', event.target.value)
+                                            )
+                                        }
                                         type="password"
                                         placeholder="Password"
                                     />
@@ -59,11 +70,22 @@ class AccountScreen extends Component {
 
                             <Form.Item>
                                 {getFieldDecorator('passwordTwo', {
-                                    rules: [{ required: true, message: 'Please input your Password!' }],
+                                    rules: [
+                                        { required: true, message: 'Please input your Password!' },
+                                    ],
                                 })(
                                     <Input
-                                        prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                        onChange={event => this.setState(byPropKey('passwordTwo', event.target.value))}
+                                        prefix={
+                                            <Icon
+                                                type="lock"
+                                                style={{ color: 'rgba(0,0,0,.25)' }}
+                                            />
+                                        }
+                                        onChange={(event) =>
+                                            this.setState(
+                                                byPropKey('passwordTwo', event.target.value)
+                                            )
+                                        }
                                         type="password"
                                         placeholder="Password"
                                     />
@@ -85,4 +107,6 @@ class AccountScreen extends Component {
     }
 }
 
-export const WrapperAccountScreen = withAuthorization(authUser => !!authUser)(Form.create()(AccountScreen));
+export const WrapperAccountScreen = withAuthorization((authUser) => !!authUser)(
+    Form.create()(AccountScreen)
+);

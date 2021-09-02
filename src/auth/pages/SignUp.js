@@ -21,7 +21,7 @@ const SignUpForm = ({ form, onSubmit }) => {
         message: '',
     });
 
-    const handleSubmit = event => {
+    const handleSubmit = (event) => {
         event.preventDefault();
 
         if (newPassword !== confirmPassword) {
@@ -40,13 +40,13 @@ const SignUpForm = ({ form, onSubmit }) => {
             .then(() => {
                 submitButton.disabled = false;
             })
-            .catch(error => {
+            .catch((error) => {
                 submitButton.disabled = false;
                 setError(error.message);
             });
     };
 
-    const handleEmailInputBlur = event => {
+    const handleEmailInputBlur = (event) => {
         setEmailInputErr({
             status: EMAIL_ERROR_TYPES.INVALID.STATUS,
             message: EMAIL_ERROR_TYPES.INVALID.MESSAGE,
@@ -56,7 +56,7 @@ const SignUpForm = ({ form, onSubmit }) => {
     return (
         <FormContainer>
             <h1 className="title">Sign Up</h1>
-            <Form onSubmit={event => handleSubmit(event)} className="login-form">
+            <Form onSubmit={(event) => handleSubmit(event)} className="login-form">
                 <Form.Item>
                     {form.getFieldDecorator('username', {
                         rules: [{ required: true, message: 'Please input your username!' }],
@@ -64,7 +64,7 @@ const SignUpForm = ({ form, onSubmit }) => {
                         <Input
                             prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                             placeholder="Username"
-                            onChange={event => setUsername(event.target.value)}
+                            onChange={(event) => setUsername(event.target.value)}
                         />
                     )}
                 </Form.Item>
@@ -76,7 +76,7 @@ const SignUpForm = ({ form, onSubmit }) => {
                         <Input
                             prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                             placeholder="Email"
-                            onChange={event => setEmail(event.target.value)}
+                            onChange={(event) => setEmail(event.target.value)}
                             onBlur={handleEmailInputBlur}
                         />
                     )}
@@ -90,7 +90,7 @@ const SignUpForm = ({ form, onSubmit }) => {
                             prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                             type="password"
                             placeholder="Password"
-                            onChange={event => setNewPassword(event.target.value)}
+                            onChange={(event) => setNewPassword(event.target.value)}
                         />
                     )}
                 </Form.Item>
@@ -103,13 +103,17 @@ const SignUpForm = ({ form, onSubmit }) => {
                             prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                             type="password"
                             placeholder="Confirm password"
-                            onChange={event => serConfirmPassword(event.target.value)}
+                            onChange={(event) => serConfirmPassword(event.target.value)}
                         />
                     )}
                 </Form.Item>
 
                 <Form.Item>
-                    <FormButton type="primary" htmlType="submit" className="login-form-button signup-form-button">
+                    <FormButton
+                        type="primary"
+                        htmlType="submit"
+                        className="login-form-button signup-form-button"
+                    >
                         Sign Up
                     </FormButton>
                 </Form.Item>
@@ -122,7 +126,7 @@ const SignUpForm = ({ form, onSubmit }) => {
 
 class SignUpScreen extends Component {
     async onSubmit(email, password, username) {
-        return createUserWithEmailAndPassword(email, password).then(authUser => {
+        return createUserWithEmailAndPassword(email, password).then((authUser) => {
             createUser(authUser.user.uid, username, email);
             window.location = LANDING;
         });

@@ -5,14 +5,14 @@ import { withRouter } from 'react-router-dom';
 import { AuthUserContext } from './AuthUserContext';
 import { SIGN_IN } from '../../routes';
 
-export const withAuthentication = Component =>
+export const withAuthentication = (Component) =>
     class WithAuthentication extends React.Component {
         state = {
             authUser: null,
         };
 
         componentDidMount() {
-            firebase.auth().onAuthStateChanged(authUser => {
+            firebase.auth().onAuthStateChanged((authUser) => {
                 authUser ? this.setState({ authUser }) : this.setState({ authUser: null });
             });
         }
@@ -28,10 +28,10 @@ export const withAuthentication = Component =>
         }
     };
 
-export const withAuthorization = authCondition => Component => {
+export const withAuthorization = (authCondition) => (Component) => {
     class WithAuthorization extends React.Component {
         componentDidMount() {
-            firebase.auth().onAuthStateChanged(authUser => {
+            firebase.auth().onAuthStateChanged((authUser) => {
                 if (!authCondition(authUser)) {
                     this.props.history.push(SIGN_IN);
                 }
@@ -41,7 +41,7 @@ export const withAuthorization = authCondition => Component => {
         render() {
             return (
                 <AuthUserContext.Consumer>
-                    {authUser => (authUser ? <Component {...this.props} /> : null)}
+                    {(authUser) => (authUser ? <Component {...this.props} /> : null)}
                 </AuthUserContext.Consumer>
             );
         }

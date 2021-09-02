@@ -25,7 +25,7 @@ export class Card extends Component {
         this.setState(() => ({ editMode: false }));
     };
 
-    handleTitleChange = event => {
+    handleTitleChange = (event) => {
         this.setState({ title: event.target.value });
     };
 
@@ -56,18 +56,33 @@ export class Card extends Component {
             >
                 <div>
                     {card && card.label && (
-                        <Label color={getColor(LABELS, card.label)} text={card.label} small={true} />
+                        <Label
+                            color={getColor(LABELS, card.label)}
+                            text={card.label}
+                            small={true}
+                        />
                     )}
                 </div>
                 {editMode ? (
-                    <form onSubmit={event => this.handleSubmitForm(event, onEditCard, listKey, card.key, title)}>
-                        <TitleInput value={this.state.title} onChange={event => this.handleTitleChange(event)} />
+                    <form
+                        onSubmit={(event) =>
+                            this.handleSubmitForm(event, onEditCard, listKey, card.key, title)
+                        }
+                    >
+                        <TitleInput
+                            value={this.state.title}
+                            onChange={(event) => this.handleTitleChange(event)}
+                        />
                     </form>
                 ) : (
                     <React.Fragment>
                         {showEditIcons && (
-                            <Edit onClick={event => event.stopPropagation()}>
-                                <GrayButton onClick={() => this.handleDeleteCard(onDeleteCard, listKey, card.key)}>
+                            <Edit onClick={(event) => event.stopPropagation()}>
+                                <GrayButton
+                                    onClick={() =>
+                                        this.handleDeleteCard(onDeleteCard, listKey, card.key)
+                                    }
+                                >
                                     <Icon type="delete" />
                                 </GrayButton>
                             </Edit>
@@ -82,6 +97,6 @@ export class Card extends Component {
 }
 
 function getColor(labels, text) {
-    const label = labels.find(label => label.text === text);
+    const label = labels.find((label) => label.text === text);
     return label.color;
 }

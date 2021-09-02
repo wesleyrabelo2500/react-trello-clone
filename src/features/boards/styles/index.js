@@ -24,7 +24,7 @@ export const StyledBoardLink = styled.div`
     padding: 4px;
     width: 250px;
     height: 80px;
-    background-color: ${props => props.color};
+    background-color: ${(props) => props.color};
     color: white;
     margin: 0.5%;
     border-radius: 4px;
@@ -55,8 +55,8 @@ export const Favorite = styled.div`
     bottom: 4px;
     right: 4px;
     transition: all 0.1s;
-    color: ${props => (props.favorite ? '#f2d600' : 'white')};
-    display: ${props => (props.favorite ? 'block' : 'none')};
+    color: ${(props) => (props.favorite ? '#f2d600' : 'white')};
+    display: ${(props) => (props.favorite ? 'block' : 'none')};
 `;
 
 export const StyledInput = styled(Input)`

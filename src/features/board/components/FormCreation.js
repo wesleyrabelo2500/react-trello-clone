@@ -17,7 +17,7 @@ export class FormCreation extends Component {
         callback(text).then(() => this.setState(() => ({ text: '', loading: false })));
     };
 
-    handleInputChange = event => {
+    handleInputChange = (event) => {
         this.setState({ text: event.target.value });
     };
 
@@ -25,9 +25,9 @@ export class FormCreation extends Component {
         const { onCreate, placeholder } = this.props;
         const { text } = this.state;
         return (
-            <form onSubmit={event => this.handleCreate(event, onCreate, text)}>
+            <form onSubmit={(event) => this.handleCreate(event, onCreate, text)}>
                 <Input
-                    onChange={event => this.handleInputChange(event)}
+                    onChange={(event) => this.handleInputChange(event)}
                     value={this.state.text}
                     placeholder={placeholder}
                     disabled={this.state.loading}

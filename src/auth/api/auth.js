@@ -8,8 +8,8 @@ export const signInWithEmailAndPassword = (email, password) =>
 
 export const signOut = () => firebase.auth().signOut();
 
-export const passwordReset = email => firebase.auth().sendPasswordResetEmail(email);
+export const passwordReset = (email) => firebase.auth().sendPasswordResetEmail(email);
 
-export const passwordUpdate = password => firebase.auth().currentUser.updatePassword(password);
+export const passwordUpdate = (password) => firebase.auth().currentUser.updatePassword(password);
 
 export const getUser = () => firebase.auth().currentUser;

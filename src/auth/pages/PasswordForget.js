@@ -26,7 +26,7 @@ class PasswordForgetScreen extends Component {
         const { email } = this.state;
         this.resetEmailInputErr();
 
-        this.props.onSubmit(email).catch(error => {
+        this.props.onSubmit(email).catch((error) => {
             this.setState(byPropKey('error', error.message));
         });
 
@@ -42,7 +42,7 @@ class PasswordForgetScreen extends Component {
         );
     };
 
-    handleEmailInputBlur = event => {
+    handleEmailInputBlur = (event) => {
         this.setState(
             byPropKey('emailInputErr', {
                 status: EMAIL_ERROR_TYPES.INVALID.STATUS,
@@ -58,16 +58,21 @@ class PasswordForgetScreen extends Component {
         return (
             <FormContainer>
                 <h1 className="title">Password Forget</h1>
-                <Form onSubmit={event => this.handleSubmit(event)} className="login-form">
-                    <Form.Item validateStatus={this.state.emailInputErr.status} help={this.state.emailInputErr.message}>
+                <Form onSubmit={(event) => this.handleSubmit(event)} className="login-form">
+                    <Form.Item
+                        validateStatus={this.state.emailInputErr.status}
+                        help={this.state.emailInputErr.message}
+                    >
                         {getFieldDecorator('email', {
                             rules: [{ required: true, message: 'Please input your email!' }],
                         })(
                             <Input
                                 prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                                 placeholder="Email"
-                                onChange={event => this.setState(byPropKey('email', event.target.value))}
-                                onBlur={event => this.handleEmailInputBlur(event)}
+                                onChange={(event) =>
+                                    this.setState(byPropKey('email', event.target.value))
+                                }
+                                onBlur={(event) => this.handleEmailInputBlur(event)}
                             />
                         )}
                     </Form.Item>

@@ -25,7 +25,7 @@ export class CreateBoardModal extends Component {
         });
     };
 
-    handleBoardTitleChange = event => {
+    handleBoardTitleChange = (event) => {
         this.setState({
             boardTitle: event.target.value,
         });
@@ -43,13 +43,16 @@ export class CreateBoardModal extends Component {
                 onCancel={onCloseModal}
                 footer={null}
             >
-                <BoardForm onSubmit={event => this.handleCreateBoard(event, onCreateBoard)}>
+                <BoardForm onSubmit={(event) => this.handleCreateBoard(event, onCreateBoard)}>
                     <StyledInput
                         placeholder="Add board title"
-                        onChange={event => this.handleBoardTitleChange(event)}
+                        onChange={(event) => this.handleBoardTitleChange(event)}
                         value={this.state.boardTitle}
                     />
-                    <Button type="primary" onClick={event => this.handleCreateBoard(event, onCreateBoard)}>
+                    <Button
+                        type="primary"
+                        onClick={(event) => this.handleCreateBoard(event, onCreateBoard)}
+                    >
                         Create
                     </Button>
                 </BoardForm>

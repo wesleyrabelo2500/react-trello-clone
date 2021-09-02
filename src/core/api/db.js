@@ -11,7 +11,7 @@ export const createUser = (id, username, email) =>
         email,
     });
 
-export const createBoard = async board => {
+export const createBoard = async (board) => {
     const uid = getUser().uid;
     const id = boardsRef.push().key;
     await boardsRef.child(uid).child(id).set(board);
@@ -19,7 +19,7 @@ export const createBoard = async board => {
     return board;
 };
 
-export const deleteBoard = async boardKey => {
+export const deleteBoard = async (boardKey) => {
     const uid = getUser().uid;
     await boardsRef.child(uid).child(boardKey).remove();
 };
@@ -51,13 +51,13 @@ export const editBoard = async (boardKey, board) => {
     return board;
 };
 
-export const getBoard = key => {
+export const getBoard = (key) => {
     const uid = getUser().uid;
 
     return boardsRef.child(uid).child(`${key}`).once('value');
 };
 
-export const onceGetLists = key => listsRef.child(key).once('value');
+export const onceGetLists = (key) => listsRef.child(key).once('value');
 
 export const doCreateList = async (boardKey, list) => {
     const id = listsRef.push().key;
@@ -88,7 +88,7 @@ export const addCard = (listKey, cardTitle) =>
         title: cardTitle,
     });
 
-export const getCard = listKey => db.ref(`cards/${listKey}`).once('value');
+export const getCard = (listKey) => db.ref(`cards/${listKey}`).once('value');
 
 export const updateCard = async (listKey, cardKey, card) => {
     await cardsRef
@@ -112,4 +112,5 @@ export const moveCard = (oldListKey, newListKey, cardKey, card) =>
             })
         );
 
-export const deleteCard = (listKey, cardKey) => db.ref(`cards/${listKey}/`).child(`${cardKey}`).remove();
+export const deleteCard = (listKey, cardKey) =>
+    db.ref(`cards/${listKey}/`).child(`${cardKey}`).remove();

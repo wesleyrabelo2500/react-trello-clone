@@ -27,7 +27,7 @@ class Cards extends Component {
     };
 
     componentDidMount = () => {
-        getCard(this.props.list.key).then(snapshot => {
+        getCard(this.props.list.key).then((snapshot) => {
             const snapshotVal = snapshot.val();
             if (!snapshotVal) {
                 return;
@@ -40,11 +40,11 @@ class Cards extends Component {
         });
     };
 
-    handleCreateCard = cardTitle => {
+    handleCreateCard = (cardTitle) => {
         const { list } = this.props;
         return addCard(list.key, cardTitle)
             .then(() => getCard(list.key))
-            .then(snapshot => {
+            .then((snapshot) => {
                 const snapshotVal = snapshot.val();
                 if (!snapshotVal) {
                     return;
@@ -61,7 +61,7 @@ class Cards extends Component {
     handleEditCard = (listKey, cardKey, card) => {
         return updateCard(listKey, cardKey, card).then(() => {
             const updatedCards = { ...this.state.cards };
-            const cardIndex = updatedCards[listKey].findIndex(card => card.key === cardKey);
+            const cardIndex = updatedCards[listKey].findIndex((card) => card.key === cardKey);
             updatedCards[listKey][cardIndex] = {
                 ...updatedCards[listKey][cardIndex],
                 ...card,
@@ -75,7 +75,7 @@ class Cards extends Component {
 
     moveCard = (component, oldListKey, newListKey, cardKey, card) => {
         moveCard(oldListKey, newListKey, cardKey, card).then(() => {
-            const cardItems = this.state.cards[oldListKey].filter(card => card.key !== cardKey);
+            const cardItems = this.state.cards[oldListKey].filter((card) => card.key !== cardKey);
             const updatedCards = { ...this.state.cards };
             updatedCards[oldListKey] = cardItems;
             this.setState({
@@ -95,7 +95,9 @@ class Cards extends Component {
     handleDeleteCard = (listKey, cardKey) => {
         return deleteCard(listKey, cardKey).then(() => {
             const updatedCards = { ...this.state.cards };
-            updatedCards[listKey] = this.state.cards[listKey].filter(card => card.key !== cardKey);
+            updatedCards[listKey] = this.state.cards[listKey].filter(
+                (card) => card.key !== cardKey
+            );
             this.setState({
                 cards: updatedCards,
             });
@@ -109,7 +111,7 @@ class Cards extends Component {
         const listCards = cards[list.key] ? cards[list.key] : [];
         return connectDropTarget(
             <div>
-                {listCards.map(card => (
+                {listCards.map((card) => (
                     <CardContainer
                         key={card.key}
                         listKey={list.key}

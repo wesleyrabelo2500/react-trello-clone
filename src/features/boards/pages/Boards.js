@@ -31,7 +31,7 @@ class BoardsScreen extends Component {
             isLoading: true,
         });
         getBoards()
-            .then(snapshot => {
+            .then((snapshot) => {
                 if (!snapshot.val()) {
                     return;
                 }
@@ -46,8 +46,8 @@ class BoardsScreen extends Component {
             });
     };
 
-    handleCreateBoard = board => {
-        return createBoard(board).then(response => {
+    handleCreateBoard = (board) => {
+        return createBoard(board).then((response) => {
             let updatedBoards = this.state.boards;
             updatedBoards.push(response);
             this.setState({
@@ -70,7 +70,7 @@ class BoardsScreen extends Component {
     render() {
         const { isLoading } = this.state;
         const { boards } = this.state;
-        const starredBoards = boards.filter(board => board.favorite);
+        const starredBoards = boards.filter((board) => board.favorite);
 
         return isLoading ? (
             <Spinner />
@@ -86,7 +86,11 @@ class BoardsScreen extends Component {
                         {starredBoards.map((board, index) => {
                             return (
                                 <Link to={`b/${board.key}`} key={index}>
-                                    <BoardLink title={board.title} color="#0079BF" favorite={board.favorite} />
+                                    <BoardLink
+                                        title={board.title}
+                                        color="#0079BF"
+                                        favorite={board.favorite}
+                                    />
                                 </Link>
                             );
                         })}
@@ -143,6 +147,6 @@ export const NewBoard = ({ onClick }) => (
     </StyledNewBoard>
 );
 
-const authCondition = authUser => !!authUser;
+const authCondition = (authUser) => !!authUser;
 
 export const WrapperBoardsScreen = withAuthorization(authCondition)(BoardsScreen);

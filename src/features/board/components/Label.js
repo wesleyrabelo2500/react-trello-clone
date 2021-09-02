@@ -5,7 +5,7 @@ import { LabelWrapper } from '../styles';
 export const Label = ({ color, text, active, onClick, card, listKey, small }) => (
     <LabelWrapper
         className={`card-label-${color}`}
-        onClick={event => onClick(listKey, card.key, { ...card, label: text })}
+        onClick={(event) => onClick(listKey, card.key, { ...card, label: text })}
         small={small}
     >
         {text && <span>{text}</span>}

@@ -16,7 +16,12 @@ export class CardModal extends Component {
 
         return (
             <Modal
-                title={<CardDetail title={<h4>{card.title}</h4>} icon={<StyledIcon type="project" />} />}
+                title={
+                    <CardDetail
+                        title={<h4>{card.title}</h4>}
+                        icon={<StyledIcon type="project" />}
+                    />
+                }
                 visible={visible}
                 onOk={onOk}
                 onCancel={onCancel}
@@ -26,13 +31,21 @@ export class CardModal extends Component {
                     <CardDetail
                         title={<h4>Labels</h4>}
                         icon={<Icon type="tag" />}
-                        content={<CardLabel card={card} listKey={listKey} onEditCard={onEditCard} />}
+                        content={
+                            <CardLabel card={card} listKey={listKey} onEditCard={onEditCard} />
+                        }
                     />
 
                     <CardDetail
                         icon={<StyledIcon type="align-left" />}
                         title={<h4>Description</h4>}
-                        content={<CardDescription card={card} listKey={listKey} onEditCard={onEditCard} />}
+                        content={
+                            <CardDescription
+                                card={card}
+                                listKey={listKey}
+                                onEditCard={onEditCard}
+                            />
+                        }
                     />
                 </Details>
             </Modal>
@@ -40,7 +53,7 @@ export class CardModal extends Component {
     }
 }
 
-export const CardDetail = props => {
+export const CardDetail = (props) => {
     return (
         <CardDetailWrapper>
             <CardDetailHead>

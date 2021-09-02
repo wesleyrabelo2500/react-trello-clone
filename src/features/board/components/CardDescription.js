@@ -31,7 +31,7 @@ export class CardDescription extends Component {
         });
     };
 
-    handleDescriptionChange = event => {
+    handleDescriptionChange = (event) => {
         this.setState({ description: event.target.value });
     };
 
@@ -42,15 +42,21 @@ export class CardDescription extends Component {
         return (
             <div>
                 {editMode ? (
-                    <form onSubmit={event => this.handleSubmitForm(event, onEditCard, listKey, card.key, card)}>
+                    <form
+                        onSubmit={(event) =>
+                            this.handleSubmitForm(event, onEditCard, listKey, card.key, card)
+                        }
+                    >
                         <StyledTextArea
-                            onChange={event => this.handleDescriptionChange(event)}
+                            onChange={(event) => this.handleDescriptionChange(event)}
                             value={this.state.description}
                             autosize
                         />
                         <SaveButton
                             disabled={!isValid}
-                            onClick={event => this.handleSubmitForm(event, onEditCard, listKey, card.key, card)}
+                            onClick={(event) =>
+                                this.handleSubmitForm(event, onEditCard, listKey, card.key, card)
+                            }
                         >
                             Save
                         </SaveButton>

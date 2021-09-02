@@ -37,7 +37,7 @@ class BoardScreen extends Component {
         });
         const boardKey = this.getBoardKey();
         Promise.all([getBoard(boardKey), onceGetLists(boardKey)])
-            .then(snapshots => {
+            .then((snapshots) => {
                 const board = snapshots[0].val();
                 const lists = mergeDataWithKey(snapshots[1].val());
                 this.setState(() => ({ boardKey, board, lists }));
@@ -49,9 +49,9 @@ class BoardScreen extends Component {
             );
     };
 
-    handleCreateList = listTitle => {
+    handleCreateList = (listTitle) => {
         const { boardKey } = this.state;
-        return doCreateList(boardKey, { title: listTitle }).then(response => {
+        return doCreateList(boardKey, { title: listTitle }).then((response) => {
             const lists = [...this.state.lists];
             lists.push(response);
             this.setState({
@@ -62,9 +62,9 @@ class BoardScreen extends Component {
 
     handleUpdateList = (listKey, title) => {
         const { boardKey } = this.state;
-        return updateList(boardKey, listKey, { title }).then(response => {
+        return updateList(boardKey, listKey, { title }).then((response) => {
             const lists = [...this.state.lists];
-            lists[lists.findIndex(list => list.key === listKey)] = {
+            lists[lists.findIndex((list) => list.key === listKey)] = {
                 ...response,
                 key: listKey,
             };
@@ -74,10 +74,10 @@ class BoardScreen extends Component {
         });
     };
 
-    handleDeleteList = listKey => {
+    handleDeleteList = (listKey) => {
         const { boardKey } = this.state;
         return doDeleteList(boardKey, listKey).then(() => {
-            const lists = this.state.lists.filter(list => list.key !== listKey);
+            const lists = this.state.lists.filter((list) => list.key !== listKey);
             this.setState({
                 lists,
             });
@@ -95,7 +95,7 @@ class BoardScreen extends Component {
         });
     };
 
-    handleDeleteBoard = boardKey => {
+    handleDeleteBoard = (boardKey) => {
         return deleteBoard(boardKey).then(() => {
             this.props.history.push('/boards');
         });
@@ -143,7 +143,10 @@ class BoardScreen extends Component {
                             </List>
                         ))}
                         <AddList>
-                            <FormCreation placeholder="Create new list" onCreate={this.handleCreateList} />
+                            <FormCreation
+                                placeholder="Create new list"
+                                onCreate={this.handleCreateList}
+                            />
                         </AddList>
                     </Lists>
                 </React.Fragment>
@@ -152,7 +155,7 @@ class BoardScreen extends Component {
     }
 }
 
-const authCondition = authUser => !!authUser;
+const authCondition = (authUser) => !!authUser;
 
 export const WrapperBoardScreen = withRouter(
     withAuthorization(authCondition)(DragDropContext(HTML5Backend)(BoardScreen))
