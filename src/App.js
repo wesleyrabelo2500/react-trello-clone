@@ -7,7 +7,7 @@ import { WrappedSignUpPage } from './auth/pages/SignUp';
 import { withAuthentication } from './auth/utils/AuthHOC';
 import { AuthUserContext } from './auth/utils/AuthUserContext';
 import AuthorizedNavigation from './core/layout/AuthNavigation';
-import { WrapperBoardScreen } from './features/board/pages/Board';
+import BoardPage from './features/board/pages/Board';
 import BoardsPage from './features/boards/pages/Boards';
 import { GlobalStyle } from './global-styles';
 import { NotFoundScreen } from './pages/NotFound';
@@ -25,9 +25,9 @@ export const Content = withAuthentication(() => (
                 <Route exact path={SIGN_UP} component={WrappedSignUpPage} />
                 <Route exact path={SIGN_IN} component={SignInScreen} />
                 <Route exact path={PASSWORD_FORGET} component={PasswordForgetScreen} />
-                {<Route exact path={BOARDS} component={BoardsPage} />}
                 <Route exact path={ACCOUNT} component={WrapperAccountScreen} />
-                <Route exact path={BOARD} component={WrapperBoardScreen} />
+                {<Route exact path={BOARDS} component={BoardsPage} />}
+                <Route exact path={BOARD} component={BoardPage} />
                 <Route component={NotFoundScreen} />
             </Switch>
         </React.Fragment>
