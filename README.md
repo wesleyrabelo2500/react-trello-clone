@@ -18,6 +18,8 @@ Your node.js version should be 8.9.0
 $ git clone https://github.com/bmarvinb/trello-clone.git
 ```
 
+-   Go to directory
+
 ```
 $ cd react-trello-clone
 ```
