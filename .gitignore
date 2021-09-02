@@ -19,11 +19,3 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-.idea
-.vscode
-.firebase
-.firebaserc
-.firebase.json
-firebase.json
-database.rules.json
