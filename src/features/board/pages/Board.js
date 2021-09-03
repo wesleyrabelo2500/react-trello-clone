@@ -63,8 +63,8 @@ const BoardPage = () => {
 
     const handleDeleteList = async (listKey) => {
         await doDeleteList(boardKey, listKey);
-        const lists = lists.filter((list) => list.key !== listKey);
-        setLists(lists);
+        const filteredLists = lists.filter((list) => list.key !== listKey);
+        setLists(filteredLists);
     };
 
     const handleAddToFavorites = async () => {
