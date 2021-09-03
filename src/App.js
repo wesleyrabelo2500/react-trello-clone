@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
-import { WrapperAccountScreen } from './auth/pages/Account';
-import PasswordForgetScreen from './auth/pages/PasswordForget';
-import { SignInScreen } from './auth/pages/SignIn';
-import { WrappedSignUpPage } from './auth/pages/SignUp';
+import AccountPage from './auth/pages/Account';
+import PasswordForgetPage from './auth/pages/PasswordForget';
+import SignInPage from './auth/pages/SignIn';
+import WrappedSignUpPage from './auth/pages/SignUp';
 import { withAuthentication } from './auth/utils/AuthHOC';
 import { AuthUserContext } from './auth/utils/AuthUserContext';
 import AuthorizedNavigation from './core/layout/AuthNavigation';
@@ -21,12 +21,12 @@ export const Content = withAuthentication(() => (
             </AuthUserContext.Consumer>
 
             <Switch className="container">
-                {<Route exact path={LANDING} render={() => <Redirect to={BOARDS} />} />}
+                <Route exact path={LANDING} render={() => <Redirect to={BOARDS} />} />
                 <Route exact path={SIGN_UP} component={WrappedSignUpPage} />
-                <Route exact path={SIGN_IN} component={SignInScreen} />
-                <Route exact path={PASSWORD_FORGET} component={PasswordForgetScreen} />
-                <Route exact path={ACCOUNT} component={WrapperAccountScreen} />
-                {<Route exact path={BOARDS} component={BoardsPage} />}
+                <Route exact path={SIGN_IN} component={SignInPage} />
+                <Route exact path={PASSWORD_FORGET} component={PasswordForgetPage} />
+                <Route exact path={ACCOUNT} component={AccountPage} />
+                <Route exact path={BOARDS} component={BoardsPage} />
                 <Route exact path={BOARD} component={BoardPage} />
                 <Route component={NotFoundScreen} />
             </Switch>

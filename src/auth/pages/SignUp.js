@@ -138,4 +138,4 @@ class SignUpScreen extends Component {
     }
 }
 
-export const WrappedSignUpPage = withRouter(SignUpScreen);
+export default withRouter(SignUpScreen);

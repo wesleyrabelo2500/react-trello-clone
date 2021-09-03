@@ -106,6 +106,4 @@ class AccountScreen extends Component {
     }
 }
 
-export const WrapperAccountScreen = withAuthorization((authUser) => !!authUser)(
-    Form.create()(AccountScreen)
-);
+export default withAuthorization((authUser) => !!authUser)(Form.create()(AccountScreen));

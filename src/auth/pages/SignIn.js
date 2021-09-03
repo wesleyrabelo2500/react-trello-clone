@@ -116,7 +116,7 @@ const SignInForm = ({ form }) => {
 
 export const WrappedSignInForm = Form.create()(SignInForm);
 
-export const SignInScreen = ({ history }) => (
+const SignInPage = ({ history }) => (
     <FormContainer>
         <WrappedSignInForm history={history} />
         <p>
@@ -127,3 +127,5 @@ export const SignInScreen = ({ history }) => (
         </p>
     </FormContainer>
 );
+
+export default SignInPage;
