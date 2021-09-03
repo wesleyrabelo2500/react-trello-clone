@@ -22,8 +22,7 @@
         "prettier": "prettier \"**/*.+(js|jsx|ts|tsx|json|scss|css|md|html)\"",
         "prettier-diff": "npm run prettier \"**/*.+(js|jsx|ts|tsx|json|scss|css|md|html)\" -- --list-different",
         "prettier-fix": "npm run prettier \"**/*.+(js|jsx|ts|tsx|json|scss|css|md|html)\" -- --write",
-        "firebase-deploy": "npm run build && firebase deploy",
-        "install": "npm run install --force"
+        "firebase-deploy": "npm run build && firebase deploy"
     },
     "browserslist": [
         ">0.2%",
