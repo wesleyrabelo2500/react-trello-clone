@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { Icon, Input } from 'antd';
+import styled from 'styled-components';
 import { Button } from '../../../shared/components/Button';
 
 export const AddList = styled.div`

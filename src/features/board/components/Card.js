@@ -1,10 +1,9 @@
 import { Icon } from 'antd';
 import React, { Component } from 'react';
-
-import { GrayButton } from '../../../shared/components/Button';
-import { Label } from './Label';
 import { LABELS } from '../../../core/constants';
-import { TitleInput, CardBlock, Edit } from '../styles';
+import { GrayButton } from '../../../shared/components/Button';
+import { CardBlock, Edit, TitleInput } from '../styles';
+import { Label } from './Label';
 
 export class Card extends Component {
     state = {

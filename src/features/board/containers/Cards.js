@@ -1,11 +1,10 @@
-import { DropTarget } from 'react-dnd';
 import React, { Component } from 'react';
-
-import CardContainer from './CardContainer';
-import { addCard, deleteCard, updateCard, moveCard, getCard } from '../../../core/api/db';
-import { FormCreation } from '../components/FormCreation';
+import { DropTarget } from 'react-dnd';
+import { addCard, deleteCard, getCard, moveCard, updateCard } from '../../../core/api/db';
 import { ItemTypes } from '../../../core/constants';
 import { mergeDataWithKey } from '../../../shared/utils';
+import { FormCreation } from '../components/FormCreation';
+import CardContainer from './CardContainer';
 
 const cardTarget = {
     drop(props, monitor, component) {

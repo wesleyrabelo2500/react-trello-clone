@@ -3,7 +3,6 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import { List } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
-
 import { BoardTitle } from '../components/BoardTitle';
 import Cards from '../containers/Cards';
 import {
@@ -19,7 +18,7 @@ import {
 import { FormCreation } from '../components/FormCreation';
 import { ListHeader } from '../components/ListHeader';
 import { Spinner } from '../../../shared/components/Spinner';
-import { isEmpty, mergeDataWithKey } from '../../../shared/utils';
+import { mergeDataWithKey } from '../../../shared/utils';
 import { withAuthorization } from '../../../auth/utils/AuthHOC';
 import { AddList, Lists } from '../styles';
 

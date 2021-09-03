@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
 import { Form, Icon, Input } from 'antd';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import { auth, provider } from '../../core/api/firebase';
+import { actionTypes } from '../../core/api/reducer';
+import { useStateValue } from '../../core/api/StateProvider';
 import { BOARDS, LANDING, PASSWORD_FORGET, SIGN_UP } from '../../routes';
 import { signInWithEmailAndPassword } from '../api/auth';
-import { EMAIL_ERROR_TYPES } from '../constants';
-import { FormButton } from '../components/common/FormButton';
 import { ErrorMessage } from '../components/common/ErrorMessage';
+import { FormButton } from '../components/common/FormButton';
 import { FormContainer } from '../components/common/FormContainer';
-import { useStateValue } from '../../core/api/StateProvider';
-import { actionTypes } from '../../core/api/reducer';
+import { EMAIL_ERROR_TYPES } from '../constants';
 
 const SignInForm = ({ form }) => {
     const [email, setEmail] = useState('');

@@ -1,7 +1,7 @@
 import { Button } from 'antd';
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { StyledTextArea, SaveButton, Detail } from '../styles';
+import { Detail, SaveButton, StyledTextArea } from '../styles';
 
 export class CardDescription extends Component {
     state = {

@@ -1,6 +1,5 @@
 import { Form, Icon, Input } from 'antd';
 import React, { Component } from 'react';
-
 import { byPropKey } from '../../shared/utils';
 import { passwordReset } from '../api/auth';
 import { ErrorMessage } from '../components/common/ErrorMessage';

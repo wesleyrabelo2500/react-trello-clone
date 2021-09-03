@@ -21,7 +21,6 @@ class AccountScreen extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
 
-        // TODO: add spinners
         return passwordUpdate(this.state.passwordOne)
             .then(() => {
                 this.props.form.setFieldsValue({

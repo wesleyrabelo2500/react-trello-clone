@@ -1,14 +1,13 @@
+import { Form, Icon, Input } from 'antd';
 import React, { Component, useState } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Form, Icon, Input } from 'antd';
-
-import { LANDING } from '../../routes';
 import { createUser } from '../../core/api/db';
+import { LANDING } from '../../routes';
 import { createUserWithEmailAndPassword } from '../api/auth';
-import { EMAIL_ERROR_TYPES } from '../constants';
-import { FormContainer } from '../components/common/FormContainer';
-import { FormButton } from '../components/common/FormButton';
 import { ErrorMessage } from '../components/common/ErrorMessage';
+import { FormButton } from '../components/common/FormButton';
+import { FormContainer } from '../components/common/FormContainer';
+import { EMAIL_ERROR_TYPES } from '../constants';
 
 const SignUpForm = ({ form, onSubmit }) => {
     const [username, setUsername] = useState('');

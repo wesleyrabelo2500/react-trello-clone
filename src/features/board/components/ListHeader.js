@@ -1,6 +1,6 @@
 import { Dropdown, Icon, Menu } from 'antd';
 import React, { Component } from 'react';
-import { Header, StyledButton, InputTitle } from '../styles';
+import { Header, InputTitle, StyledButton } from '../styles';
 
 export class ListHeader extends Component {
     state = {
@@ -46,7 +46,9 @@ export class ListHeader extends Component {
                         <InputTitle value={title} onChange={this.handleInputChange} />
                     </form>
                 ) : (
-                    <h4 onClick={this.handleEnableEdit} role="presentation">{listTitle}</h4>
+                    <h4 onClick={this.handleEnableEdit} role="presentation">
+                        {listTitle}
+                    </h4>
                 )}
                 <Dropdown
                     overlay={

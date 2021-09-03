@@ -1,13 +1,12 @@
-import { Icon, Menu, Dropdown, Input } from 'antd';
+import { Dropdown, Icon, Input, Menu } from 'antd';
 import React, { Component } from 'react';
-
 import { Button } from '../../../shared/components/Button';
 import {
-    StyledBoardTitle,
-    MenuButtonText,
-    ShowMenuButton,
     Favorite,
     Form,
+    MenuButtonText,
+    ShowMenuButton,
+    StyledBoardTitle,
     StyledButton,
     StyledIcon,
 } from '../styles';
