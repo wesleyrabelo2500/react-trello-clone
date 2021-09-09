@@ -1,4 +1,5 @@
-import firebase from 'firebase';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { SIGN_IN } from '../../routes';
