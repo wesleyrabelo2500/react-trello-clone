@@ -11,14 +11,6 @@ export const createUser = (id, username, email) =>
         email,
     });
 
-export const createBoard = async (board) => {
-    const uid = getUser().uid;
-    const id = boardsRef.push().key;
-    await boardsRef.child(uid).child(id).set(board);
-    board.key = id;
-    return board;
-};
-
 export const deleteBoard = async (boardKey) => {
     const uid = getUser().uid;
     await boardsRef.child(uid).child(boardKey).remove();
@@ -32,11 +24,6 @@ export const updateBoard = async (boardKey, title) => {
         .update({
             ...title,
         });
-};
-
-export const getBoards = () => {
-    const uid = getUser().uid;
-    return boardsRef.child(uid).once('value');
 };
 
 export const editBoard = async (boardKey, board) => {
