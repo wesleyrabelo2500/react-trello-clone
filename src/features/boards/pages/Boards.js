@@ -2,7 +2,7 @@ import { Icon } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { withAuthorization } from '../../../auth/utils/AuthHOC';
-import { createBoard, getBoards } from '../../../core/api/db';
+import { createBoard, getBoards } from '../api/boards';
 import { Spinner } from '../../../shared/components/Spinner';
 import { isEmpty, mergeDataWithKey } from '../../../shared/utils';
 import { CreateBoardModal } from '../components/CreateBoardModal';
