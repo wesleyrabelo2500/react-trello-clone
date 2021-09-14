@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { DropTarget } from 'react-dnd';
-import { addCard, deleteCard, getCard, moveCard, updateCard } from '../../../core/api/db';
+import { addCard, deleteCard, getCard, moveCard, updateCard } from '../api/card';
 import { ItemTypes } from '../../../core/constants';
 import { mergeDataWithKey } from '../../../shared/utils';
 import { FormCreation } from '../components/FormCreation';

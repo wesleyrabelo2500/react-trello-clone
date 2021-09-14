@@ -5,16 +5,8 @@ import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import { BoardTitle } from '../components/BoardTitle';
 import Cards from '../containers/Cards';
-import {
-    doCreateList,
-    deleteBoard,
-    doDeleteList,
-    editBoard,
-    updateBoard,
-    updateList,
-    getBoard,
-    onceGetLists,
-} from '../../../core/api/db';
+import { onceGetLists, doCreateList, doDeleteList, updateList } from '../api/list';
+import { deleteBoard, editBoard, getBoard, updateBoard } from '../api/board';
 import { FormCreation } from '../components/FormCreation';
 import { ListHeader } from '../components/ListHeader';
 import { Spinner } from '../../../shared/components/Spinner';
