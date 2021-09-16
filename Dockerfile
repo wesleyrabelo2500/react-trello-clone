@@ -10,6 +10,7 @@ RUN apk add --no-cache --virtual .gyp \
     && apk del .gyp
 
 COPY . .
+RUN echo "\nDISABLE_ESLINT_PLUGIN=true" >> .env
 
 EXPOSE 3000
 CMD ["npm", "start"]
