@@ -34,7 +34,7 @@ $ docker-compose up --build
 Install npm dependencies
 
 ```
-$ npm install --force
+$ npm install --legacy-peer-deps
 ```
 
 Run development
