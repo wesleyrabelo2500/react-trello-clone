@@ -1,38 +1,35 @@
 import { Input } from 'antd';
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
-export class FormCreation extends Component {
-    state = {
-        text: '',
-        loading: false,
-    };
+export const FormCreation = (props) => {
+    const [text, setText] = useState('');
+    const [loading, setLoading] = useState(false);
 
-    handleCreate = (event, callback, text) => {
+    const handleCreate = (event, callback, text) => {
         event.preventDefault();
-        if (this.state.loading || !text || !text.trim()) {
+        if (loading || !text || !text.trim()) {
             return;
         }
-
-        this.setState(() => ({ loading: true }));
-        callback(text).then(() => this.setState(() => ({ text: '', loading: false })));
+        setLoading(true);
+        callback(text).then(() => {
+            setText('');
+            setLoading(false);
+        });
     };
 
-    handleInputChange = (event) => {
-        this.setState({ text: event.target.value });
+    const handleInputChange = (event) => {
+        setText(event.target.value);
     };
 
-    render() {
-        const { onCreate, placeholder } = this.props;
-        const { text } = this.state;
-        return (
-            <form onSubmit={(event) => this.handleCreate(event, onCreate, text)}>
-                <Input
-                    onChange={(event) => this.handleInputChange(event)}
-                    value={this.state.text}
-                    placeholder={placeholder}
-                    disabled={this.state.loading}
-                />
-            </form>
-        );
-    }
-}
+    const { onCreate, placeholder } = props;
+    return (
+        <form onSubmit={(event) => handleCreate(event, onCreate, text)}>
+            <Input
+                onChange={(event) => handleInputChange(event)}
+                value={text}
+                placeholder={placeholder}
+                disabled={loading}
+            />
+        </form>
+    );
+};
