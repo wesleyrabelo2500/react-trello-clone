@@ -11,10 +11,14 @@ export const FormCreation = (props) => {
             return;
         }
         setLoading(true);
-        callback(text).then(() => {
+        
+        const runCallback = async () => {
+            await callback(text);
             setText('');
             setLoading(false);
-        });
+        };
+
+        runCallback();
     };
 
     const handleInputChange = (event) => {
