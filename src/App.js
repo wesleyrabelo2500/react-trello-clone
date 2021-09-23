@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import AccountPage from './auth/pages/Account';
+import Landing from './auth/pages/Landing';
 import PasswordForgetPage from './auth/pages/PasswordForget';
 import SignInPage from './auth/pages/SignIn';
 import WrappedSignUpPage from './auth/pages/SignUp';
@@ -21,7 +22,8 @@ export const Content = withAuthentication(() => (
             </AuthUserContext.Consumer>
 
             <Switch className="container">
-                <Route exact path={LANDING} render={() => <Redirect to={BOARDS} />} />
+                {/* <Route exact path={LANDING} render={() => <Redirect to={BOARDS} />} /> */}
+                <Route exact path={LANDING} component={Landing} />
                 <Route exact path={SIGN_UP} component={WrappedSignUpPage} />
                 <Route exact path={SIGN_IN} component={SignInPage} />
                 <Route exact path={PASSWORD_FORGET} component={PasswordForgetPage} />
