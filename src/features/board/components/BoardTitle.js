@@ -4,7 +4,6 @@ import { Button } from '../../../shared/components/Button';
 import {
     Favorite,
     Form,
-    MenuButtonText,
     ShowMenuButton,
     StyledBoardTitle,
     StyledButton,
@@ -87,7 +86,6 @@ export class BoardTitle extends Component {
                     >
                         <Button>
                             <Icon type="ellipsis" />
-                            <MenuButtonText>Show menu</MenuButtonText>
                         </Button>
                     </Dropdown>
                 </ShowMenuButton>
