@@ -18,11 +18,11 @@
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "eslint": "eslint \"src/**/*.+(js|jsx|ts|tsx)\"",
-        "eslint-fix": "eslint --fix \"src/**/*.+(js|jsx|ts|tsx)\"",
-        "prettier": "prettier \"**/*.+(js|jsx|ts|tsx|json|scss|css|md|html)\"",
-        "prettier-diff": "npm run prettier \"**/*.+(js|jsx|ts|tsx|json|scss|css|md|html)\" -- --list-different",
-        "prettier-fix": "npm run prettier \"**/*.+(js|jsx|ts|tsx|json|scss|css|md|html)\" -- --write",
+        "eslint": "eslint \"src/**/*.+(js|jsx)\"",
+        "eslint-fix": "eslint --fix \"src/**/*.+(js|jsx)\"",
+        "prettier": "prettier \"**/*.+(js|jsx|json|scss|css|md|html)\"",
+        "prettier-diff": "npm run prettier \"**/*.+(js|jsx|json|scss|css|md|html)\" -- --list-different",
+        "prettier-fix": "npm run prettier \"**/*.+(js|jsx|json|scss|css|md|html)\" -- --write",
         "firebase-deploy": "npm run build && firebase deploy"
     },
     "browserslist": [
@@ -42,6 +42,6 @@
         "webpack-bundle-analyzer": "^4.4.2"
     },
     "lint-staged": {
-        "*.{html,json,md,js,jsx,ts,tsx}": "prettier --write"
+        "*.{html,json,md,js,jsx}": "prettier --write"
     }
 }
