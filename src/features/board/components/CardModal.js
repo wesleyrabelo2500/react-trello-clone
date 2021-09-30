@@ -1,17 +1,12 @@
 import { Icon, Modal } from 'antd';
-import React, { Component } from 'react';
+import React from 'react';
 import { LABELS } from '../../../core/constants';
 import { CardDetailHead, CardDetailIcon, CardDetailWrapper, Details, StyledIcon } from '../styles';
 import { CardDescription } from './CardDescription';
 import { Label } from './Label';
 
-export class CardModal extends Component {
-    state = {
-        modalIsVisible: false,
-    };
-
-    render() {
-        const { listKey, card, visible, onOk, onCancel, onEditCard } = this.props;
+export const CardModal = (props) => {
+        const { listKey, card, visible, onOk, onCancel, onEditCard } = props;
 
         return (
             <Modal
@@ -49,7 +44,7 @@ export class CardModal extends Component {
                 </Details>
             </Modal>
         );
-    }
+    
 }
 
 export const CardDetail = (props) => {
@@ -64,9 +59,9 @@ export const CardDetail = (props) => {
     );
 };
 
-class CardLabel extends Component {
-    render() {
-        const { card, listKey, onEditCard } = this.props;
+const CardLabel = (props) => {
+        const { card, listKey, onEditCard } = props;
+    
         return LABELS.map((label, index) => (
             <Label
                 key={index}
@@ -78,5 +73,4 @@ class CardLabel extends Component {
                 onClick={onEditCard}
             />
         ));
-    }
 }
