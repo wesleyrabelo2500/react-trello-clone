@@ -50,7 +50,7 @@ export class CardDescription extends Component {
                         <StyledTextArea
                             onChange={(event) => this.handleDescriptionChange(event)}
                             value={this.state.description}
-                            autosize
+                            autoSize
                         />
                         <SaveButton
                             disabled={!isValid}
