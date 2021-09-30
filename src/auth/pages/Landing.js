@@ -1,89 +1,61 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import {Button, Row,Col,Layout,Typography,Input } from 'antd'
+import { GithubOutlined } from '@ant-design/icons'
 import styled from 'styled-components'
-import { SIGN_IN, SIGN_UP } from '../../routes'
-import { FormButton } from '../components/common/FormButton'
+import { Link } from 'react-router-dom';
+import { SIGN_IN, SIGN_UP } from '../../routes';
 
+const { Header, Content, Footer } = Layout;
+const { Title, Text } = Typography;
 
-const Hero = styled.div`
-    height: 100vh;
-    margin: 0;
-`
-
-const Container = styled.div`
-    width: 80%;
-    margin: 0 auto;
-`
-
-const Navbar = styled.nav`
-    height: 70px;
-`
-
-const NavContainer = styled(Container)`
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-`
-
-const NavLinks = styled.div`
-    display: flex;
-    align-items: center;
-`
-
-const Button = styled(FormButton)`
-    margin: 0 10px;
-`
-
-const HeroMain = styled.main`
-    display: flex;
-    height: 100%;
-    align-items: center;
-`
-
-const Illustration = styled.img`
-    width: 100%;
+const InputHero = styled(Input)`
+    &:hover, &:focus{
+        border-color: #C98BD2;
+        box-shadow: none;
+    }
 `
 
 function Landing() {
-
     return (
-        <Hero>
-            <Navbar>
-                <NavContainer>
-                    <h2 className="logo">TrelloBoard</h2>
-                    <NavLinks>
-                        <Button>
-                            <Link to={SIGN_IN}>
-                                Login
-                            </Link>
-                        </Button>
-                        <Button>
+        <Layout style={{backgroundColor:"transparent",background: "linear-gradient(180deg, rgba(255, 255, 255, 0.54) -2.93%, #FFFFFF -2.92%, #E9C4EE 100%)"}}>
+            <Header style={{display:"flex"}} style={{backgroundColor:"transparent",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+                <Text style={{display:"flex",alignItems:"baseline",fontSize:"18px"}}><Title level={1}>TB</Title>oard</Text>
+                <Button style={{backgroundColor:"#C98BD2",color:"#FFFFFF",outline:"none",border:"none"}}>
+                    <Link to={SIGN_IN} >
+                        Go To Your Dashboard
+                    </Link>
+                </Button>
+            </Header>
+            <Content style={{display:'flex',overflow:'hidden'}}>
+                <Row gutter={[50]} type="flex" align="middle">
+                <Col span={10} offset={2}>
+                    <Title level={1} style={{lineHeight:"50px",margin:"10px 0"}}><span style={{fontSize:42,fontWeight:"bold"}}>TB</span>oard helps teams to move forward.</Title>
+                    <Text type="secondary" style={{lineHeight:"28px",fontSize:"16px",margin:"10px 0"}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Natoque aenean tempor elementum et nunc. Sed euismod vivamus quam.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Text>
+                    <div style={{margin:"10px 0",display:'flex',gap:"10px"}}>
+                        <InputHero placeholder="Email"/>
+                        <Button style={{backgroundColor:"#C98BD2",color:"#FFFFFF",outline:"none",border:"none"}}>
                             <Link to={SIGN_UP}>
-                                Signup
+                                Sign Up - Free
                             </Link>
                         </Button>
-                    </NavLinks>
-                </NavContainer>
-            </Navbar>
-            <Container>
-                <HeroMain>
-                    <div style={{flex: 1}}>
-                        <h1 className="">Love Working Together?</h1>
-                        <p>Collaborate, manage projects, and reach new productivity peaks. From high rises to the home office, the way your team works is unique - accomplish it all with TrelloBoard</p>
-                        <FormButton>
-                            <a href="https://github.com/bmarvinb/react-trello-clone" target='_blank'>
-                                <img src='/images/landing/github.svg' alt="github" style={{width: 24,margin: '0 5px'}}/>
-                                <span>Join Us</span>
-                            </a>
-                        </FormButton>
                     </div>
-                    <div style={{flex: 1}}>
-                        <Illustration src='/images/landing/hero-Illustration.png' alt='hero-illustration' />
-                    </div>
-                </HeroMain>
-            </Container>
-        </Hero>
+                </Col>
+                <Col span={12} >
+                    <img src="/images/landing/hero.svg" alt="hero-illustration" style={{width:"100%"}}/>
+                </Col>
+                </Row>
+            </Content>
+            <Footer style={{backgroundColor:"transparent"}} type>
+                <Row type="flex" justify="space-between">
+                    <Col><Text>© 2021, TBoards. All right reserver.</Text></Col>
+                <Col>
+                    <a href="https://github.com/bmarvinb/react-trello-clone" target="_blank" style={{color:"#000000",opacity:"0.8"}}>
+                        <GithubOutlined style={{fontSize:"24px"}}/>
+                    </a>
+                </Col>
+                </Row>
+            </Footer>
+        </Layout>
     )
 }
 

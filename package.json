@@ -3,6 +3,7 @@
     "version": "0.0.1",
     "private": true,
     "dependencies": {
+        "@ant-design/icons": "^4.7.0",
         "antd": "^3.11.0",
         "react": "^17.0.2",
         "react-dnd": "^5.0.0",
