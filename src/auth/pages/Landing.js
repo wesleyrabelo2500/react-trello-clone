@@ -2,8 +2,9 @@ import React from 'react'
 import {Button, Row,Col,Layout,Typography,Input } from 'antd'
 import { GithubOutlined } from '@ant-design/icons'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { SIGN_IN, SIGN_UP } from '../../routes';
+import { withLandingAuthentication } from '../utils/AuthHOC';
 
 const { Header, Content, Footer } = Layout;
 const { Title, Text } = Typography;
@@ -59,4 +60,4 @@ function Landing() {
     )
 }
 
-export default Landing
+export default withRouter(withLandingAuthentication(Landing))

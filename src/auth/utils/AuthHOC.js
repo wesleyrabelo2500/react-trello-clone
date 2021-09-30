@@ -2,7 +2,8 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { SIGN_IN } from '../../routes';
+import { BOARDS, SIGN_IN } from '../../routes';
+import { Spinner } from '../../shared/components/Spinner';
 import { AuthUserContext } from './AuthUserContext';
 
 export const withAuthentication = (Component) =>
@@ -49,3 +50,35 @@ export const withAuthorization = (authCondition) => (Component) => {
 
     return withRouter(WithAuthorization);
 };
+
+export const withLandingAuthentication = (Component) => {
+    class WithLandingAuthentication extends React.Component{
+
+        state = {
+            loading: false
+        }
+
+        componentDidMount() {
+            this.setState({loading: true})
+            firebase.auth().onAuthStateChanged((authUser) => {
+                this.setState({loading: false})
+                if(authUser){
+                    this.props.history.push(BOARDS);
+                }
+            });
+        }
+
+        render(){
+
+            if(this.state.loading){
+                return <Spinner />
+            }
+            
+            return (
+                <Component />
+            )
+        }
+    }
+
+    return WithLandingAuthentication
+}
