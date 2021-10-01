@@ -52,23 +52,20 @@ export const withAuthorization = (authCondition) => (Component) => {
 };
 
 export const withLandingAuthentication = (Component) => {
-    return WithLandingAuthentication = () => {
+    const WithLandingAuthentication = (props) => {
         const [loading, setLoading] = useState(false);
 
         useEffect(()=>{
             setLoading(true);
             firebase.auth().onAuthStateChanged((authUser) => {
-                this.setState({loading: false})
+                setLoading(false)
                 if(authUser){
-                    this.props.history.push(BOARDS);
+                    props.history.push(BOARDS);
                 }
             });
-        })
-
-        if(loading){
-            return <Spinner />
-        }
-
-        return <Component />
+        },[])
+        return loading?<Spinner />:<Component />
     }
+
+    return withRouter(WithLandingAuthentication);
 }
