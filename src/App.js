@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import AccountPage from './auth/pages/Account';
-import Landing from './auth/pages/Landing';
+import Landing from './pages/Landing';
 import PasswordForgetPage from './auth/pages/PasswordForget';
 import SignInPage from './auth/pages/SignIn';
 import WrappedSignUpPage from './auth/pages/SignUp';
