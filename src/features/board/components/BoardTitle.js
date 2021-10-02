@@ -10,7 +10,7 @@ import {
     StyledIcon,
 } from '../styles';
 
-export const BoardTitle = ({props}) => {
+const BoardTitle = ({props}) => {
     const [state, setState] = useState({
       edit: false,
       boardTitle: '',  
