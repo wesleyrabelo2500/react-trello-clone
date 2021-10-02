@@ -1,5 +1,5 @@
 import { Dropdown, Icon, Input, Menu } from 'antd';
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import { Button } from '../../../shared/components/Button';
 import {
     Favorite,
@@ -14,33 +14,33 @@ export const BoardTitle = ({props}) => {
     const [state, setState] = useState({
       edit: false,
       boardTitle: '',  
-    })
+    });
     const { title, favorite, boardKey, onAddToFavorites, deleteBoard, updateBoard } = props;
 
     const handleEnableEdit = () => {
         setState({
             edit:true, 
             boardTitle: title
-        })
-    }
+        });
+    };
 
     const handleDisableEdit = () => {
-        setState({...state, edit: false})
-    }
+        setState({...state, edit: false});
+    };
 
     const handleBoardTitleChange = (event) => {
-        setState({ ...state, boardTitle: event.target.value})
-    }
+        setState({ ...state, boardTitle: event.target.value});
+    };
 
     const handleSubmitForm = (event, callback, boardKey, title) => {
         event.preventDefault();
         if(!title) {
             return;
         }
-        callback(board, {title}).then(() => {
+        callback(boardKey, {title}).then(() => {
             setState({...state, edit: false})
-        })
-    }
+        });
+    };
 
     return (
         <StyledBoardTitle>
@@ -81,5 +81,6 @@ export const BoardTitle = ({props}) => {
                 </ShowMenuButton>
             </StyledBoardTitle>
     )
-}
+};
 
+export default BoardTitle;
