@@ -1,6 +1,6 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import { BOARDS, SIGN_IN } from '../../routes';
 import { Spinner } from '../../shared/components/Spinner';
@@ -30,23 +30,23 @@ export const withAuthentication = (Component) =>
     };
 
 export const withAuthorization = (authCondition) => (Component) => {
-    class WithAuthorization extends React.Component {
-        componentDidMount() {
+    /**Converted withAuthorization class component
+     * into functional component, as React.useContext
+     * can be used within functional components only
+     */
+
+    const WithAuthorization = (props) => {
+        useEffect(() => {
             firebase.auth().onAuthStateChanged((authUser) => {
                 if (!authCondition(authUser)) {
-                    this.props.history.push(SIGN_IN);
+                    props.history.push(SIGN_IN);
                 }
             });
-        }
+        });
+        const authUser = useContext(AuthUserContext);
 
-        render() {
-            return (
-                <AuthUserContext.Consumer>
-                    {(authUser) => (authUser ? <Component {...this.props} /> : null)}
-                </AuthUserContext.Consumer>
-            );
-        }
-    }
+        return authUser ? <Component {...props} /> : null;
+    };
 
     return withRouter(WithAuthorization);
 };
@@ -55,17 +55,17 @@ export const withLandingAuthentication = (Component) => {
     const WithLandingAuthentication = (props) => {
         const [loading, setLoading] = useState(false);
 
-        useEffect(()=>{
+        useEffect(() => {
             setLoading(true);
             firebase.auth().onAuthStateChanged((authUser) => {
-                setLoading(false)
-                if(authUser){
+                setLoading(false);
+                if (authUser) {
                     props.history.push(BOARDS);
                 }
             });
-        },[])
-        return loading?<Spinner />:<Component />
-    }
+        }, []);
+        return loading ? <Spinner /> : <Component />;
+    };
 
     return withRouter(WithLandingAuthentication);
-}
+};
