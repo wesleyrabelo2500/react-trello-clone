@@ -6,7 +6,6 @@ This is a very simplified version of Trello using React and Firebase.
 
 For a live demo of the project have a look at https://trello-board-b720f.firebaseapp.com
 
-
 ## Development
 
 Clone the repository

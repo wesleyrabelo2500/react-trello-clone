@@ -12,21 +12,16 @@ export const FormCreation = (props) => {
             return;
         }
         setLoading(true);
-        
         await callback(text);
         setText('');
         setLoading(false);
-    };
-
-    const handleInputChange = (event) => {
-        setText(event.target.value);
     };
 
     const { onCreate, placeholder } = props;
     return (
         <form onSubmit={(event) => handleCreate(event, onCreate, text)}>
             <Input
-                onChange={(event) => handleInputChange(event)}
+                onChange={(event) => setText(event.target.value)}
                 value={text}
                 placeholder={placeholder}
                 disabled={loading}

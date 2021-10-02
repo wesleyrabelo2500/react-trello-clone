@@ -8,27 +8,10 @@ export class ListHeader extends Component {
         title: '',
     };
 
-    handleEnableEdit = () => {
-        const { listTitle } = this.props;
-        this.setState(() => ({ edit: true, title: listTitle }));
-    };
-
-    handleDisableEdit = () => {
-        this.setState(() => ({ edit: false }));
-    };
-
-    handleInputChange = (event) => {
-        this.setState({ title: event.target.value });
-    };
-
-    handleFormSubmit = (event, callback, listKey, listTitle) => {
+    handleFormSubmit = async (event, callback, listKey, listTitle) => {
         event.preventDefault();
-
-        callback(listKey, listTitle).then(() => this.setState(() => ({ title: '', edit: false })));
-    };
-
-    handleDeleteList = (callback, listKey) => {
-        callback(listKey);
+        await callback(listKey, listTitle);
+        this.setState(() => ({ title: '', edit: false }));
     };
 
     render() {
@@ -43,20 +26,25 @@ export class ListHeader extends Component {
                         }
                         onBlur={(event) => this.handleFormSubmit(event, onEditList, listKey, title)}
                     >
-                        <InputTitle value={title} onChange={this.handleInputChange} />
+                        <InputTitle
+                            value={title}
+                            onChange={(event) => this.setState({ title: event.target.value })}
+                        />
                     </form>
                 ) : (
-                    <h4 onClick={this.handleEnableEdit} role="presentation">
+                    <h4
+                        onClick={() =>
+                            this.setState(() => ({ edit: true, title: this.props.listTitle }))
+                        }
+                        role="presentation"
+                    >
                         {listTitle}
                     </h4>
                 )}
                 <Dropdown
                     overlay={
                         <Menu>
-                            <Menu.Item
-                                key="1"
-                                onClick={(event) => this.handleDeleteList(onDeleteList, listKey)}
-                            >
+                            <Menu.Item key="1" onClick={() => onDeleteList(listKey)}>
                                 Delete This List
                             </Menu.Item>
                         </Menu>

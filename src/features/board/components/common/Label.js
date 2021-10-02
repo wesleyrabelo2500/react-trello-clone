@@ -1,6 +1,6 @@
 import { Icon } from 'antd';
 import React from 'react';
-import { LabelWrapper } from '../styles';
+import { LabelWrapper } from '../../styles';
 
 export const Label = ({ color, text, active, onClick, card, listKey, small }) => (
     <LabelWrapper
