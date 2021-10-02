@@ -1,5 +1,5 @@
 import { Dropdown, Icon, Input, Menu } from 'antd';
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { Button } from '../../../shared/components/Button';
 import {
     Favorite,
@@ -10,62 +10,52 @@ import {
     StyledIcon,
 } from '../styles';
 
-export class BoardTitle extends Component {
-    state = {
-        edit: false,
-        title: '',
-    };
+export const BoardTitle = ({props}) => {
+    const [state, setState] = useState({
+      edit: false,
+      boardTitle: '',  
+    })
+    const { title, favorite, boardKey, onAddToFavorites, deleteBoard, updateBoard } = props;
 
-    handleEnableEdit = () => {
-        this.setState({
-            edit: true,
-            boardTitle: this.props.title,
-        });
-    };
+    const handleEnableEdit = () => {
+        setState({
+            edit:true, 
+            boardTitle: title
+        })
+    }
 
-    handleDisableEdit = () => {
-        this.setState({
-            edit: false,
-        });
-    };
+    const handleDisableEdit = () => {
+        setState({...state, edit: false})
+    }
 
-    handleBoardTitleChange = (event) => {
-        this.setState({
-            boardTitle: event.target.value,
-        });
-    };
+    const handleBoardTitleChange = (event) => {
+        setState({ ...state, boardTitle: event.target.value})
+    }
 
-    handleSubmitForm = (event, callback, boardKey, title) => {
+    const handleSubmitForm = (event, callback, boardKey, title) => {
         event.preventDefault();
-        if (!title) {
+        if(!title) {
             return;
         }
-        callback(boardKey, { title }).then(() => {
-            this.setState({
-                edit: false,
-            });
-        });
-    };
+        callback(board, {title}).then(() => {
+            setState({...state, edit: false})
+        })
+    }
 
-    render() {
-        const { title, favorite, boardKey, onAddToFavorites, deleteBoard, updateBoard } =
-            this.props;
-
-        const { edit, boardTitle } = this.state;
-        return (
-            <StyledBoardTitle>
+    return (
+        <StyledBoardTitle>
                 <h3>
                     {edit ? (
                         <Form
                             onSubmit={(event) =>
-                                this.handleSubmitForm(event, updateBoard, boardKey, boardTitle)
+                                handleSubmitForm(event, updateBoard, boardKey, boardTitle)
                             }
-                            onBlur={this.handleDisableEdit}
+                            onBlur={handleDisableEdit}
                         >
-                            <Input value={boardTitle} onChange={this.handleBoardTitleChange} />
+                            <Input value={boardTitle} onChange={handleBoardTitleChange} />
                         </Form>
                     ) : (
-                        <Button onClick={this.handleEnableEdit}>{title}</Button>
+                        <Button onClick={handleEnableEdit}>{title}</Button>
                     )}
                 </h3>
                 <Favorite>
@@ -90,6 +80,6 @@ export class BoardTitle extends Component {
                     </Dropdown>
                 </ShowMenuButton>
             </StyledBoardTitle>
-        );
-    }
+    )
 }
+
