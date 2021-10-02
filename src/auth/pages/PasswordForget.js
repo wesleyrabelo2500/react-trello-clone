@@ -23,26 +23,23 @@ const PasswordForget = (props) => {
         });
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         resetEmailInputErr();
-        validateFields((err) => {
+        validateFields(async (err) => {
             if (err) {
                 setEmailInputErr({
                     status: 'error',
                     message: err.email.errors[0].message,
                 });
             } else {
-                passwordReset(email)
-                    .then((result) => {
-                        setError('');
-
-                        //handle callback onSubmit() or whatever you want here.
-                        // onSubmit(result);
-                    })
-                    .catch((e) => {
-                        setError(e.message);
-                    });
+                setEmail('');
+                try {
+                    await passwordReset(email);
+                    setError('');
+                } catch (e) {
+                    setError(e.message);
+                }
             }
         });
     };
