@@ -1,5 +1,7 @@
 import { Button, Modal } from 'antd';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import { BoardForm, StyledInput } from '../styles';
 
 import { DEFAULT_COLOR } from '../../../core/constants';
@@ -60,3 +62,9 @@ export class CreateBoardModal extends Component {
         );
     }
 }
+
+CreateBoardModal.propTypes = {
+    onCloseModal: PropTypes.func,
+    onCreateBoard: PropTypes.func,
+    visible: PropTypes.bool
+};
