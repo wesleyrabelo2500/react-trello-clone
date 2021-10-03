@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Icon, Input } from 'antd';
-import { passwordReset } from '../api/auth';
+import { passwordReset } from '../services/auth';
 import { ErrorMessage } from '../components/common/ErrorMessage';
 import { FormButton } from '../components/common/FormButton';
 import { FormContainer } from '../components/common/FormContainer';

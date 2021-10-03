@@ -1,7 +1,7 @@
 import { Form, Icon, Input } from 'antd';
 import React, { useState } from 'react';
 
-import { passwordUpdate } from '../api/auth';
+import { passwordUpdate } from '../services/auth';
 import { byPropKey } from '../../shared/utils';
 import { ErrorMessage } from '../components/common/ErrorMessage';
 import { FormButton } from '../components/common/FormButton';

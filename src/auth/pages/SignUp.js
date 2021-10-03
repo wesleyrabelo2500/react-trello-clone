@@ -3,7 +3,7 @@ import React, { Component, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import { createUser } from '../../core/api/db';
 import { LANDING } from '../../routes';
-import { createUserWithEmailAndPassword } from '../api/auth';
+import { createUserWithEmailAndPassword } from '../services/auth';
 import { ErrorMessage } from '../components/common/ErrorMessage';
 import { FormButton } from '../components/common/FormButton';
 import { FormContainer } from '../components/common/FormContainer';

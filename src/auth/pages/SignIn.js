@@ -5,7 +5,7 @@ import { auth, provider } from '../../core/api/firebase';
 import { actionTypes } from '../../core/api/reducer';
 import { useStateValue } from '../../core/api/StateProvider';
 import { BOARDS, LANDING, PASSWORD_FORGET, SIGN_UP } from '../../routes';
-import { signInWithEmailAndPassword } from '../api/auth';
+import { signInWithEmailAndPassword } from '../services/auth';
 import { ErrorMessage } from '../components/common/ErrorMessage';
 import { FormButton } from '../components/common/FormButton';
 import { FormContainer } from '../components/common/FormContainer';

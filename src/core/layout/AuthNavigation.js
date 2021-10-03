@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import { ACCOUNT, BOARDS } from '../../routes';
 import { Button } from '../../shared/components/Button';
-import { signOut } from '../../auth/api/auth';
+import { signOut } from '../../auth/services/auth';
 
 class NavigationAuth extends Component {
     signOut() {
