@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Input } from 'antd';
 import React, { useState } from 'react';
 import { isEmptyText } from '../../../shared/utils';
@@ -28,4 +29,9 @@ export const FormCreation = (props) => {
             />
         </form>
     );
+};
+
+FormCreation.propTypes = {
+    onCreate: PropTypes.func.isRequired,
+    placeholder: PropTypes.string.isRequired,
 };
