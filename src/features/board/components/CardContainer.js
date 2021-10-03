@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component, useState } from 'react';
 import { DragSource } from 'react-dnd';
 import { ItemTypes } from '../../../core/constants';
@@ -47,3 +48,11 @@ function CardContainer(props) {
 }
 
 export default DragSource(ItemTypes.CARD, cardSource, collect)(CardContainer);
+
+CardContainer.propTypes = {
+    listKey: PropTypes.string,
+    card: PropTypes.object,
+    connectDragSource: PropTypes.func,
+    onEditCard: PropTypes.func,
+    onDeleteCard: PropTypes.func,
+};
