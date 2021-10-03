@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { Button } from 'antd';
 import React, { useState } from 'react';
 import styled from 'styled-components';
@@ -52,9 +51,3 @@ export function CardDescription(props) {
 }
 
 const DescriptionPlaceholder = styled.div``;
-
-CardDescription.propTypes = {
-    listKey: PropTypes.string,
-    card: PropTypes.object,
-    onEditCard: PropTypes.func,
-};
