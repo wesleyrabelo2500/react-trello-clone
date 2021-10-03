@@ -1,3 +1,4 @@
+import PropType from 'prop-types';
 import React, { Component } from 'react';
 import { DropTarget } from 'react-dnd';
 import { addCard, deleteCard, getCard, moveCard, updateCard } from '../services/card';
@@ -127,3 +128,8 @@ class Cards extends Component {
 }
 
 export default DropTarget(ItemTypes.CARD, cardTarget, collect)(Cards);
+
+Cards.proptType = {
+    list: PropType.object,
+    connectDropTarget: PropType.func,
+};
