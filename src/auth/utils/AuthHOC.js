@@ -1,6 +1,6 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import { BOARDS, SIGN_IN } from '../../routes';
 import { Spinner } from '../../shared/components/Spinner';
@@ -30,23 +30,18 @@ export const withAuthentication = (Component) =>
     };
 
 export const withAuthorization = (authCondition) => (Component) => {
-    class WithAuthorization extends React.Component {
-        componentDidMount() {
+    const WithAuthorization = (props) => {
+        useEffect(() => {
             firebase.auth().onAuthStateChanged((authUser) => {
                 if (!authCondition(authUser)) {
-                    this.props.history.push(SIGN_IN);
+                    props.history.push(SIGN_IN);
                 }
             });
-        }
+        }, [props.history]);
+        const authUser = useContext(AuthUserContext);
 
-        render() {
-            return (
-                <AuthUserContext.Consumer>
-                    {(authUser) => (authUser ? <Component {...this.props} /> : null)}
-                </AuthUserContext.Consumer>
-            );
-        }
-    }
+        return authUser ? <Component {...props} /> : null;
+    };
 
     return withRouter(WithAuthorization);
 };
