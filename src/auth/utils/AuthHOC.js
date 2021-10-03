@@ -42,7 +42,7 @@ export const withAuthorization = (authCondition) => (Component) => {
                     props.history.push(SIGN_IN);
                 }
             });
-        });
+        }, [props.history]);
         const authUser = useContext(AuthUserContext);
 
         return authUser ? <Component {...props} /> : null;
