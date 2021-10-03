@@ -21,8 +21,7 @@ export class Card extends Component {
     };
 
     getColor(labels, text) {
-        const label = labels.find((label) => label.text === text);
-        return label.color;
+        return labels.find((label) => label.text === text).color;
     }
 
     render() {
