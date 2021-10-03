@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Icon, Modal } from 'antd';
 import React from 'react';
 import { LABELS } from '../../../core/constants';
@@ -35,6 +36,15 @@ export const CardModal = (props) => {
             </Details>
         </Modal>
     );
+};
+
+CardModal.propTypes = {
+    listKey: PropTypes.string,
+    card: PropTypes.object.isRequired,
+    visible: PropTypes.bool.isRequired,
+    onOk: PropTypes.func,
+    onCancel: PropTypes.func,
+    onEditCard: PropTypes.func,
 };
 
 export const CardDetail = (props) => {
