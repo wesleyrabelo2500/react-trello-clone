@@ -30,11 +30,6 @@ export const withAuthentication = (Component) =>
     };
 
 export const withAuthorization = (authCondition) => (Component) => {
-    /**Converted withAuthorization class component
-     * into functional component, as React.useContext
-     * can be used within functional components only
-     */
-
     const WithAuthorization = (props) => {
         useEffect(() => {
             firebase.auth().onAuthStateChanged((authUser) => {
