@@ -22,10 +22,8 @@ const BoardsPage = () => {
 
     useEffect(() => {
         setLoading(true);
-
         (async () => {
             const snapshot = await getBoards();
-
             setBoards(mergeDataWithKey(snapshot.val()));
             setLoading(false);
         })();
@@ -33,7 +31,6 @@ const BoardsPage = () => {
 
     const handleCreateBoard = async (board) => {
         const response = await createBoard(board);
-
         setBoards([...boards, response]);
         setModalVisible(false);
     };

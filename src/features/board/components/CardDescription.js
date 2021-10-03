@@ -9,31 +9,15 @@ export class CardDescription extends Component {
         editMode: false,
     };
 
-    handleEnableEditMode = () => {
-        const { description } = this.props.card;
-        this.setState({
-            description,
-            editMode: true,
-        });
-    };
-
-    handleDisableEditMode = () => {
+    submitForm = async (event, callback, listKey, cardKey, card) => {
+        event.preventDefault();
+        await callback(listKey, cardKey, { ...card, description: this.state.description });
         this.setState({
             editMode: false,
         });
     };
 
-    handleSubmitForm = (event, callback, listKey, cardKey, card) => {
-        event.preventDefault();
-
-        callback(listKey, cardKey, { ...card, description: this.state.description }).then(() => {
-            this.handleDisableEditMode();
-        });
-    };
-
-    handleDescriptionChange = (event) => {
-        this.setState({ description: event.target.value });
-    };
+    handleDescriptionChange = (event) => {};
 
     render() {
         const { editMode } = this.state;
@@ -44,26 +28,41 @@ export class CardDescription extends Component {
                 {editMode ? (
                     <form
                         onSubmit={(event) =>
-                            this.handleSubmitForm(event, onEditCard, listKey, card.key, card)
+                            this.submitForm(event, onEditCard, listKey, card.key, card)
                         }
                     >
                         <StyledTextArea
-                            onChange={(event) => this.handleDescriptionChange(event)}
+                            onChange={(event) => this.setState({ description: event.target.value })}
                             value={this.state.description}
                             autoSize
                         />
                         <SaveButton
                             disabled={!isValid}
                             onClick={(event) =>
-                                this.handleSubmitForm(event, onEditCard, listKey, card.key, card)
+                                this.submitForm(event, onEditCard, listKey, card.key, card)
                             }
                         >
                             Save
                         </SaveButton>
-                        <Button onClick={this.handleDisableEditMode}>Cancel</Button>
+                        <Button
+                            onClick={(event) =>
+                                this.setState({
+                                    editMode: false,
+                                })
+                            }
+                        >
+                            Cancel
+                        </Button>
                     </form>
                 ) : (
-                    <DescriptionPlaceholder onClick={this.handleEnableEditMode}>
+                    <DescriptionPlaceholder
+                        onClick={(event) =>
+                            this.setState({
+                                description: this.props.card.description,
+                                editMode: true,
+                            })
+                        }
+                    >
                         {card.description ? (
                             <span>{card.description}</span>
                         ) : (

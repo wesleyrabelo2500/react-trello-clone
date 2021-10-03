@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { DragSource } from 'react-dnd';
 import { ItemTypes } from '../../../core/constants';
-import { Card } from '../components/Card';
-import { CardModal } from '../components/CardModal';
+import { Card } from './Card';
+import { CardModal } from './CardModal';
 
 const cardSource = {
     beginDrag(props) {
@@ -26,24 +26,6 @@ class CardContainer extends Component {
         modalIsVisible: false,
     };
 
-    showModal = () => {
-        this.setState({
-            modalIsVisible: true,
-        });
-    };
-
-    handleOk = () => {
-        this.setState({
-            modalIsVisible: false,
-        });
-    };
-
-    handleCancel = () => {
-        this.setState({
-            modalIsVisible: false,
-        });
-    };
-
     render() {
         const { listKey, card, connectDragSource, onEditCard, onDeleteCard } = this.props;
         const { modalIsVisible } = this.state;
@@ -52,7 +34,11 @@ class CardContainer extends Component {
             <div>
                 <Card
                     card={card}
-                    showModal={this.showModal}
+                    showModal={() =>
+                        this.setState({
+                            modalIsVisible: true,
+                        })
+                    }
                     onEditCard={onEditCard}
                     onDeleteCard={onDeleteCard}
                     listKey={listKey}
@@ -62,8 +48,16 @@ class CardContainer extends Component {
                     listKey={listKey}
                     card={card}
                     visible={modalIsVisible}
-                    onOk={this.handleOk}
-                    onCancel={this.handleCancel}
+                    onOk={() =>
+                        this.setState({
+                            modalIsVisible: false,
+                        })
+                    }
+                    onCancel={() =>
+                        this.setState({
+                            modalIsVisible: false,
+                        })
+                    }
                     onEditCard={onEditCard}
                     onDeleteCard={onDeleteCard}
                 />

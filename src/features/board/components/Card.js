@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { LABELS } from '../../../core/constants';
 import { GrayButton } from '../../../shared/components/Button';
 import { CardBlock, Edit, TitleInput } from '../styles';
-import { Label } from './Label';
+import { Label } from './common/Label';
 
 export class Card extends Component {
     state = {
@@ -12,51 +12,34 @@ export class Card extends Component {
         title: '',
     };
 
-    handleShowEditButton = () => {
-        this.setState(() => ({ showEditIcons: true }));
-    };
-
-    handleHideEditButton = () => {
-        this.setState(() => ({ showEditIcons: false }));
-    };
-
-    handleDisableEdit = () => {
-        this.setState(() => ({ editMode: false }));
-    };
-
-    handleTitleChange = (event) => {
-        this.setState({ title: event.target.value });
-    };
-
-    handleSubmitForm = (event, callback, listKey, cardKey, title) => {
+    handleSubmitForm = async (event, callback, listKey, cardKey, title) => {
         event.preventDefault();
-
-        callback(listKey, cardKey, { title }).then(() =>
-            this.setState(() => ({
-                editMode: false,
-            }))
-        );
+        await callback(listKey, cardKey, { title });
+        this.setState(() => ({
+            editMode: false,
+        }));
     };
 
-    handleDeleteCard = (callback, listKey, cardKey) => {
-        callback(listKey, cardKey);
-    };
+    getColor(labels, text) {
+        const label = labels.find((label) => label.text === text);
+        return label.color;
+    }
 
     render() {
         const { showModal, onEditCard, onDeleteCard, card, listKey } = this.props;
         const { showEditIcons, editMode, title } = this.state;
         return (
             <CardBlock
-                onMouseEnter={this.handleShowEditButton}
-                onMouseLeave={this.handleHideEditButton}
-                onBlur={this.handleDisableEdit}
+                onMouseEnter={() => this.setState(() => ({ showEditIcons: true }))}
+                onMouseLeave={() => this.setState(() => ({ showEditIcons: false }))}
+                onBlur={() => this.setState(() => ({ editMode: false }))}
                 editMode={editMode}
                 onClick={showModal}
             >
                 <div>
                     {card && card.label && (
                         <Label
-                            color={getColor(LABELS, card.label)}
+                            color={this.getColor(LABELS, card.label)}
                             text={card.label}
                             small={true}
                         />
@@ -70,18 +53,14 @@ export class Card extends Component {
                     >
                         <TitleInput
                             value={this.state.title}
-                            onChange={(event) => this.handleTitleChange(event)}
+                            onChange={(event) => this.setState({ title: event.target.value })}
                         />
                     </form>
                 ) : (
                     <React.Fragment>
                         {showEditIcons && (
                             <Edit onClick={(event) => event.stopPropagation()}>
-                                <GrayButton
-                                    onClick={() =>
-                                        this.handleDeleteCard(onDeleteCard, listKey, card.key)
-                                    }
-                                >
+                                <GrayButton onClick={() => onDeleteCard(listKey, card.key)}>
                                     <Icon type="delete" />
                                 </GrayButton>
                             </Edit>
@@ -93,9 +72,4 @@ export class Card extends Component {
             </CardBlock>
         );
     }
-}
-
-function getColor(labels, text) {
-    const label = labels.find((label) => label.text === text);
-    return label.color;
 }

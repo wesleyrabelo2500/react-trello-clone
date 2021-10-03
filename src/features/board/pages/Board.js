@@ -3,8 +3,7 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import { List } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
-import { BoardTitle } from '../components/BoardTitle';
-import Cards from '../containers/Cards';
+import Cards from '../components/Cards';
 import { onceGetLists, doCreateList, doDeleteList, updateList } from '../api/list';
 import { deleteBoard, editBoard, getBoard, updateBoard } from '../api/board';
 import { FormCreation } from '../components/FormCreation';
@@ -13,6 +12,7 @@ import { Spinner } from '../../../shared/components/Spinner';
 import { mergeDataWithKey } from '../../../shared/utils';
 import { withAuthorization } from '../../../auth/utils/AuthHOC';
 import { AddList, Lists } from '../styles';
+import BoardHeader from '../components/BoardHeader';
 
 const BoardPage = () => {
     const [loading, setLoading] = useState(false);
@@ -83,7 +83,7 @@ const BoardPage = () => {
 
     return (
         <>
-            <BoardTitle
+            <BoardHeader
                 title={board.title}
                 favorite={board.favorite}
                 boardKey={boardKey}
