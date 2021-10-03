@@ -1,73 +1,71 @@
 import { Dropdown, Icon, Menu } from 'antd';
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Header, InputTitle, StyledButton } from '../styles';
 
-export class ListHeader extends Component {
-    state = {
-        edit: false,
-        title: '',
-    };
+export const ListHeader = (props) => {
+    const { listTitle, listKey, onEditList, onDeleteList } = props;
+    const [edit, setEdit] = useState(false);
+    const [title, setTitle] = useState('');
 
-    handleEnableEdit = () => {
-        const { listTitle } = this.props;
-        this.setState(() => ({ edit: true, title: listTitle }));
-    };
+    const handleDisableEdit = () => {
+        setEdit(false);
+    }
 
-    handleDisableEdit = () => {
-        this.setState(() => ({ edit: false }));
-    };
+    const handleEnableEdit = () => {
+        setEdit(true);
+        setTitle(listTitle);
+    }
 
-    handleInputChange = (event) => {
-        this.setState({ title: event.target.value });
-    };
+    const handleInputChange = (e) => {
+        setTitle(e.target.value);
+    }
 
-    handleFormSubmit = (event, callback, listKey, listTitle) => {
+    const handleFormSubmit = (event, callback, listKey, listTitle) => {
         event.preventDefault();
 
-        callback(listKey, listTitle).then(() => this.setState(() => ({ title: '', edit: false })));
+        callback(listKey, listTitle).then(() => {
+            setTitle('')
+            setEdit(false);
+        });
     };
 
-    handleDeleteList = (callback, listKey) => {
+    const handleDeleteList = (callback, listKey) => {
         callback(listKey);
     };
 
-    render() {
-        const { listTitle, listKey, onEditList, onDeleteList } = this.props;
-        const { edit, title } = this.state;
-        return (
-            <Header>
-                {edit ? (
-                    <form
-                        onSubmit={(event) =>
-                            this.handleFormSubmit(event, onEditList, listKey, title)
-                        }
-                        onBlur={(event) => this.handleFormSubmit(event, onEditList, listKey, title)}
-                    >
-                        <InputTitle value={title} onChange={this.handleInputChange} />
-                    </form>
-                ) : (
-                    <h4 onClick={this.handleEnableEdit} role="presentation">
-                        {listTitle}
-                    </h4>
-                )}
-                <Dropdown
-                    overlay={
-                        <Menu>
-                            <Menu.Item
-                                key="1"
-                                onClick={(event) => this.handleDeleteList(onDeleteList, listKey)}
-                            >
-                                Delete This List
-                            </Menu.Item>
-                        </Menu>
+    return (
+        <Header>
+            {edit ? (
+                <form
+                    onSubmit={(event) =>
+                        handleFormSubmit(event, onEditList, listKey, title)
                     }
-                    trigger={['click']}
+                    onBlur={(event) => handleFormSubmit(event, onEditList, listKey, title)}
                 >
-                    <StyledButton>
-                        <Icon type="ellipsis" />
-                    </StyledButton>
-                </Dropdown>
-            </Header>
-        );
-    }
+                    <InputTitle value={title} onChange={handleInputChange} />
+                </form>
+            ) : (
+                <h4 onClick={handleEnableEdit} role="presentation">
+                    {listTitle}
+                </h4>
+            )}
+            <Dropdown
+                overlay={
+                    <Menu>
+                        <Menu.Item
+                            key="1"
+                            onClick={(event) => handleDeleteList(onDeleteList, listKey)}
+                        >
+                            Delete This List
+                        </Menu.Item>
+                    </Menu>
+                }
+                trigger={['click']}
+            >
+                <StyledButton>
+                    <Icon type="ellipsis" />
+                </StyledButton>
+            </Dropdown>
+        </Header>
+    );
 }
