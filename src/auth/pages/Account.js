@@ -16,8 +16,7 @@ const INITIAL_STATE = {
 };
 
 const AccountScreen = (props) => {
-
-    const [state, setState] = useState(INITIAL_STATE)
+    const [state, setState] = useState(INITIAL_STATE);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -34,7 +33,6 @@ const AccountScreen = (props) => {
             });
     };
 
-
     const { getFieldDecorator } = props.form;
     const { error } = state;
     return (
@@ -46,21 +44,14 @@ const AccountScreen = (props) => {
                     <Form onSubmit={(event) => handleSubmit(event)} className="login-form">
                         <Form.Item>
                             {getFieldDecorator('passwordOne', {
-                                rules: [
-                                    { required: true, message: 'Please input your Password!' },
-                                ],
+                                rules: [{ required: true, message: 'Please input your Password!' }],
                             })(
                                 <Input
                                     prefix={
-                                        <Icon
-                                            type="lock"
-                                            style={{ color: 'rgba(0,0,0,.25)' }}
-                                        />
+                                        <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
                                     }
                                     onChange={(event) =>
-                                        setState(
-                                            byPropKey('passwordOne', event.target.value)
-                                        )
+                                        setState(byPropKey('passwordOne', event.target.value))
                                     }
                                     type="password"
                                     placeholder="Password"
@@ -70,21 +61,14 @@ const AccountScreen = (props) => {
 
                         <Form.Item>
                             {getFieldDecorator('passwordTwo', {
-                                rules: [
-                                    { required: true, message: 'Please input your Password!' },
-                                ],
+                                rules: [{ required: true, message: 'Please input your Password!' }],
                             })(
                                 <Input
                                     prefix={
-                                        <Icon
-                                            type="lock"
-                                            style={{ color: 'rgba(0,0,0,.25)' }}
-                                        />
+                                        <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
                                     }
                                     onChange={(event) =>
-                                        setState(
-                                            byPropKey('passwordTwo', event.target.value)
-                                        )
+                                        setState(byPropKey('passwordTwo', event.target.value))
                                     }
                                     type="password"
                                     placeholder="Password"
@@ -104,6 +88,6 @@ const AccountScreen = (props) => {
             )}
         </AuthUserContext.Consumer>
     );
-}
+};
 
 export default withAuthorization((authUser) => !!authUser)(Form.create()(AccountScreen));

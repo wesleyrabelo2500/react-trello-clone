@@ -66,5 +66,5 @@ export class CreateBoardModal extends Component {
 CreateBoardModal.propTypes = {
     onCloseModal: PropTypes.func,
     onCreateBoard: PropTypes.func,
-    visible: PropTypes.bool
+    visible: PropTypes.bool,
 };

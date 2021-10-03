@@ -9,22 +9,22 @@ export const ListHeader = (props) => {
 
     const handleDisableEdit = () => {
         setEdit(false);
-    }
+    };
 
     const handleEnableEdit = () => {
         setEdit(true);
         setTitle(listTitle);
-    }
+    };
 
     const handleInputChange = (e) => {
         setTitle(e.target.value);
-    }
+    };
 
     const handleFormSubmit = (event, callback, listKey, listTitle) => {
         event.preventDefault();
 
         callback(listKey, listTitle).then(() => {
-            setTitle('')
+            setTitle('');
             setEdit(false);
         });
     };
@@ -37,9 +37,7 @@ export const ListHeader = (props) => {
         <Header>
             {edit ? (
                 <form
-                    onSubmit={(event) =>
-                        handleFormSubmit(event, onEditList, listKey, title)
-                    }
+                    onSubmit={(event) => handleFormSubmit(event, onEditList, listKey, title)}
                     onBlur={(event) => handleFormSubmit(event, onEditList, listKey, title)}
                 >
                     <InputTitle value={title} onChange={handleInputChange} />
@@ -68,4 +66,4 @@ export const ListHeader = (props) => {
             </Dropdown>
         </Header>
     );
-}
+};
