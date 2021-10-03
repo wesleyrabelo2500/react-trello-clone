@@ -1,13 +1,10 @@
 export function mergeDataWithKey(data) {
-    if (!data) {
-        return [];
-    }
-    return Object.values(data).map((value, index) => {
-        return {
-            ...value,
-            key: Object.keys(data)[index],
-        };
-    });
+    return !data
+        ? []
+        : Object.values(data).map((value, index) => ({
+              ...value,
+              key: Object.keys(data)[index],
+          }));
 }
 
 export function byPropKey(propertyName, value) {
@@ -18,3 +15,7 @@ export function byPropKey(propertyName, value) {
 
 export const isEmpty = (obj) =>
     [Object, Array].includes((obj || {}).constructor) && !Object.entries(obj || {}).length;
+
+export function isEmptyText(text) {
+    return !text || !text.trim();
+}

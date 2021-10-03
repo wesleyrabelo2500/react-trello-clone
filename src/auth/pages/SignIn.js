@@ -1,9 +1,9 @@
 import { Form, Icon, Input } from 'antd';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { auth, provider } from '../../core/api/firebase';
-import { actionTypes } from '../../core/api/reducer';
-import { useStateValue } from '../../core/api/StateProvider';
+import { auth, provider } from '../../core/services/firebase';
+import { actionTypes } from '../../core/services/reducer';
+import { useStateValue } from '../../core/services/StateProvider';
 import { BOARDS, LANDING, PASSWORD_FORGET, SIGN_UP } from '../../routes';
 import { signInWithEmailAndPassword } from '../services/auth';
 import { ErrorMessage } from '../components/common/ErrorMessage';
@@ -21,16 +21,17 @@ const SignInForm = ({ form }) => {
     });
     const [, dispatch] = useStateValue();
 
-    const signInWithGoogle = () => {
-        auth.signInWithPopup(provider)
-            .then((result) => {
-                dispatch({
-                    type: actionTypes.SET_USER,
-                    user: result.user,
-                });
-                window.location = BOARDS;
-            })
-            .catch((error) => alert(error.message));
+    const signInWithGoogle = async () => {
+        try {
+            const result = await auth.signInWithPopup(provider);
+            dispatch({
+                type: actionTypes.SET_USER,
+                user: result.user,
+            });
+            window.location = BOARDS;
+        } catch (error) {
+            alert(error.message);
+        }
     };
 
     const onSubmit = async (event) => {
@@ -40,20 +41,18 @@ const SignInForm = ({ form }) => {
             status: '',
             message: '',
         });
-
-        submitButton.disabled = true;
-        return await signInWithEmailAndPassword(email, password)
-            .then(() => {
-                submitButton.disabled = false;
-                window.location = LANDING;
-            })
-            .catch((error) => {
-                submitButton.disabled = false;
-                setError(error.message);
-            });
+        try {
+            submitButton.disabled = true;
+            await signInWithEmailAndPassword(email, password);
+            submitButton.disabled = false;
+            window.location = LANDING;
+        } catch {
+            submitButton.disabled = false;
+            setError(error.message);
+        }
     };
 
-    const handleEmailInputBlur = (event) => {
+    const handleEmailInputBlur = () => {
         setEmailInputErr({
             status: EMAIL_ERROR_TYPES.INVALID.STATUS,
             message: EMAIL_ERROR_TYPES.INVALID.MESSAGE,

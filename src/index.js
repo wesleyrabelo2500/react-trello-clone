@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import App from './App';
-import reducer, { initialState } from './core/api/reducer';
-import { StateProvider } from './core/api/StateProvider';
+import reducer, { initialState } from './core/services/reducer';
+import { StateProvider } from './core/services/StateProvider';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(

@@ -1,4 +1,4 @@
-import { db } from '../../../core/api/firebase';
+import { db } from '../../../core/services/firebase';
 
 const cardsRef = db.ref('cards');
 
@@ -20,16 +20,12 @@ export const updateCard = async (listKey, cardKey, card) => {
     return card;
 };
 
-export const moveCard = (oldListKey, newListKey, cardKey, card) =>
-    db
-        .ref(`cards/${oldListKey}`)
-        .child(`${cardKey}`)
-        .remove()
-        .then(() =>
-            db.ref(`cards/${newListKey}/${cardKey}`).set({
-                ...card,
-            })
-        );
+export const moveCard = async (oldListKey, newListKey, cardKey, card) => {
+    await db.ref(`cards/${oldListKey}`).child(`${cardKey}`).remove();
+    await db.ref(`cards/${newListKey}/${cardKey}`).set({
+        ...card,
+    });
+};
 
 export const deleteCard = (listKey, cardKey) =>
     db.ref(`cards/${listKey}/`).child(`${cardKey}`).remove();

@@ -1,4 +1,4 @@
-import { db } from '../../../core/api/firebase';
+import { db } from '../../../core/services/firebase';
 
 const listsRef = db.ref('lists');
 

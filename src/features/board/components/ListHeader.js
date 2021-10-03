@@ -7,26 +7,17 @@ export const ListHeader = (props) => {
     const [edit, setEdit] = useState(false);
     const [title, setTitle] = useState('');
 
-    const handleDisableEdit = () => {
-        setEdit(false);
-    };
-
     const handleEnableEdit = () => {
         setEdit(true);
         setTitle(listTitle);
     };
 
-    const handleInputChange = (e) => {
-        setTitle(e.target.value);
-    };
-
-    const handleFormSubmit = (event, callback, listKey, listTitle) => {
+    const handleFormSubmit = async (event, callback, listKey, listTitle) => {
         event.preventDefault();
 
-        callback(listKey, listTitle).then(() => {
-            setTitle('');
-            setEdit(false);
-        });
+        await callback(listKey, listTitle);
+        setTitle('');
+        setEdit(false);
     };
 
     const handleDeleteList = (callback, listKey) => {
@@ -40,7 +31,7 @@ export const ListHeader = (props) => {
                     onSubmit={(event) => handleFormSubmit(event, onEditList, listKey, title)}
                     onBlur={(event) => handleFormSubmit(event, onEditList, listKey, title)}
                 >
-                    <InputTitle value={title} onChange={handleInputChange} />
+                    <InputTitle value={title} onChange={(e) => setTitle(e.target.value)} />
                 </form>
             ) : (
                 <h4 onClick={handleEnableEdit} role="presentation">
@@ -50,10 +41,7 @@ export const ListHeader = (props) => {
             <Dropdown
                 overlay={
                     <Menu>
-                        <Menu.Item
-                            key="1"
-                            onClick={(event) => handleDeleteList(onDeleteList, listKey)}
-                        >
+                        <Menu.Item key="1" onClick={() => handleDeleteList(onDeleteList, listKey)}>
                             Delete This List
                         </Menu.Item>
                     </Menu>

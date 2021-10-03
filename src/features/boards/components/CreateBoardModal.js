@@ -1,66 +1,52 @@
 import { Button, Modal } from 'antd';
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-
 import { BoardForm, StyledInput } from '../styles';
-
 import { DEFAULT_COLOR } from '../../../core/constants';
+import { isEmptyText } from '../../../shared/utils';
 
-export class CreateBoardModal extends Component {
-    state = {
-        boardTitle: '',
-    };
+export function CreateBoardModal(props) {
+    const [boardTitle, setBoardTitle] = useState('');
 
-    handleCreateBoard = (event, callback) => {
+    const handleCreateBoard = async (event, callback) => {
         event.preventDefault();
-        const board = {
-            title: this.state.boardTitle,
-            color: DEFAULT_COLOR,
-        };
-        if (!board.title || !board.title.trim()) {
+        if (isEmptyText(boardTitle)) {
             return;
         }
-        return callback(board).then(() => {
-            this.setState(() => ({
-                boardTitle: '',
-            }));
+        await callback({
+            title: boardTitle,
+            color: DEFAULT_COLOR,
         });
+        setBoardTitle('');
     };
 
-    handleBoardTitleChange = (event) => {
-        this.setState({
-            boardTitle: event.target.value,
-        });
+    const handleBoardTitleChange = (event) => {
+        setBoardTitle(event.target.value);
     };
 
-    render() {
-        const { onCloseModal, onCreateBoard, visible } = this.props;
+    const { onCloseModal, onCreateBoard, visible } = props;
 
-        return (
-            <Modal
-                title="Create board"
-                width="320px"
-                style={{ top: 20 }}
-                visible={visible}
-                onCancel={onCloseModal}
-                footer={null}
-            >
-                <BoardForm onSubmit={(event) => this.handleCreateBoard(event, onCreateBoard)}>
-                    <StyledInput
-                        placeholder="Add board title"
-                        onChange={(event) => this.handleBoardTitleChange(event)}
-                        value={this.state.boardTitle}
-                    />
-                    <Button
-                        type="primary"
-                        onClick={(event) => this.handleCreateBoard(event, onCreateBoard)}
-                    >
-                        Create
-                    </Button>
-                </BoardForm>
-            </Modal>
-        );
-    }
+    return (
+        <Modal
+            title="Create board"
+            width="320px"
+            style={{ top: 20 }}
+            visible={visible}
+            onCancel={onCloseModal}
+            footer={null}
+        >
+            <BoardForm onSubmit={(event) => handleCreateBoard(event, onCreateBoard)}>
+                <StyledInput
+                    placeholder="Add board title"
+                    onChange={(event) => handleBoardTitleChange(event)}
+                    value={boardTitle}
+                />
+                <Button type="primary" onClick={(event) => handleCreateBoard(event, onCreateBoard)}>
+                    Create
+                </Button>
+            </BoardForm>
+        </Modal>
+    );
 }
 
 CreateBoardModal.propTypes = {

@@ -1,7 +1,7 @@
 import { Form, Icon, Input } from 'antd';
 import React, { Component, useState } from 'react';
 import { withRouter } from 'react-router-dom';
-import { createUser } from '../../core/api/db';
+import { createUser } from '../../core/services/db';
 import { LANDING } from '../../routes';
 import { createUserWithEmailAndPassword } from '../services/auth';
 import { ErrorMessage } from '../components/common/ErrorMessage';
@@ -20,29 +20,25 @@ const SignUpForm = ({ form, onSubmit }) => {
         message: '',
     });
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-
         if (newPassword !== confirmPassword) {
             setError('new password and confirm password do not match');
             return;
         }
-
         const submitButton = document.querySelector('.signup-form-button');
-
         setEmailInputErr({
             status: '',
             message: '',
         });
         submitButton.disabled = true;
-        onSubmit(email, newPassword, username)
-            .then(() => {
-                submitButton.disabled = false;
-            })
-            .catch((error) => {
-                submitButton.disabled = false;
-                setError(error.message);
-            });
+        try {
+            await onSubmit(email, newPassword, username);
+            submitButton.disabled = false;
+        } catch (error) {
+            submitButton.disabled = false;
+            setError(error.message);
+        }
     };
 
     const handleEmailInputBlur = (event) => {
@@ -123,19 +119,15 @@ const SignUpForm = ({ form, onSubmit }) => {
     );
 };
 
-class SignUpScreen extends Component {
-    async onSubmit(email, password, username) {
-        return createUserWithEmailAndPassword(email, password).then((authUser) => {
-            createUser(authUser.user.uid, username, email);
-            window.location = LANDING;
-        });
-    }
+function SignUpScreen() {
+    const onSubmit = async (email, password, username) => {
+        const authUser = await createUserWithEmailAndPassword(email, password);
+        await createUser(authUser.user.uid, username, email);
+        window.location = LANDING;
+    };
 
-    render() {
-        const WrappedSignUpForm = Form.create()(SignUpForm);
-
-        return <WrappedSignUpForm onSubmit={this.onSubmit} />;
-    }
+    const WrappedSignUpForm = Form.create()(SignUpForm);
+    return <WrappedSignUpForm onSubmit={onSubmit} />;
 }
 
 export default withRouter(SignUpScreen);

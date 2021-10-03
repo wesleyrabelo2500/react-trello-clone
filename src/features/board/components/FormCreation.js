@@ -1,6 +1,6 @@
 import { Input } from 'antd';
 import React, { useState } from 'react';
-import formValidator from '../../../shared/utils/validators';
+import { isEmptyText } from '../../../shared/utils';
 
 export const FormCreation = (props) => {
     const [text, setText] = useState('');
@@ -8,7 +8,7 @@ export const FormCreation = (props) => {
 
     const handleCreate = async (event, callback, text) => {
         event.preventDefault();
-        if (formValidator(loading, text)) {
+        if (loading || isEmptyText(text)) {
             return;
         }
         setLoading(true);

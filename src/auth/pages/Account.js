@@ -1,6 +1,5 @@
 import { Form, Icon, Input } from 'antd';
 import React, { useState } from 'react';
-
 import { passwordUpdate } from '../services/auth';
 import { byPropKey } from '../../shared/utils';
 import { ErrorMessage } from '../components/common/ErrorMessage';
@@ -18,19 +17,18 @@ const INITIAL_STATE = {
 const AccountScreen = (props) => {
     const [state, setState] = useState(INITIAL_STATE);
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
-        return passwordUpdate(state.passwordOne)
-            .then(() => {
-                props.form.setFieldsValue({
-                    passwordOne: '',
-                    passwordTwo: '',
-                });
-            })
-            .catch((error) => {
-                setState(byPropKey('error', error.message));
+        try {
+            await passwordUpdate(state.passwordOne);
+            props.form.setFieldsValue({
+                passwordOne: '',
+                passwordTwo: '',
             });
+        } catch (error) {
+            setState(byPropKey('error', error.message));
+        }
     };
 
     const { getFieldDecorator } = props.form;
