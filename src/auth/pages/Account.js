@@ -1,5 +1,5 @@
 import { Form, Input } from 'antd';
-import { Icon } from '@ant-design/compatible';
+import { LockOutlined } from '@ant-design/icons';
 import React, { useState } from 'react';
 import { passwordUpdate } from '../services/auth';
 import { byPropKey } from '../../shared/utils';
@@ -47,7 +47,7 @@ const AccountScreen = (props) => {
                             })(
                                 <Input
                                     prefix={
-                                        <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
+                                        <LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />
                                     }
                                     onChange={(event) =>
                                         setState(byPropKey('passwordOne', event.target.value))
@@ -64,7 +64,7 @@ const AccountScreen = (props) => {
                             })(
                                 <Input
                                     prefix={
-                                        <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
+                                        <LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />
                                     }
                                     onChange={(event) =>
                                         setState(byPropKey('passwordTwo', event.target.value))

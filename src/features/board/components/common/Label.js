@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Icon } from '@ant-design/compatible';
+import { CheckOutlined } from '@ant-design/icons';
 import React from 'react';
 import { LabelWrapper } from '../../styles';
 
@@ -10,7 +10,7 @@ export const Label = ({ color, text, active, onClick, card, listKey, small }) =>
         small={small}
     >
         {text && <span>{text}</span>}
-        {active && <Icon type="check" />}
+        {active && <CheckOutlined />}
     </LabelWrapper>
 );
 

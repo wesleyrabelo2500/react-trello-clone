@@ -11,7 +11,6 @@ import { EMAIL_ERROR_TYPES } from '../constants';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 const SignUpForm = ({form, onSubmit}) => {
-    // const [form] = Form.useForm();
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [newPassword, setNewPassword] = useState('');
@@ -52,7 +51,7 @@ const SignUpForm = ({form, onSubmit}) => {
     return (
         <FormContainer>
             <h1 className="title">Sign Up</h1>
-            <Form form={form} onFinish={(event) => handleSubmit(event)} className="login-form">
+            <Form onFinish={(event) => handleSubmit(event)} className="login-form">
                 <Form.Item
                     name="username"
                     rules={[{ required: true, message: 'Please input your username!' }]}

@@ -44,12 +44,6 @@ export const ShowMenuButton = styled.div`
     }
 `;
 
-export const StyledIcon = styled(Icon)`
-    &.active {
-        color: #f2d600;
-    }
-`;
-
 export const MenuButtonText = styled.span`
     padding-left: 5px;
 `;

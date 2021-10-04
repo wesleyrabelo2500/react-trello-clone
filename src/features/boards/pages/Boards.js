@@ -1,4 +1,4 @@
-import { Icon } from '@ant-design/compatible';
+import { StarOutlined, UserOutlined } from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { withAuthorization } from '../../../auth/utils/AuthHOC';
@@ -46,7 +46,7 @@ const BoardsPage = () => {
             {!isEmpty(starredBoards) && (
                 <BoardTypes>
                     <BoardTypeTitle>
-                        <Icon type="star" />
+                        <StarOutlined />
                         Starred Boards
                     </BoardTypeTitle>
 
@@ -66,7 +66,7 @@ const BoardsPage = () => {
 
             <BoardTypes>
                 <BoardTypeTitle>
-                    <Icon type="user" />
+                    <UserOutlined />
                     Personal Boards
                 </BoardTypeTitle>
 

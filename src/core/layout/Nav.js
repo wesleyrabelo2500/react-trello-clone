@@ -1,5 +1,5 @@
 import { Dropdown, Menu } from 'antd';
-import { Icon } from '@ant-design/compatible';
+import { UserOutlined, HomeOutlined, LogoutOutlined, SettingOutlined } from '@ant-design/icons';
 import { Link, withRouter } from 'react-router-dom';
 import React from 'react';
 import styled from 'styled-components';
@@ -14,7 +14,7 @@ const Nav = () => {
             <NavItems>
                 <Link to={BOARDS}>
                     <StyledButton>
-                        <Icon type="home" />
+                        <HomeOutlined />
                     </StyledButton>
                 </Link>
             </NavItems>
@@ -23,19 +23,19 @@ const Nav = () => {
                     overlay={
                         <Menu>
                             <Menu.Item key="0">
-                                <Icon type="user" theme="outlined" />
+                                <UserOutlined />
                                 <StyledLink to={ACCOUNT}>Settings</StyledLink>
                             </Menu.Item>
                             <Menu.Divider />
                             <Menu.Item key="1" onClick={() => signOut()}>
-                                <Icon type="logout" theme="outlined" /> Sign Out
+                                <LogoutOutlined /> Sign Out
                             </Menu.Item>
                         </Menu>
                     }
                     trigger={['click']}
                 >
                     <StyledButton>
-                        <Icon type="setting" theme="outlined" />
+                        <SettingOutlined />
                     </StyledButton>
                 </Dropdown>
             </NavUser>

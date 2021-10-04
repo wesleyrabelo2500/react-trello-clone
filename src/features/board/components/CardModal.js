@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import { Modal } from 'antd';
-import { Icon } from '@ant-design/compatible';
+import { TagOutlined, ProjectOutlined, AlignLeftOutlined } from '@ant-design/icons';
 import React from 'react';
 import { LABELS } from '../../../core/constants';
-import { CardDetailHead, CardDetailIcon, CardDetailWrapper, Details, StyledIcon } from '../styles';
+import { CardDetailHead, CardDetailIcon, CardDetailWrapper, Details } from '../styles';
 import { CardDescription } from './CardDescription';
 import { Label } from './common/Label';
 
@@ -13,7 +13,7 @@ export const CardModal = (props) => {
     return (
         <Modal
             title={
-                <CardDetail title={<h4>{card.title}</h4>} icon={<StyledIcon type="project" />} />
+                <CardDetail title={<h4>{card.title}</h4>} icon={<ProjectOutlined />} />
             }
             visible={visible}
             onOk={onOk}
@@ -23,12 +23,12 @@ export const CardModal = (props) => {
             <Details>
                 <CardDetail
                     title={<h4>Labels</h4>}
-                    icon={<Icon type="tag" />}
+                    icon={<TagOutlined />}
                     content={<CardLabel card={card} listKey={listKey} onEditCard={onEditCard} />}
                 />
 
                 <CardDetail
-                    icon={<StyledIcon type="align-left" />}
+                    icon={<AlignLeftOutlined />}
                     title={<h4>Description</h4>}
                     content={
                         <CardDescription card={card} listKey={listKey} onEditCard={onEditCard} />

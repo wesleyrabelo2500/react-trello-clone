@@ -13,7 +13,6 @@ import { FormContainer } from '../components/common/FormContainer';
 import { EMAIL_ERROR_TYPES } from '../constants';
 
 const SignInForm = () => {
-    const [form] = Form.useForm();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
@@ -66,7 +65,7 @@ const SignInForm = () => {
         <FormContainer>
             <h1>Sign In</h1>
 
-            <Form form={form} onFinish={onFinish}>
+            <Form onFinish={onFinish}>
                 <Form.Item
                     name="email"
                     rules={[{ required: true, message: 'Please input your email!' }]}
