@@ -47,7 +47,7 @@ const SignInForm = ({ form }) => {
             await signInWithEmailAndPassword(email, password);
             submitButton.disabled = false;
             window.location = LANDING;
-        } catch {
+        } catch (error) {
             submitButton.disabled = false;
             setError(error.message);
         }
