@@ -54,23 +54,6 @@ const SignInForm = () => {
             setError(error.message);
         }
     };
-    // const onSubmit = async (event) => {
-    //     event.preventDefault();
-    //     const submitButton = document.querySelector('.login-form-button');
-    //     setEmailInputErr({
-    //         status: '',
-    //         message: '',
-    //     });
-    //     try {
-    //         submitButton.disabled = true;
-    //         await signInWithEmailAndPassword(email, password);
-    //         submitButton.disabled = false;
-    //         window.location = LANDING;
-    //     } catch {
-    //         submitButton.disabled = false;
-    //         setError(error.message);
-    //     }
-    // };
 
     const handleEmailInputBlur = () => {
         setEmailInputErr({
