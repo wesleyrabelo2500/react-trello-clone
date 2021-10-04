@@ -7,26 +7,19 @@ import { Spinner } from '../../shared/components/Spinner';
 import { AuthUserContext } from './AuthUserContext';
 
 export const withAuthentication = (Component) =>
-    class WithAuthentication extends React.Component {
-        state = {
-            authUser: null,
-        };
-
-        componentDidMount() {
-            firebase.auth().onAuthStateChanged((authUser) => {
-                authUser ? this.setState({ authUser }) : this.setState({ authUser: null });
+    (props) => {
+        const [authUser, setAuthUser] = useState(null)
+        useEffect(() => {
+            firebase.auth().onAuthStateChanged((authUser = null) => {
+                setAuthUser(authUser)
             });
-        }
+        }, [])
 
-        render() {
-            const { authUser } = this.state;
-
-            return (
-                <AuthUserContext.Provider value={authUser}>
-                    <Component {...this.props} />
-                </AuthUserContext.Provider>
-            );
-        }
+        return (
+            <AuthUserContext.Provider value={authUser}>
+                <Component {...props} />
+            </AuthUserContext.Provider>
+        );
     };
 
 export const withAuthorization = (authCondition) => (Component) => {
