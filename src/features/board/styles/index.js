@@ -1,4 +1,5 @@
-import { Icon, Input } from 'antd';
+import { Input } from 'antd';
+import { Icon } from '@ant-design/compatible';
 import styled from 'styled-components';
 import { Button } from '../../../shared/components/Button';
 

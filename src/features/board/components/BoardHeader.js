@@ -1,4 +1,5 @@
-import { Dropdown, Icon, Input, Menu } from 'antd';
+import { Dropdown, Input, Menu } from 'antd';
+import { Icon } from '@ant-design/compatible';
 import React, { useState } from 'react';
 import { Button } from '../../../shared/components/Button';
 import {

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Icon } from 'antd';
+import { Icon } from '@ant-design/compatible';
 import React from 'react';
 import { LabelWrapper } from '../../styles';
 

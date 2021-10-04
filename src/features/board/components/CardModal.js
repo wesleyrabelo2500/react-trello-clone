@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
-import { Icon, Modal } from 'antd';
+import { Modal } from 'antd';
+import { Icon } from '@ant-design/compatible';
 import React from 'react';
 import { LABELS } from '../../../core/constants';
 import { CardDetailHead, CardDetailIcon, CardDetailWrapper, Details, StyledIcon } from '../styles';

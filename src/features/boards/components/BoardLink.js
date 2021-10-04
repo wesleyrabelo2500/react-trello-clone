@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'; // ES6
-import { Icon } from 'antd';
+import { Icon } from '@ant-design/compatible';
 import { Favorite, StyledBoardLink, Title } from '../styles';
 
 export const BoardLink = ({ title, favorite, color }) => (

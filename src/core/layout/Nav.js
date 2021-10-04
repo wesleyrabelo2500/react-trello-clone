@@ -1,4 +1,5 @@
-import { Dropdown, Icon, Menu } from 'antd';
+import { Dropdown, Menu } from 'antd';
+import { Icon } from '@ant-design/compatible';
 import { Link, withRouter } from 'react-router-dom';
 import React from 'react';
 import styled from 'styled-components';

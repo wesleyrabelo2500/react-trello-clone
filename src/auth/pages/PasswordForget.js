@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Form, Icon, Input } from 'antd';
+import { Form, Input } from 'antd';
+import { Icon } from '@ant-design/compatible';
 import { passwordReset } from '../services/auth';
 import { ErrorMessage } from '../components/common/ErrorMessage';
 import { FormButton } from '../components/common/FormButton';
@@ -105,4 +106,4 @@ const PasswordForget = (props) => {
     );
 };
 
-export default Form.create()(PasswordForget);
+export default PasswordForget;

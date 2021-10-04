@@ -1,5 +1,5 @@
-import { Icon } from 'antd';
 import React, { useState } from 'react';
+import { Icon } from '@ant-design/compatible';
 import { LABELS } from '../../../core/constants';
 import { GrayButton } from '../../../shared/components/Button';
 import { CardBlock, Edit, TitleInput } from '../styles';

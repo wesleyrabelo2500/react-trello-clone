@@ -1,4 +1,5 @@
-import { Form, Icon, Input } from 'antd';
+import { Form, Input } from 'antd';
+import { Icon } from '@ant-design/compatible';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { auth, provider } from '../../core/services/firebase';
@@ -65,30 +66,30 @@ const SignInForm = ({ form }) => {
             <h1>Sign In</h1>
 
             <Form onSubmit={onSubmit}>
-                <Form.Item validateStatus={emailInputErr.status} help={emailInputErr.message}>
-                    {form.getFieldDecorator('email', {
-                        rules: [{ required: true, message: 'Please input your email!' }],
-                    })(
-                        <Input
-                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                            placeholder="Email"
-                            onChange={(event) => setEmail(event.target.value)}
-                            onBlur={handleEmailInputBlur}
-                        />
-                    )}
+                <Form.Item
+                    name="email"
+                    rules={[{ required: true, message: 'Please input your email!' }]}
+                    validateStatus={emailInputErr.status}
+                    help={emailInputErr.message}
+                >
+                    <Input
+                        prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                        placeholder="Email"
+                        onChange={(event) => setEmail(event.target.value)}
+                        onBlur={handleEmailInputBlur}
+                    />
                 </Form.Item>
 
-                <Form.Item>
-                    {form.getFieldDecorator('password', {
-                        rules: [{ required: true, message: 'Please input your Password!' }],
-                    })(
-                        <Input
-                            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                            onChange={(event) => setPassword(event.target.value)}
-                            type="password"
-                            placeholder="Password"
-                        />
-                    )}
+                <Form.Item
+                    name="password"
+                    rules={[{ required: true, message: 'Please input your Password!' }]}
+                >
+                    <Input
+                        prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                        onChange={(event) => setPassword(event.target.value)}
+                        type="password"
+                        placeholder="Password"
+                    />
                 </Form.Item>
 
                 <Form.Item>
@@ -114,7 +115,7 @@ const SignInForm = ({ form }) => {
     );
 };
 
-export const WrappedSignInForm = Form.create()(SignInForm);
+export const WrappedSignInForm = SignInForm;
 
 const SignInPage = ({ history }) => (
     <FormContainer>

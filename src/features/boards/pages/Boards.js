@@ -1,4 +1,4 @@
-import { Icon } from 'antd';
+import { Icon } from '@ant-design/compatible';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { withAuthorization } from '../../../auth/utils/AuthHOC';

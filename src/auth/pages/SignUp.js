@@ -1,4 +1,5 @@
-import { Form, Icon, Input } from 'antd';
+import { Form, Input } from 'antd';
+import { Icon } from '@ant-design/compatible';
 import React, { Component, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import { createUser } from '../../core/services/db';
@@ -52,55 +53,53 @@ const SignUpForm = ({ form, onSubmit }) => {
         <FormContainer>
             <h1 className="title">Sign Up</h1>
             <Form onSubmit={(event) => handleSubmit(event)} className="login-form">
-                <Form.Item>
-                    {form.getFieldDecorator('username', {
-                        rules: [{ required: true, message: 'Please input your username!' }],
-                    })(
-                        <Input
-                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                            placeholder="Username"
-                            onChange={(event) => setUsername(event.target.value)}
-                        />
-                    )}
+                <Form.Item
+                    name="username"
+                    rules={[{ required: true, message: 'Please input your username!' }]}
+                >
+                    <Input
+                        prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                        placeholder="Username"
+                        onChange={(event) => setUsername(event.target.value)}
+                    />
                 </Form.Item>
 
-                <Form.Item validateStatus={emailInputErr.status} help={emailInputErr.message}>
-                    {form.getFieldDecorator('email', {
-                        rules: [{ required: true, message: 'Please input your email!' }],
-                    })(
-                        <Input
-                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                            placeholder="Email"
-                            onChange={(event) => setEmail(event.target.value)}
-                            onBlur={handleEmailInputBlur}
-                        />
-                    )}
+                <Form.Item
+                    name="email"
+                    rules={[{ required: true, message: 'Please input your email!' }]}
+                    validateStatus={emailInputErr.status}
+                    help={emailInputErr.message}
+                >
+                    <Input
+                        prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                        placeholder="Email"
+                        onChange={(event) => setEmail(event.target.value)}
+                        onBlur={handleEmailInputBlur}
+                    />
                 </Form.Item>
 
-                <Form.Item>
-                    {form.getFieldDecorator('newPassword', {
-                        rules: [{ required: true, message: 'Please input your new password!' }],
-                    })(
-                        <Input
-                            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                            type="password"
-                            placeholder="Password"
-                            onChange={(event) => setNewPassword(event.target.value)}
-                        />
-                    )}
+                <Form.Item
+                    name="newPassword"
+                    rules={[{ required: true, message: 'Please input your new password!' }]}
+                >
+                    <Input
+                        prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                        type="password"
+                        placeholder="Password"
+                        onChange={(event) => setNewPassword(event.target.value)}
+                    />
                 </Form.Item>
 
-                <Form.Item>
-                    {form.getFieldDecorator('confirmPassword', {
-                        rules: [{ required: true, message: 'Please input your confirm password!' }],
-                    })(
-                        <Input
-                            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                            type="password"
-                            placeholder="Confirm password"
-                            onChange={(event) => serConfirmPassword(event.target.value)}
-                        />
-                    )}
+                <Form.Item
+                    name="confirmPassword"
+                    rules={[{ required: true, message: 'Please input your confirm password!' }]}
+                >
+                    <Input
+                        prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                        type="password"
+                        placeholder="Confirm password"
+                        onChange={(event) => serConfirmPassword(event.target.value)}
+                    />
                 </Form.Item>
 
                 <Form.Item>
@@ -126,7 +125,7 @@ function SignUpScreen() {
         window.location = LANDING;
     };
 
-    const WrappedSignUpForm = Form.create()(SignUpForm);
+    const WrappedSignUpForm = SignUpForm;
     return <WrappedSignUpForm onSubmit={onSubmit} />;
 }
 

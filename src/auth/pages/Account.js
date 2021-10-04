@@ -1,4 +1,5 @@
-import { Form, Icon, Input } from 'antd';
+import { Form, Input } from 'antd';
+import { Icon } from '@ant-design/compatible';
 import React, { useState } from 'react';
 import { passwordUpdate } from '../services/auth';
 import { byPropKey } from '../../shared/utils';
@@ -88,4 +89,4 @@ const AccountScreen = (props) => {
     );
 };
 
-export default withAuthorization((authUser) => !!authUser)(Form.create()(AccountScreen));
+export default withAuthorization((authUser) => !!authUser)(AccountScreen);
