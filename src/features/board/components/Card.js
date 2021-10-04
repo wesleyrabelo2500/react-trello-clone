@@ -6,19 +6,14 @@ import { CardBlock, Edit, TitleInput } from '../styles';
 import { Label } from './common/Label';
 
 export function Card(props) {
-    const [state, setState] = useState({
-        showEditIcons: false,
-        editMode: false,
-        title: '',
-    });
+    const [showEditIcons, setEditIcons] = useState(false);
+    const [editMode, setEditMode] = useState(false);
+    const [title, setTitle] = useState('');
 
     const handleSubmitForm = async (event, callback, listKey, cardKey, title) => {
         event.preventDefault();
         await callback(listKey, cardKey, { title });
-        setState((prvsState) => ({
-            ...prvsState,
-            editMode: false,
-        }));
+        setEditMode(false);
     };
 
     const getColor = (labels, text) => {
@@ -27,13 +22,12 @@ export function Card(props) {
     };
 
     const { showModal, onEditCard, onDeleteCard, card, listKey } = props;
-    const { showEditIcons, editMode, title } = state;
 
     return (
         <CardBlock
-            onMouseEnter={() => setState((prvsState) => ({ ...prvsState, showEditIcons: true }))}
-            onMouseLeave={() => setState((prvsState) => ({ ...prvsState, showEditIcons: false }))}
-            onBlur={() => setState((prvsState) => ({ ...prvsState, editMode: false }))}
+            onMouseEnter={() => setEditIcons(true)}
+            onMouseLeave={() => setEditIcons(false)}
+            onBlur={() => setEditMode(false)}
             editMode={editMode}
             onClick={showModal}
         >
@@ -48,10 +42,7 @@ export function Card(props) {
                         handleSubmitForm(event, onEditCard, listKey, card.key, title)
                     }
                 >
-                    <TitleInput
-                        value={state.title}
-                        onChange={(event) => setState({ title: event.target.value })}
-                    />
+                    <TitleInput value={title} onChange={(event) => setTitle(event.target.value)} />
                 </form>
             ) : (
                 <React.Fragment>
