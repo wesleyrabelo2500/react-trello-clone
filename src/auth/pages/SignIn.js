@@ -1,5 +1,5 @@
 import { Form, Input } from 'antd';
-import { Icon } from '@ant-design/compatible';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { auth, provider } from '../../core/services/firebase';
@@ -12,7 +12,8 @@ import { FormButton } from '../components/common/FormButton';
 import { FormContainer } from '../components/common/FormContainer';
 import { EMAIL_ERROR_TYPES } from '../constants';
 
-const SignInForm = ({ form }) => {
+const SignInForm = () => {
+    const [form] = Form.useForm();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
@@ -36,8 +37,8 @@ const SignInForm = ({ form }) => {
         }
     };
 
-    const onSubmit = async (event) => {
-        event.preventDefault();
+    const onFinish = async (event) => {
+        console.log(event)
         const submitButton = document.querySelector('.login-form-button');
         setEmailInputErr({
             status: '',
@@ -53,6 +54,23 @@ const SignInForm = ({ form }) => {
             setError(error.message);
         }
     };
+    // const onSubmit = async (event) => {
+    //     event.preventDefault();
+    //     const submitButton = document.querySelector('.login-form-button');
+    //     setEmailInputErr({
+    //         status: '',
+    //         message: '',
+    //     });
+    //     try {
+    //         submitButton.disabled = true;
+    //         await signInWithEmailAndPassword(email, password);
+    //         submitButton.disabled = false;
+    //         window.location = LANDING;
+    //     } catch {
+    //         submitButton.disabled = false;
+    //         setError(error.message);
+    //     }
+    // };
 
     const handleEmailInputBlur = () => {
         setEmailInputErr({
@@ -65,7 +83,7 @@ const SignInForm = ({ form }) => {
         <FormContainer>
             <h1>Sign In</h1>
 
-            <Form onSubmit={onSubmit}>
+            <Form form={form} onFinish={onFinish}>
                 <Form.Item
                     name="email"
                     rules={[{ required: true, message: 'Please input your email!' }]}
@@ -73,7 +91,7 @@ const SignInForm = ({ form }) => {
                     help={emailInputErr.message}
                 >
                     <Input
-                        prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                        prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                         placeholder="Email"
                         onChange={(event) => setEmail(event.target.value)}
                         onBlur={handleEmailInputBlur}
@@ -85,7 +103,7 @@ const SignInForm = ({ form }) => {
                     rules={[{ required: true, message: 'Please input your Password!' }]}
                 >
                     <Input
-                        prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                        prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                         onChange={(event) => setPassword(event.target.value)}
                         type="password"
                         placeholder="Password"
