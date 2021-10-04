@@ -46,7 +46,6 @@ const BoardHeader = (props) => {
             </h3>
             <Favorite>
                 <StyledButton onClick={onAddToFavorites} active={favorite}>
-                    {/* <StyledIcon type="star" className={favorite && 'active'} /> */}
                     {favorite ? <StarFilled style={{ color: '#f2d600' }} /> : <StarOutlined />}
                 </StyledButton>
             </Favorite>
