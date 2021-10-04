@@ -21,7 +21,8 @@ const SignInForm = ({ form }) => {
     });
     const [, dispatch] = useStateValue();
 
-    const signInWithGoogle = async () => {
+    const signInWithGoogle = async (event) => {
+        event.preventDefault();
         try {
             const result = await auth.signInWithPopup(provider);
             dispatch({
