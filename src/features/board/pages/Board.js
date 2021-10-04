@@ -69,7 +69,7 @@ const BoardPage = () => {
     const handleDeleteBoard = async (boardKey) => {
         await deleteBoard(boardKey);
 
-        window.location('/boards');
+        window.location.assign('/boards');
     };
 
     const handleUpdateBoard = async (boardKey, title) => {
