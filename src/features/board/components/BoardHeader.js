@@ -9,6 +9,7 @@ import {
     StyledButton,
     StyledIcon,
 } from '../styles';
+import PropTypes from 'prop-types';
 
 const BoardHeader = (props) => {
     const [edit, setEdit] = useState(false);
@@ -66,6 +67,15 @@ const BoardHeader = (props) => {
             </ShowMenuButton>
         </StyledBoardTitle>
     );
+};
+
+BoardHeader.propTypes = {
+    title: PropTypes.string.isRequired,
+    favorite: PropTypes.bool,
+    boardKey: PropTypes.string.isRequired,
+    onAddToFavorites: PropTypes.func.isRequired,
+    deleteBoard: PropTypes.func.isRequired,
+    updateBoard: PropTypes.func.isRequired,
 };
 
 export default BoardHeader;
