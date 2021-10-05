@@ -7,8 +7,7 @@ import { GrayButton } from '../../../shared/components/Button';
 import { CardBlock, Edit, TitleInput } from '../styles';
 import { Label } from './common/Label';
 
-export function Card(props) {
-    console.log({ props })
+export const Card = (props) => {
     const [showEditIcons, setEditIcons] = useState(false);
     const [editMode, setEditMode] = useState(false);
     const [title, setTitle] = useState('');
@@ -68,7 +67,7 @@ export function Card(props) {
 Card.propType = {
     listKey: PropType.string.isRequired,
     card: PropType.object.isRequired,
-    showModal: PropType.bool.isRequired,
+    showModal: PropType.func.isRequired,
     onEditCard: PropType.func.isRequired,
     onDeleteCard: PropType.func.isRequired,
 };
