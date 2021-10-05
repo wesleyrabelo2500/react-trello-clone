@@ -1,4 +1,5 @@
-import { Form, Icon, Input } from 'antd';
+import { Form, Input } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { auth, provider } from '../../core/services/firebase';
@@ -11,7 +12,7 @@ import { FormButton } from '../components/common/FormButton';
 import { FormContainer } from '../components/common/FormContainer';
 import { EMAIL_ERROR_TYPES } from '../constants';
 
-const SignInForm = ({ form }) => {
+const SignInForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
@@ -35,8 +36,8 @@ const SignInForm = ({ form }) => {
         }
     };
 
-    const onSubmit = async (event) => {
-        event.preventDefault();
+    const onFinish = async (event) => {
+        console.log(event)
         const submitButton = document.querySelector('.login-form-button');
         setEmailInputErr({
             status: '',
@@ -64,31 +65,31 @@ const SignInForm = ({ form }) => {
         <FormContainer>
             <h1>Sign In</h1>
 
-            <Form onSubmit={onSubmit}>
-                <Form.Item validateStatus={emailInputErr.status} help={emailInputErr.message}>
-                    {form.getFieldDecorator('email', {
-                        rules: [{ required: true, message: 'Please input your email!' }],
-                    })(
-                        <Input
-                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                            placeholder="Email"
-                            onChange={(event) => setEmail(event.target.value)}
-                            onBlur={handleEmailInputBlur}
-                        />
-                    )}
+            <Form onFinish={onFinish}>
+                <Form.Item
+                    name="email"
+                    rules={[{ required: true, message: 'Please input your email!' }]}
+                    validateStatus={emailInputErr.status}
+                    help={emailInputErr.message}
+                >
+                    <Input
+                        prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+                        placeholder="Email"
+                        onChange={(event) => setEmail(event.target.value)}
+                        onBlur={handleEmailInputBlur}
+                    />
                 </Form.Item>
 
-                <Form.Item>
-                    {form.getFieldDecorator('password', {
-                        rules: [{ required: true, message: 'Please input your Password!' }],
-                    })(
-                        <Input
-                            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                            onChange={(event) => setPassword(event.target.value)}
-                            type="password"
-                            placeholder="Password"
-                        />
-                    )}
+                <Form.Item
+                    name="password"
+                    rules={[{ required: true, message: 'Please input your Password!' }]}
+                >
+                    <Input
+                        prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+                        onChange={(event) => setPassword(event.target.value)}
+                        type="password"
+                        placeholder="Password"
+                    />
                 </Form.Item>
 
                 <Form.Item>
@@ -114,7 +115,7 @@ const SignInForm = ({ form }) => {
     );
 };
 
-export const WrappedSignInForm = Form.create()(SignInForm);
+export const WrappedSignInForm = SignInForm;
 
 const SignInPage = ({ history }) => (
     <FormContainer>

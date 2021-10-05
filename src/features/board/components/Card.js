@@ -1,5 +1,5 @@
-import { Icon } from 'antd';
 import React, { useState } from 'react';
+import { DeleteOutlined, AlignLeftOutlined } from '@ant-design/icons';
 import { LABELS } from '../../../core/constants';
 import { GrayButton } from '../../../shared/components/Button';
 import { CardBlock, Edit, TitleInput } from '../styles';
@@ -49,14 +49,14 @@ export function Card(props) {
                     {showEditIcons && (
                         <Edit onClick={(event) => event.stopPropagation()}>
                             <GrayButton onClick={() => onDeleteCard(listKey, card.key)}>
-                                <Icon type="delete" />
+                            <DeleteOutlined />
                             </GrayButton>
                         </Edit>
                     )}
                     <div>{card.title}</div>
                 </React.Fragment>
             )}
-            <div>{card.description && <Icon type="align-left" />}</div>
+            <div>{card.description && <AlignLeftOutlined />}</div>
         </CardBlock>
     );
 }

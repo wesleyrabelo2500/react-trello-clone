@@ -1,4 +1,5 @@
-import { Dropdown, Icon, Input, Menu } from 'antd';
+import { Dropdown, Input, Menu } from 'antd';
+import { EllipsisOutlined, StarFilled, StarOutlined } from '@ant-design/icons';
 import React, { useState } from 'react';
 import { Button } from '../../../shared/components/Button';
 import {
@@ -7,7 +8,6 @@ import {
     ShowMenuButton,
     StyledBoardTitle,
     StyledButton,
-    StyledIcon,
 } from '../styles';
 import PropTypes from 'prop-types';
 
@@ -46,7 +46,7 @@ const BoardHeader = (props) => {
             </h3>
             <Favorite>
                 <StyledButton onClick={onAddToFavorites} active={favorite}>
-                    <StyledIcon type="star" className={favorite && 'active'} />
+                    {favorite ? <StarFilled style={{ color: '#f2d600' }} /> : <StarOutlined />}
                 </StyledButton>
             </Favorite>
             <ShowMenuButton>
@@ -61,7 +61,7 @@ const BoardHeader = (props) => {
                     trigger={['click']}
                 >
                     <Button>
-                        <Icon type="ellipsis" />
+                        <EllipsisOutlined />
                     </Button>
                 </Dropdown>
             </ShowMenuButton>

@@ -1,4 +1,5 @@
-import { Icon, Input } from 'antd';
+import { Input } from 'antd';
+import { Icon } from '@ant-design/compatible';
 import styled from 'styled-components';
 import { Button } from '../../../shared/components/Button';
 
@@ -40,12 +41,6 @@ export const ShowMenuButton = styled.div`
     text-decoration: underline;
     div {
         font-weight: normal;
-    }
-`;
-
-export const StyledIcon = styled(Icon)`
-    &.active {
-        color: #f2d600;
     }
 `;
 

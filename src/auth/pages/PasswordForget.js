@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Form, Icon, Input } from 'antd';
+import { Form, Input } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
 import { passwordReset } from '../services/auth';
 import { ErrorMessage } from '../components/common/ErrorMessage';
 import { FormButton } from '../components/common/FormButton';
@@ -85,7 +86,7 @@ const PasswordForget = (props) => {
                         ],
                     })(
                         <Input
-                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                             placeholder="Email"
                             onChange={(event) => handleOnChange(event.target.value)}
                             onBlur={(event) => handleOnBlur(event.target.value)}
@@ -105,4 +106,4 @@ const PasswordForget = (props) => {
     );
 };
 
-export default Form.create()(PasswordForget);
+export default PasswordForget;

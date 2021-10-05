@@ -1,4 +1,5 @@
-import { Dropdown, Icon, Menu } from 'antd';
+import { Dropdown, Menu } from 'antd';
+import { EllipsisOutlined } from '@ant-design/icons';
 import React, { useState } from 'react';
 import { Header, InputTitle, StyledButton } from '../styles';
 
@@ -49,7 +50,7 @@ export const ListHeader = (props) => {
                 trigger={['click']}
             >
                 <StyledButton>
-                    <Icon type="ellipsis" />
+                    <EllipsisOutlined />
                 </StyledButton>
             </Dropdown>
         </Header>
