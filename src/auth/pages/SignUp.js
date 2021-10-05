@@ -1,5 +1,5 @@
 import { Form, Input } from 'antd';
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import { createUser } from '../../core/services/db';
 import { LANDING } from '../../routes';
