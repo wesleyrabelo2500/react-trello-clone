@@ -17,8 +17,8 @@ const SignUpForm = ({form, onSubmit}) => {
     const [confirmPassword, serConfirmPassword] = useState('');
     const [error, setError] = useState(null);
     const [emailInputErr, setEmailInputErr] = useState({
-        status: '',
-        message: '',
+        status: null,
+        message: null,
     });
 
     const handleSubmit = async (event) => {
