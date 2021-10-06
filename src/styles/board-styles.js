@@ -2,11 +2,6 @@ import { Input } from 'antd';
 import styled from 'styled-components';
 import { Button } from '../components/common/Button';
 
-export const AddList = styled.div`
-    width: 250px;
-    margin: auto;
-`;
-
 export const Lists = styled.div`
     background-color: #0079bf;
     flex: 1;
@@ -43,10 +38,6 @@ export const ShowMenuButton = styled.div`
     div {
         font-weight: normal;
     }
-`;
-
-export const MenuButtonText = styled.span`
-    padding-left: 5px;
 `;
 
 export const StyledButton = styled(Button)`
