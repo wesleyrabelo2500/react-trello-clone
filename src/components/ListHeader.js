@@ -1,7 +1,8 @@
-import { Dropdown, Menu } from 'antd';
+import { Dropdown, Input, Menu } from 'antd';
 import { EllipsisOutlined } from '@ant-design/icons';
 import React, { useState } from 'react';
-import { Header, InputTitle, StyledButton } from '../styles/board-styles';
+import styled from 'styled-components';
+import { StyledButton } from '../global-styles';
 
 export const ListHeader = (props) => {
     const { listTitle, listKey, onEditList, onDeleteList } = props;
@@ -56,3 +57,22 @@ export const ListHeader = (props) => {
         </Header>
     );
 };
+
+const Header = styled.div`
+    display: flex;
+    margin-bottom: 5px;
+    background: #fff;
+    justify-content: space-between;
+    border-radius: 5px;
+    padding: 0 0px 0 10px;
+    align-items: center;
+    min-width: 250px;
+`;
+
+const InputTitle = styled(Input)`
+    height: 25px !important;
+    margin-bottom: 0.5em !important;
+    font-weight: bold;
+    padding: 4px 5px !important;
+    font-size: 1.17em !important;
+`;

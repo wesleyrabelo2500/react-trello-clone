@@ -1,5 +1,6 @@
 import 'antd/dist/antd.css';
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
+import { Button } from './components/common/Button';
 
 export const GlobalStyle = createGlobalStyle`
 body {
@@ -76,4 +77,8 @@ body {
   flex-direction:column;
   align-items: center;
 }
+`;
+
+export const StyledButton = styled(Button)`
+    background: ${(props) => (props.active ? '#0079BF' : '')};
 `;

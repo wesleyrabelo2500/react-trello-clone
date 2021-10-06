@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
-import { Button } from 'antd';
+import { Button, Input } from 'antd';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Detail, SaveButton, StyledTextArea } from '../styles/board-styles';
 import { isEmptyText } from '../utils/board-utils';
 
 export function CardDescription(props) {
@@ -58,3 +57,18 @@ CardDescription.propTypes = {
     card: PropTypes.object,
     onEditCard: PropTypes.func,
 };
+
+const StyledTextArea = styled(Input.TextArea)`
+    margin-bottom: 10px !important;
+`;
+
+const SaveButton = styled(Button)`
+    margin-right: 5px;
+    background: #1890ff;
+    display: inline-block;
+    padding: 0 10px;
+`;
+
+const Detail = styled.span`
+    cursor: pointer;
+`;

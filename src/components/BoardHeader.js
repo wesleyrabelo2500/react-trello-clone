@@ -2,14 +2,9 @@ import { Dropdown, Input, Menu } from 'antd';
 import { EllipsisOutlined, StarFilled, StarOutlined } from '@ant-design/icons';
 import React, { useState } from 'react';
 import { Button } from './common/Button';
-import {
-    Favorite,
-    Form,
-    ShowMenuButton,
-    StyledBoardTitle,
-    StyledButton,
-} from '../styles/board-styles';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { StyledButton } from '../global-styles';
 
 const BoardHeader = (props) => {
     const [edit, setEdit] = useState(false);
@@ -44,11 +39,11 @@ const BoardHeader = (props) => {
                     <Button onClick={() => setEdit(true)}>{title}</Button>
                 )}
             </h3>
-            <Favorite>
+            <div>
                 <StyledButton onClick={onAddToFavorites} active={favorite}>
                     {favorite ? <StarFilled style={{ color: '#f2d600' }} /> : <StarOutlined />}
                 </StyledButton>
-            </Favorite>
+            </div>
             <ShowMenuButton>
                 <Dropdown
                     overlay={
@@ -77,5 +72,28 @@ BoardHeader.propTypes = {
     deleteBoard: PropTypes.func.isRequired,
     updateBoard: PropTypes.func.isRequired,
 };
+
+const Form = styled.form`
+    margin-right: 5px !important;
+  }
+`;
+
+const ShowMenuButton = styled.div`
+    color: white;
+    position: absolute;
+    right: 0;
+    text-decoration: underline;
+    div {
+        font-weight: normal;
+    }
+`;
+
+const StyledBoardTitle = styled.div`
+    margin-top: -20px;
+    background: #0079bf;
+    display: flex;
+    position: relative;
+    padding: 8px 8px 12px;
+`;
 
 export default BoardHeader;

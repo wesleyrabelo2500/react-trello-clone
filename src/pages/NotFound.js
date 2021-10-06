@@ -1,3 +1,3 @@
 import React from 'react';
 
-export const NotFoundScreen = () => <div>404</div>;
+export const NotFoundScreen = () => <h1>404</h1>;

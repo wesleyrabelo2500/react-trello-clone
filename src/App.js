@@ -9,7 +9,7 @@ import { AuthUserContext } from './utils/auth-user-context';
 import Nav from './components/Nav';
 import BoardPage from './pages/Board';
 import BoardsPage from './pages/Boards';
-import { GlobalStyle } from './styles/global-styles';
+import { GlobalStyle } from './global-styles';
 import { NotFoundScreen } from './pages/NotFound';
 
 export const ROUTES = {

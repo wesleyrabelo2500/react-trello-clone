@@ -6,13 +6,7 @@ import { createBoard, getBoards } from '../services/boards';
 import { Spinner } from '../components/common/Spinner';
 import { isEmpty, mergeDataWithKey } from '../utils/board-utils';
 import { CreateBoardModal } from '../components/CreateBoardModal';
-import {
-    BoardTypes,
-    BoardTypeTitle,
-    CreateBoardTitle,
-    NewBoardContent,
-    StyledNewBoard,
-} from '../styles/boards-styles';
+import styled from 'styled-components';
 import { BoardLink } from '../components/common/BoardLink';
 
 const BoardsPage = () => {
@@ -100,5 +94,48 @@ const BoardsPage = () => {
         </div>
     );
 };
+
+const BoardTypes = styled.div`
+    margin: auto;
+    padding: 0 10px;
+    margin-bottom: 20px;
+`;
+
+const BoardTypeTitle = styled.h4`
+    i {
+        margin-right: 5px;
+        color: gray;
+    }
+    margin-left: 5px;
+    margin-bottom: 0px;
+`;
+
+const NewBoardContent = styled.div`
+    text-align: center;
+`;
+
+const CreateBoardTitle = styled.div`
+    top: 25px;
+    position: relative;
+`;
+
+const StyledBoardLink = styled.div`
+    position: relative;
+    display: inline-block;
+    padding: 4px;
+    width: 250px;
+    height: 80px;
+    background-color: ${(props) => props.color};
+    color: white;
+    margin: 0.5%;
+    border-radius: 4px;
+    transition: all 0.3s;
+`;
+
+const StyledNewBoard = styled(StyledBoardLink)`
+    color: #6b808c;
+    cursor: pointer;
+    position: relative;
+`;
 
 export default withAuthorization((authUser) => !!authUser)(BoardsPage);

@@ -1,9 +1,9 @@
-import { Button, Modal } from 'antd';
+import { Button, Input, Modal } from 'antd';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { BoardForm, StyledInput } from '../styles/boards-styles';
 import { DEFAULT_COLOR } from '../constants/core-constants';
 import { isEmptyText } from '../utils/board-utils';
+import styled from 'styled-components';
 
 export function CreateBoardModal(props) {
     const [boardTitle, setBoardTitle] = useState('');
@@ -54,3 +54,12 @@ CreateBoardModal.propTypes = {
     onCreateBoard: PropTypes.func,
     visible: PropTypes.bool,
 };
+
+const StyledInput = styled(Input)`
+    margin-bottom: 10px !important;
+`;
+
+const BoardForm = styled.form`
+    width: 100%;
+    margin: auto;
+`;

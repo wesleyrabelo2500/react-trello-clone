@@ -3,9 +3,9 @@ import { Modal } from 'antd';
 import { TagOutlined, ProjectOutlined, AlignLeftOutlined } from '@ant-design/icons';
 import React from 'react';
 import { LABELS } from '../constants/core-constants';
-import { CardDetailHead, CardDetailIcon, CardDetailWrapper, Details } from '../styles/board-styles';
 import { CardDescription } from './CardDescription';
 import { Label } from './common/Label';
+import styled from 'styled-components';
 
 export const CardModal = (props) => {
     const { listKey, card, visible, onOk, onCancel, onEditCard } = props;
@@ -73,3 +73,26 @@ const CardLabel = (props) => {
         />
     ));
 };
+
+const Details = styled.div`
+    flex-direction: column;
+    width: 100%;
+    > div {
+        margin-bottom: 16px;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+`;
+
+const CardDetailWrapper = styled.div`
+    width: 100%;
+`;
+
+const CardDetailHead = styled.div`
+    display: flex;
+`;
+
+const CardDetailIcon = styled.div`
+    width: 7%;
+`;

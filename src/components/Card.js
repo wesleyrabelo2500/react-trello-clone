@@ -4,8 +4,9 @@ import PropType from 'prop-types';
 import { DeleteOutlined, AlignLeftOutlined } from '@ant-design/icons';
 import { LABELS } from '../constants/core-constants';
 import { GrayButton } from './common/Button';
-import { CardBlock, Edit, TitleInput } from '../styles/board-styles';
 import { Label } from './common/Label';
+import styled from 'styled-components';
+import { Input } from 'antd';
 
 export const Card = (props) => {
     const [showEditIcons, setEditIcons] = useState(false);
@@ -70,3 +71,36 @@ Card.propType = {
     onEditCard: PropType.func.isRequired,
     onDeleteCard: PropType.func.isRequired,
 };
+
+const CardBlock = styled.div`
+    position: relative;
+    background: white;
+    margin-bottom: 7px;
+    border-radius: 3px;
+    padding: 6px 10px 6px;
+    box-shadow: 0px 1px 0px grey;
+    min-width: 250px;
+    &:hover {
+        background: ${(props) => (props.editMode ? '#fff' : '#efefef')};
+        cursor: pointer;
+    }
+`;
+
+const TitleInput = styled(Input)`
+    border: none !important;
+    outline: none !important;
+    height: 20px !important;
+    padding-left: 0 !important;
+    &:focus {
+        box-shadow: none !important;
+    }
+`;
+
+const Edit = styled.div`
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    > div {
+        display: inline-block;
+    }
+`;

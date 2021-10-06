@@ -11,8 +11,8 @@ import { ListHeader } from '../components/ListHeader';
 import { Spinner } from '../components/common/Spinner';
 import { mergeDataWithKey } from '../utils/board-utils';
 import { withAuthorization } from '../utils/auth-hoc';
-import { Lists } from '../styles/board-styles';
 import BoardHeader from '../components/BoardHeader';
+import styled from 'styled-components';
 
 const BoardPage = () => {
     const [loading, setLoading] = useState(false);
@@ -108,5 +108,18 @@ const BoardPage = () => {
         </DndProvider>
     );
 };
+
+const Lists = styled.div`
+    background-color: #0079bf;
+    flex: 1;
+    display: flex;
+    overflow: auto;
+    white-space: nowrap;
+    padding: 0 10px;
+
+    > div {
+        margin-right: 1rem;
+    }
+`;
 
 export default withRouter(withAuthorization((authUser) => !!authUser)(BoardPage));
