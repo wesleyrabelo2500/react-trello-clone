@@ -1,5 +1,5 @@
-import { DragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import { List } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
@@ -82,7 +82,7 @@ const BoardPage = () => {
     }
 
     return (
-        <>
+        <DndProvider backend={HTML5Backend}>
             <BoardHeader
                 title={board.title}
                 favorite={board.favorite}
@@ -107,10 +107,10 @@ const BoardPage = () => {
                     <FormCreation placeholder="Create new list" onCreate={handleCreateList} />
                 </AddList>
             </Lists>
-        </>
+        </DndProvider>
     );
 };
 
 export default withRouter(
-    withAuthorization((authUser) => !!authUser)(DragDropContext(HTML5Backend)(BoardPage))
+    withAuthorization((authUser) => !!authUser)(BoardPage)
 );
