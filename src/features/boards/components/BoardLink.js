@@ -13,6 +13,6 @@ export const BoardLink = ({ title, favorite, color }) => (
 
 BoardLink.propTypes = {
     title: PropTypes.string.isRequired,
-    favorite: PropTypes.string,
+    favorite: PropTypes.bool,
     color: PropTypes.string
-}
+};
