@@ -5,6 +5,7 @@ import { Button } from '../../../shared/components/Button';
 
 export const AddList = styled.div`
     width: 250px;
+    margin: auto;
 `;
 
 export const Lists = styled.div`
@@ -22,6 +23,7 @@ export const Lists = styled.div`
 
 export const Form = styled.form`
     margin-right: 5px !important;
+  }
 `;
 
 export const StyledBoardTitle = styled.div`
