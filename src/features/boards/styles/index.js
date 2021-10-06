@@ -63,4 +63,5 @@ export const StyledInput = styled(Input)`
 
 export const BoardForm = styled.form`
     width: 100%;
+    margin: auto;
 `;

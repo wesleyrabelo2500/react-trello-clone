@@ -17,8 +17,8 @@ const SignInForm = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
     const [emailInputErr, setEmailInputErr] = useState({
-        status: '',
-        message: '',
+        status: null,
+        message: null,
     });
     const [, dispatch] = useStateValue();
 
