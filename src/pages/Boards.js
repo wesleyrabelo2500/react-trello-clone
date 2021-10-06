@@ -2,12 +2,12 @@ import { StarOutlined, UserOutlined } from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { withAuthorization } from '../utils/auth-hoc';
-import { createBoard, getBoards } from '../services/boards';
 import { Spinner } from '../components/common/Spinner';
 import { isEmpty, mergeDataWithKey } from '../utils/board-utils';
 import { CreateBoardModal } from '../components/CreateBoardModal';
 import styled from 'styled-components';
 import { BoardLink } from '../components/common/BoardLink';
+import { createBoard, getBoards } from '../services/board';
 
 const BoardsPage = () => {
     const [boards, setBoards] = useState([]);

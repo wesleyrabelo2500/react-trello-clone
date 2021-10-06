@@ -2,7 +2,7 @@ import { Form, Input } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { auth, provider } from '../services/firebase';
+import { auth, provider } from '../firebase';
 import { actionTypes } from '../utils/reducer';
 import { useStateValue } from '../utils/state-provider';
 import { signInWithEmailAndPassword } from '../services/auth';

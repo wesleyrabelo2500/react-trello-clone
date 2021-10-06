@@ -1,5 +1,6 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
+import { db } from '../firebase';
 
 export const createUserWithEmailAndPassword = (email, password) =>
     firebase.auth().createUserWithEmailAndPassword(email, password);
@@ -14,3 +15,9 @@ export const passwordReset = (email) => firebase.auth().sendPasswordResetEmail(e
 export const passwordUpdate = (password) => firebase.auth().currentUser.updatePassword(password);
 
 export const getUser = () => firebase.auth().currentUser;
+
+export const createUser = (id, username, email) =>
+    db.ref(`users/${id}`).set({
+        username,
+        email,
+    });

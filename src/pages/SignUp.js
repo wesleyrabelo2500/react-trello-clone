@@ -1,8 +1,7 @@
 import { Form, Input } from 'antd';
 import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
-import { createUser } from '../services/db';
-import { createUserWithEmailAndPassword } from '../services/auth';
+import { createUser, createUserWithEmailAndPassword } from '../services/auth';
 import { ErrorMessage } from '../components/common/ErrorMessage';
 import { FormButton } from '../components/common/FormButton';
 import { FormContainer } from '../components/common/FormContainer';

@@ -1,4 +1,4 @@
-import { db } from './firebase';
+import { db } from '../firebase';
 
 const cardsRef = db.ref('cards');
 
