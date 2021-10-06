@@ -2,8 +2,8 @@ import React from 'react';
 import { Button, Row, Col, Layout, Typography } from 'antd';
 import { GithubOutlined } from '@ant-design/icons';
 import { Link, withRouter } from 'react-router-dom';
-import { SIGN_IN } from '../routes';
-import { withLandingAuthentication } from '../auth/utils/AuthHOC';
+import { withLandingAuthentication } from '../utils/auth-hoc';
+import { ROUTES } from '../App';
 
 const { Header, Content, Footer } = Layout;
 const { Title, Text } = Typography;
@@ -33,7 +33,7 @@ function Landing() {
                         border: 'none',
                     }}
                 >
-                    <Link to={SIGN_IN}>Go To Boards</Link>
+                    <Link to={ROUTES.SIGN_IN}>Go To Boards</Link>
                 </Button>
             </Header>
             <Content style={{ display: 'flex', overflow: 'hidden' }}>

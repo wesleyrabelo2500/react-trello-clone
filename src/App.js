@@ -1,18 +1,25 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import AccountPage from './auth/pages/Account';
+import AccountPage from './pages/Account';
 import Landing from './pages/Landing';
-import PasswordForgetPage from './auth/pages/PasswordForget';
-import SignInPage from './auth/pages/SignIn';
-import WrappedSignUpPage from './auth/pages/SignUp';
-import { withAuthentication } from './auth/utils/AuthHOC';
-import { AuthUserContext } from './auth/utils/AuthUserContext';
-import Nav from './core/layout/Nav';
-import BoardPage from './features/board/pages/Board';
-import BoardsPage from './features/boards/pages/Boards';
-import { GlobalStyle } from './global-styles';
+import SignInPage from './pages/SignIn';
+import WrappedSignUpPage from './pages/SignUp';
+import { withAuthentication } from './utils/auth-hoc';
+import { AuthUserContext } from './utils/auth-user-context';
+import Nav from './components/Nav';
+import BoardPage from './pages/Board';
+import BoardsPage from './pages/Boards';
+import { GlobalStyle } from './styles/global-styles';
 import { NotFoundScreen } from './pages/NotFound';
-import { ACCOUNT, BOARD, BOARDS, LANDING, PASSWORD_FORGET, SIGN_IN, SIGN_UP } from './routes';
+
+export const ROUTES = {
+    SIGN_UP: '/signup',
+    SIGN_IN: '/signin',
+    LANDING: '/',
+    BOARDS: '/boards',
+    ACCOUNT: '/account',
+    BOARD: '/b/:board',
+};
 
 export const Content = withAuthentication(() => (
     <Router>
@@ -22,13 +29,12 @@ export const Content = withAuthentication(() => (
             </AuthUserContext.Consumer>
 
             <Switch className="container">
-                <Route exact path={LANDING} component={Landing} />
-                <Route exact path={SIGN_UP} component={WrappedSignUpPage} />
-                <Route exact path={SIGN_IN} component={SignInPage} />
-                <Route exact path={PASSWORD_FORGET} component={PasswordForgetPage} />
-                <Route exact path={ACCOUNT} component={AccountPage} />
-                <Route exact path={BOARDS} component={BoardsPage} />
-                <Route exact path={BOARD} component={BoardPage} />
+                <Route exact path={ROUTES.LANDING} component={Landing} />
+                <Route exact path={ROUTES.SIGN_UP} component={WrappedSignUpPage} />
+                <Route exact path={ROUTES.SIGN_IN} component={SignInPage} />
+                <Route exact path={ROUTES.ACCOUNT} component={AccountPage} />
+                <Route exact path={ROUTES.BOARDS} component={BoardsPage} />
+                <Route exact path={ROUTES.BOARD} component={BoardPage} />
                 <Route component={NotFoundScreen} />
             </Switch>
         </React.Fragment>

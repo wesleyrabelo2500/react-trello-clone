@@ -1,0 +1,88 @@
+import { Form, Input } from 'antd';
+import { LockOutlined } from '@ant-design/icons';
+import React, { useState } from 'react';
+import { passwordUpdate } from '../services/auth';
+import { byPropKey } from '../utils/board-utils';
+import { ErrorMessage } from '../components/common/ErrorMessage';
+import { FormButton } from '../components/common/FormButton';
+import { FormContainer } from '../components/common/FormContainer';
+import { AuthUserContext } from '../utils/auth-user-context';
+import { withAuthorization } from '../utils/auth-hoc';
+
+const INITIAL_STATE = {
+    passwordOne: '',
+    passwordTwo: '',
+    error: null,
+};
+
+const AccountScreen = (props) => {
+    const [state, setState] = useState(INITIAL_STATE);
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        try {
+            await passwordUpdate(state.passwordOne);
+            props.form.setFieldsValue({
+                passwordOne: '',
+                passwordTwo: '',
+            });
+        } catch (error) {
+            setState(byPropKey('error', error.message));
+        }
+    };
+
+    const { getFieldDecorator } = props.form;
+    const { error } = state;
+    return (
+        <AuthUserContext.Consumer>
+            {(authUser) => (
+                <FormContainer>
+                    <h3>Account: {authUser.email}</h3>
+
+                    <Form onSubmit={(event) => handleSubmit(event)} className="login-form">
+                        <Form.Item>
+                            {getFieldDecorator('passwordOne', {
+                                rules: [{ required: true, message: 'Please input your Password!' }],
+                            })(
+                                <Input
+                                    prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                    onChange={(event) =>
+                                        setState(byPropKey('passwordOne', event.target.value))
+                                    }
+                                    type="password"
+                                    placeholder="Password"
+                                />
+                            )}
+                        </Form.Item>
+
+                        <Form.Item>
+                            {getFieldDecorator('passwordTwo', {
+                                rules: [{ required: true, message: 'Please input your Password!' }],
+                            })(
+                                <Input
+                                    prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                    onChange={(event) =>
+                                        setState(byPropKey('passwordTwo', event.target.value))
+                                    }
+                                    type="password"
+                                    placeholder="Password"
+                                />
+                            )}
+                        </Form.Item>
+
+                        <Form.Item>
+                            <FormButton type="primary" htmlType="submit">
+                                Reset my password
+                            </FormButton>
+                        </Form.Item>
+
+                        <ErrorMessage>{error}</ErrorMessage>
+                    </Form>
+                </FormContainer>
+            )}
+        </AuthUserContext.Consumer>
+    );
+};
+
+export default withAuthorization((authUser) => !!authUser)(AccountScreen);

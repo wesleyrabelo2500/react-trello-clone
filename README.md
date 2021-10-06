@@ -33,7 +33,13 @@ $ docker-compose up --build
 Install npm dependencies
 
 ```
-$ npm install --legacy-peer-deps
+$ npm install
+```
+
+Setup husky
+
+```
+$ husky install
 ```
 
 Run development
