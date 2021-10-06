@@ -2,7 +2,7 @@ import PropType from 'prop-types';
 import React, { Component } from 'react';
 import { DropTarget } from 'react-dnd';
 import { addCard, deleteCard, getCard, moveCard, updateCard } from '../services/card';
-import { ItemTypes } from '../constants/core-constants';
+import { ItemTypes } from '../constants/constants';
 import { mergeDataWithKey } from '../utils/board-utils';
 import { FormCreation } from './FormCreation';
 import CardContainer from './CardContainer';

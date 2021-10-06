@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { DragSource } from 'react-dnd';
-import { ItemTypes } from '../constants/core-constants';
+import { ItemTypes } from '../constants/constants';
 import { Card } from './Card';
 import { CardModal } from './CardModal';
 

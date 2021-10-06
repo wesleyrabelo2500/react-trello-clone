@@ -9,8 +9,8 @@ import { signInWithEmailAndPassword } from '../services/auth';
 import { ErrorMessage } from '../components/common/ErrorMessage';
 import { FormButton } from '../components/common/FormButton';
 import { FormContainer } from '../components/common/FormContainer';
-import { EMAIL_ERROR_TYPES } from '../constants/auth-constants';
 import { ROUTES } from '../App';
+import { EMAIL_ERROR_TYPES } from '../constants/constants';
 
 const SignInForm = () => {
     const [email, setEmail] = useState('');

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropType from 'prop-types';
 
 import { DeleteOutlined, AlignLeftOutlined } from '@ant-design/icons';
-import { LABELS } from '../constants/core-constants';
+import { LABELS } from '../constants/constants';
 import { GrayButton } from './common/Button';
 import { Label } from './common/Label';
 import styled from 'styled-components';
