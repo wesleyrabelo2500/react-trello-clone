@@ -16,3 +16,12 @@ export const EMAIL_ERROR_TYPES = {
         MESSAGE: 'Please enter a valid email address',
     },
 };
+
+export const ROUTES = {
+    SIGN_UP: '/signup',
+    SIGN_IN: '/signin',
+    LANDING: '/',
+    BOARDS: '/boards',
+    ACCOUNT: '/account',
+    BOARD: '/b/:board',
+};

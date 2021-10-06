@@ -11,15 +11,7 @@ import BoardPage from './pages/Board';
 import BoardsPage from './pages/Boards';
 import { GlobalStyle } from './global-styles';
 import { NotFoundScreen } from './pages/NotFound';
-
-export const ROUTES = {
-    SIGN_UP: '/signup',
-    SIGN_IN: '/signin',
-    LANDING: '/',
-    BOARDS: '/boards',
-    ACCOUNT: '/account',
-    BOARD: '/b/:board',
-};
+import { ROUTES } from './constants';
 
 export const Content = withAuthentication(() => (
     <Router>

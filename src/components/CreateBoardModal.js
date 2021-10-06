@@ -1,7 +1,7 @@
 import { Button, Input, Modal } from 'antd';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { DEFAULT_COLOR } from '../constants/constants';
+import { DEFAULT_COLOR } from '../constants';
 import { isEmptyText } from '../utils/board-utils';
 import styled from 'styled-components';
 

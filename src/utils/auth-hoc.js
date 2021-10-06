@@ -4,7 +4,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Spinner } from '../components/common/Spinner';
 import { AuthUserContext } from './auth-user-context';
-import { ROUTES } from '../App';
+import { ROUTES } from '../constants';
 
 export const withAuthentication = (Component) => (props) => {
     const [authUser, setAuthUser] = useState(null);

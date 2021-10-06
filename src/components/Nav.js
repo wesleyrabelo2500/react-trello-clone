@@ -5,7 +5,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Button } from './common/Button';
 import { signOut } from '../services/auth';
-import { ROUTES } from '../App';
+import { ROUTES } from '../constants';
 
 const Nav = () => {
     return (

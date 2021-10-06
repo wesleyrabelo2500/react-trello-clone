@@ -3,7 +3,7 @@ import { Button, Row, Col, Layout, Typography } from 'antd';
 import { GithubOutlined } from '@ant-design/icons';
 import { Link, withRouter } from 'react-router-dom';
 import { withLandingAuthentication } from '../utils/auth-hoc';
-import { ROUTES } from '../App';
+import { ROUTES } from '../constants';
 
 const { Header, Content, Footer } = Layout;
 const { Title, Text } = Typography;
@@ -70,6 +70,7 @@ function Landing() {
                             href="https://github.com/bmarvinb/react-trello-clone"
                             target="_blank"
                             style={{ color: '#000000', opacity: '0.8' }}
+                            rel="noreferrer"
                         >
                             <GithubOutlined style={{ fontSize: '24px' }} />
                         </a>

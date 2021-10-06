@@ -7,8 +7,7 @@ import { ErrorMessage } from '../components/common/ErrorMessage';
 import { FormButton } from '../components/common/FormButton';
 import { FormContainer } from '../components/common/FormContainer';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { ROUTES } from '../App';
-import { EMAIL_ERROR_TYPES } from '../constants/constants';
+import { EMAIL_ERROR_TYPES, ROUTES } from '../constants';
 
 const SignUpForm = ({ form, onSubmit }) => {
     const [username, setUsername] = useState('');

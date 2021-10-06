@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Modal } from 'antd';
 import { TagOutlined, ProjectOutlined, AlignLeftOutlined } from '@ant-design/icons';
 import React from 'react';
-import { LABELS } from '../constants/constants';
+import { LABELS } from '../constants';
 import { CardDescription } from './CardDescription';
 import { Label } from './common/Label';
 import styled from 'styled-components';
