@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import { DragSource } from 'react-dnd';
 import { ItemTypes } from '../../../core/constants';
 import { Card } from './Card';

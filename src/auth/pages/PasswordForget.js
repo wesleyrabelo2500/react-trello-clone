@@ -8,7 +8,7 @@ import { FormContainer } from '../components/common/FormContainer';
 import { EMAIL_ERROR_TYPES } from '../constants';
 
 const PasswordForget = (props) => {
-    const { onSubmit, form } = props;
+    const { form } = props;
     const { getFieldDecorator, validateFields } = form;
     const [email, setEmail] = useState('');
     const [error, setError] = useState('');
