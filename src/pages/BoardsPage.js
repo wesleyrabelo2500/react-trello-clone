@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { BoardTitle, BoardModal } from '../components';
 import { boardService } from '../services';
-import { withAuthorization, objectToArray } from '../utils';
+import { withAuthorization } from '../utils';
 import { UserOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 
@@ -22,7 +22,7 @@ export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
 
     const fetchBoards = async () => {
         const data = (await boardService.getBoards()).val();
-        setBoardsSnapshot(data);
+        setBoardsSnapshot(data || {});
     };
 
     const addBoard = async (board) => {
@@ -32,7 +32,7 @@ export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
     };
 
     const objectToArray = (data) =>
-        data
+        !data
             ? []
             : Object.values(data).map((value, index) => ({
                   ...value,

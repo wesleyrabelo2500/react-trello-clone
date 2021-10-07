@@ -2,45 +2,24 @@ import { Button, Form, Input } from 'antd';
 import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { EMAIL_ERROR_TYPES } from '../constants';
 import { createUser, createUserWithEmailAndPassword } from '../services/auth';
 
 const SignUpForm = ({ onSubmit }) => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [newPassword, setNewPassword] = useState('');
-    const [confirmPassword, serConfirmPassword] = useState('');
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [emailInputErr, setEmailInputErr] = useState({
-        status: null,
-        message: null,
-    });
 
     const handleSubmit = async () => {
-        if (newPassword !== confirmPassword) {
-            setError('new password and confirm password do not match');
-            return;
-        }
-        const submitButton = document.querySelector('.signup-form-button');
-        setEmailInputErr({
-            status: '',
-            message: '',
-        });
-        submitButton.disabled = true;
         try {
+            setLoading(true);
             await onSubmit(email, newPassword, username);
-            submitButton.disabled = false;
         } catch (error) {
-            submitButton.disabled = false;
             setError(error.message);
+        } finally {
+            setLoading(false);
         }
-    };
-
-    const handleEmailInputBlur = () => {
-        setEmailInputErr({
-            status: EMAIL_ERROR_TYPES.INVALID.STATUS,
-            message: EMAIL_ERROR_TYPES.INVALID.MESSAGE,
-        });
     };
 
     return (
@@ -60,14 +39,11 @@ const SignUpForm = ({ onSubmit }) => {
                 <Form.Item
                     name="email"
                     rules={[{ required: true, message: 'Please input your email!' }]}
-                    validateStatus={emailInputErr.status}
-                    help={emailInputErr.message}
                 >
                     <Input
                         prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                         placeholder="Email"
                         onChange={(event) => setEmail(event.target.value)}
-                        onBlur={handleEmailInputBlur}
                     />
                 </Form.Item>
                 <Form.Item
@@ -82,20 +58,8 @@ const SignUpForm = ({ onSubmit }) => {
                     />
                 </Form.Item>
 
-                <Form.Item
-                    name="confirmPassword"
-                    rules={[{ required: true, message: 'Please input your confirm password!' }]}
-                >
-                    <Input
-                        prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
-                        type="password"
-                        placeholder="Confirm password"
-                        onChange={(event) => serConfirmPassword(event.target.value)}
-                    />
-                </Form.Item>
-
-                <Form.Item>
-                    <Button type="primary" htmlType="submit" className={`w-full`}>
+                <Form.Item className={`my-3`}>
+                    <Button type="primary" htmlType="submit" className={`w-full`} loading={loading}>
                         Sign Up
                     </Button>
                 </Form.Item>

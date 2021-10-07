@@ -6,7 +6,7 @@ import { withAuthorization } from '../utils';
 import { Button } from 'antd';
 
 export const BoardPage = withRouter(
-    withAuthorization((authUser) => !!authUser)(() => {
+    withAuthorization((authUser) => !!authUser)((props) => {
         const [board, setBoard] = useState({
             lanes: [],
         });
@@ -20,7 +20,7 @@ export const BoardPage = withRouter(
             });
         }, []);
 
-        const boardId = () => window.location.href.split('/').pop();
+        const boardId = () => props.match?.params?.board;
 
         const handleDataChange = async (data) => {
             await boardService.saveLanes(boardId(), data);
