@@ -1,4 +1,5 @@
 export const DEFAULT_COLOR = '#0079BF';
+export const LINK_COLOR = '#0079BF';
 
 export const LABELS = [
     { color: 'yellow', text: 'Low' },

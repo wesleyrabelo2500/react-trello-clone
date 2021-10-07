@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { StyledButton } from '../global-styles';
 
-export const ListHeader = (props) => {
-    const { listTitle, listKey, onEditList, onDeleteList } = props;
+export const ColumnHeader = (props) => {
+    const { listTitle, columnId, onEditList, onDeleteList } = props;
     const [edit, setEdit] = useState(false);
     const [title, setTitle] = useState('');
 
@@ -14,24 +14,24 @@ export const ListHeader = (props) => {
         setTitle(listTitle);
     };
 
-    const handleFormSubmit = async (event, callback, listKey, listTitle) => {
+    const handleFormSubmit = async (event, callback, columnId, listTitle) => {
         event.preventDefault();
 
-        await callback(listKey, listTitle);
+        await callback(columnId, listTitle);
         setTitle('');
         setEdit(false);
     };
 
-    const handleDeleteList = (callback, listKey) => {
-        callback(listKey);
+    const handleDeleteList = (callback, columnId) => {
+        callback(columnId);
     };
 
     return (
         <Header>
             {edit ? (
                 <form
-                    onSubmit={(event) => handleFormSubmit(event, onEditList, listKey, title)}
-                    onBlur={(event) => handleFormSubmit(event, onEditList, listKey, title)}
+                    onSubmit={(event) => handleFormSubmit(event, onEditList, columnId, title)}
+                    onBlur={(event) => handleFormSubmit(event, onEditList, columnId, title)}
                 >
                     <InputTitle value={title} onChange={(e) => setTitle(e.target.value)} />
                 </form>
@@ -43,7 +43,7 @@ export const ListHeader = (props) => {
             <Dropdown
                 overlay={
                     <Menu>
-                        <Menu.Item key="1" onClick={() => handleDeleteList(onDeleteList, listKey)}>
+                        <Menu.Item key="1" onClick={() => handleDeleteList(onDeleteList, columnId)}>
                             Delete This List
                         </Menu.Item>
                     </Menu>
@@ -67,6 +67,10 @@ const Header = styled.div`
     padding: 0 0px 0 10px;
     align-items: center;
     min-width: 250px;
+
+    svg {
+        color: black;
+    }
 `;
 
 const InputTitle = styled(Input)`

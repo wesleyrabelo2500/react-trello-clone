@@ -3,79 +3,81 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { List } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
-import Cards from '../components/Cards';
-import { onceGetLists, doCreateList, doDeleteList, updateList } from '../services/list';
-import { deleteBoard, editBoard, getBoard, updateBoard } from '../services/board';
-import { FormCreation } from '../components/FormCreation';
-import { ListHeader } from '../components/ListHeader';
+import Column from '../components/Column';
+import { listService } from '../services/list';
+import { boardService } from '../services/board';
+import { CreateCardControl } from '../components/CreateCardControl';
 import { Spinner } from '../components/common/Spinner';
-import { mergeDataWithKey } from '../utils/board-utils';
 import { withAuthorization } from '../utils/auth-hoc';
 import BoardHeader from '../components/BoardHeader';
 import styled from 'styled-components';
+import { objectToArray } from '../utils/board-utils';
 
 const BoardPage = () => {
-    const [loading, setLoading] = useState(false);
     const [board, setBoard] = useState({});
-    const [boardKey, setBoardKey] = useState('');
-    const [lists, setLists] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         setLoading(true);
-
-        const boardKey = window.location.href.split('/').pop();
-        Promise.all([getBoard(boardKey), onceGetLists(boardKey)])
-            .then((snapshots) => {
-                const board = snapshots[0].val();
-                const lists = mergeDataWithKey(snapshots[1].val());
-
-                setBoardKey(boardKey);
-                setBoard(board);
-                setLists(lists);
-            })
-            .finally(() => setLoading(false));
+        (async () => {
+            await fetchBoard();
+            setLoading(false);
+        })();
     }, []);
 
-    const handleCreateList = async (listTitle) => {
-        const response = await doCreateList(boardKey, { title: listTitle });
-
-        setLists([...lists, response]);
+    const fetchBoard = async () => {
+        const data = (await boardService.getBoard(boardId())).val();
+        setBoard(data);
     };
 
-    const handleUpdateList = async (listKey, title) => {
-        const response = await updateList(boardKey, listKey, { title });
-        const updatedLists = [...lists];
-        updatedLists[updatedLists.findIndex((list) => list.key === listKey)] = {
-            ...response,
-            key: listKey,
-        };
-
-        setLists(updatedLists);
+    const handleCreateList = async (title) => {
+        await listService.doCreateList(boardId(), { title });
+        await fetchBoard();
     };
 
-    const handleDeleteList = async (listKey) => {
-        await doDeleteList(boardKey, listKey);
-        const filteredLists = lists.filter((list) => list.key !== listKey);
-        setLists(filteredLists);
+    const handleUpdateList = async (columnId, title) => {
+        await listService.updateList(boardId(), columnId, { title });
+        await fetchBoard();
     };
 
     const handleAddToFavorites = async () => {
-        const updatedBoard = { ...board };
-        updatedBoard.favorite = !updatedBoard.favorite;
-        await editBoard(boardKey, updatedBoard);
+        const updatedBoard = { ...board, favorite: !board.favorite };
+        await boardService.editBoard(boardId(), updatedBoard);
         setBoard(updatedBoard);
     };
 
-    const handleDeleteBoard = async (boardKey) => {
-        await deleteBoard(boardKey);
+    const handleUpdateBoard = async (boardId, title) => {
+        await boardService.updateBoard(boardId, title);
+        await fetchBoard();
+    };
 
+    const handleDeleteList = async (columnId) => {
+        await listService.doDeleteList(boardId(), columnId);
+        await fetchBoard();
+    };
+
+    const handleDeleteBoard = async (boardId) => {
+        await boardService.deleteBoard(boardId);
         window.location.assign('/boards');
     };
 
-    const handleUpdateBoard = async (boardKey, title) => {
-        await updateBoard(boardKey, title);
-        setBoard({ ...board, ...title });
+    const handleCreateCard = async (columnId, data) => {
+        await listService.createCard(boardId(), columnId, data);
+        await fetchBoard();
     };
+
+    const handleEditCard = async (_, card, data) => {};
+
+    const handleMoveCard = async (cardId, oldColumnId, newColumnId) => {
+        await listService.moveCard(boardId(), cardId, oldColumnId, newColumnId);
+        await fetchBoard();
+    };
+
+    const lists = objectToArray(board?.lists || []);
+    const listCards = (list) =>
+        objectToArray(list?.cards || []).map((d) => ({ ...d, columnId: list.key }));
+
+    const boardId = () => window.location.href.split('/').pop();
 
     if (loading) {
         return <Spinner />;
@@ -86,24 +88,25 @@ const BoardPage = () => {
             <BoardHeader
                 title={board.title}
                 favorite={board.favorite}
-                boardKey={boardKey}
+                boardId={boardId()}
                 onAddToFavorites={handleAddToFavorites}
                 deleteBoard={handleDeleteBoard}
                 updateBoard={handleUpdateBoard}
             />
             <Lists>
-                {lists.map((list, index) => (
-                    <List key={index}>
-                        <ListHeader
-                            listKey={list.key}
-                            listTitle={list.title}
-                            onEditList={handleUpdateList}
-                            onDeleteList={handleDeleteList}
+                {lists.map((list) => (
+                    <List key={list.key}>
+                        <Column
+                            list={list}
+                            cards={listCards(list)}
+                            handleCreateCard={handleCreateCard}
+                            handleMoveCard={handleMoveCard}
+                            handleDeleteList={handleDeleteList}
+                            handleUpdateList={handleUpdateList}
                         />
-                        <Cards list={list} />
                     </List>
                 ))}
-                <FormCreation placeholder="Create new list" onCreate={handleCreateList} />
+                <CreateCardControl placeholder="Create new list" onCreate={handleCreateList} />
             </Lists>
         </DndProvider>
     );

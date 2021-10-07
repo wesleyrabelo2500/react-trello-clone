@@ -13,9 +13,9 @@ export const Card = (props) => {
     const [editMode, setEditMode] = useState(false);
     const [title, setTitle] = useState('');
 
-    const handleSubmitForm = async (event, callback, listKey, cardKey, title) => {
+    const handleSubmitForm = async (event, callback, columnId, cardId, title) => {
         event.preventDefault();
-        await callback(listKey, cardKey, { title });
+        await callback(columnId, cardId, { title });
         setEditMode(false);
     };
 
@@ -24,7 +24,7 @@ export const Card = (props) => {
         return label.color;
     };
 
-    const { showModal, onEditCard, onDeleteCard, card, listKey } = props;
+    const { showModal, onEditCard, onDeleteCard, card, columnId } = props;
 
     return (
         <CardBlock
@@ -42,7 +42,7 @@ export const Card = (props) => {
             {editMode ? (
                 <form
                     onSubmit={(event) =>
-                        handleSubmitForm(event, onEditCard, listKey, card.key, title)
+                        handleSubmitForm(event, onEditCard, columnId, card.key, title)
                     }
                 >
                     <TitleInput value={title} onChange={(event) => setTitle(event.target.value)} />
@@ -51,7 +51,7 @@ export const Card = (props) => {
                 <React.Fragment>
                     {showEditIcons && (
                         <Edit onClick={(event) => event.stopPropagation()}>
-                            <GrayButton onClick={() => onDeleteCard(listKey, card.key)}>
+                            <GrayButton onClick={() => onDeleteCard(columnId, card.key)}>
                                 <DeleteOutlined />
                             </GrayButton>
                         </Edit>
@@ -65,7 +65,7 @@ export const Card = (props) => {
 };
 
 Card.propType = {
-    listKey: PropType.string.isRequired,
+    columnId: PropType.string.isRequired,
     card: PropType.object.isRequired,
     showModal: PropType.func.isRequired,
     onEditCard: PropType.func.isRequired,

@@ -4,21 +4,21 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { isEmptyText } from '../utils/board-utils';
 
-export function CardDescription(props) {
+export function CardContent(props) {
     const [description, setDescription] = useState('');
     const [editMode, setEditMode] = useState(false);
 
-    const submitForm = async (event, callback, listKey, cardKey, card) => {
+    const submitForm = async (event, callback, columnId, cardId, card) => {
         event.preventDefault();
-        await callback(listKey, cardKey, { ...card, description: description });
+        await callback(columnId, cardId, { ...card, description: description });
         setEditMode(false);
     };
 
-    const { listKey, card, onEditCard } = props;
+    const { columnId, card, onEditCard } = props;
     return (
         <div>
             {editMode ? (
-                <form onSubmit={(event) => submitForm(event, onEditCard, listKey, card.key, card)}>
+                <form onSubmit={(event) => submitForm(event, onEditCard, columnId, card.key, card)}>
                     <StyledTextArea
                         onChange={(event) => setDescription(event.target.value)}
                         value={description}
@@ -26,7 +26,7 @@ export function CardDescription(props) {
                     />
                     <SaveButton
                         disabled={isEmptyText(description)}
-                        onClick={(event) => submitForm(event, onEditCard, listKey, card.key, card)}
+                        onClick={(event) => submitForm(event, onEditCard, columnId, card.key, card)}
                     >
                         Save
                     </SaveButton>
@@ -52,8 +52,8 @@ export function CardDescription(props) {
 
 const DescriptionPlaceholder = styled.div``;
 
-CardDescription.propTypes = {
-    listKey: PropTypes.string,
+CardContent.propTypes = {
+    columnId: PropTypes.string,
     card: PropTypes.object,
     onEditCard: PropTypes.func,
 };

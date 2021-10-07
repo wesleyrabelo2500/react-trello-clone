@@ -1,4 +1,4 @@
-export function mergeDataWithKey(data) {
+export function objectToArray(data) {
     return !data
         ? []
         : Object.values(data).map((value, index) => ({

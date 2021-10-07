@@ -3,10 +3,10 @@ import { CheckOutlined } from '@ant-design/icons';
 import React from 'react';
 import styled from 'styled-components';
 
-export const Label = ({ color, text, active, onClick, card, listKey, small }) => (
+export const Label = ({ color, text, active, onClick, card, columnId, small }) => (
     <LabelWrapper
         className={`card-label-${color}`}
-        onClick={(event) => onClick(listKey, card.key, { ...card, label: text })}
+        onClick={(event) => onClick(columnId, card.key, { ...card, label: text })}
         small={small}
     >
         {text && <span>{text}</span>}
@@ -20,7 +20,7 @@ Label.propTypes = {
     active: PropTypes.bool,
     onClick: PropTypes.func,
     card: PropTypes.object,
-    listKey: PropTypes.string,
+    columnId: PropTypes.string,
     small: PropTypes.bool,
 };
 

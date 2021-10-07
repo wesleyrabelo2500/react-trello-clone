@@ -7,7 +7,7 @@ import { Button } from './common/Button';
 import { signOut } from '../services/auth';
 import { ROUTES } from '../constants';
 
-const Nav = () => {
+const Navbar = () => {
     return (
         <StyledNav>
             <NavItems>
@@ -79,4 +79,4 @@ const NavUser = styled.div`
     }
 `;
 
-export default withRouter(Nav);
+export default withRouter(Navbar);

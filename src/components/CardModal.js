@@ -3,12 +3,12 @@ import { Modal } from 'antd';
 import { TagOutlined, ProjectOutlined, AlignLeftOutlined } from '@ant-design/icons';
 import React from 'react';
 import { LABELS } from '../constants';
-import { CardDescription } from './CardDescription';
+import { CardContent } from './CardContent';
 import { Label } from './common/Label';
 import styled from 'styled-components';
 
 export const CardModal = (props) => {
-    const { listKey, card, visible, onOk, onCancel, onEditCard } = props;
+    const { columnId, card, visible, onOk, onCancel, onEditCard } = props;
 
     return (
         <Modal
@@ -22,14 +22,14 @@ export const CardModal = (props) => {
                 <CardDetail
                     title={<h4>Labels</h4>}
                     icon={<TagOutlined />}
-                    content={<CardLabel card={card} listKey={listKey} onEditCard={onEditCard} />}
+                    content={<CardLabel card={card} columnId={columnId} onEditCard={onEditCard} />}
                 />
 
                 <CardDetail
                     icon={<AlignLeftOutlined />}
                     title={<h4>Description</h4>}
                     content={
-                        <CardDescription card={card} listKey={listKey} onEditCard={onEditCard} />
+                        <CardContent card={card} columnId={columnId} onEditCard={onEditCard} />
                     }
                 />
             </Details>
@@ -38,7 +38,7 @@ export const CardModal = (props) => {
 };
 
 CardModal.propTypes = {
-    listKey: PropTypes.string,
+    columnId: PropTypes.string,
     card: PropTypes.object.isRequired,
     visible: PropTypes.bool.isRequired,
     onOk: PropTypes.func,
@@ -59,7 +59,7 @@ export const CardDetail = (props) => {
 };
 
 const CardLabel = (props) => {
-    const { card, listKey, onEditCard } = props;
+    const { card, columnId, onEditCard } = props;
 
     return LABELS.map((label, index) => (
         <Label
@@ -68,7 +68,7 @@ const CardLabel = (props) => {
             text={label.text}
             active={card.label === label.text}
             card={card}
-            listKey={listKey}
+            columnId={columnId}
             onClick={onEditCard}
         />
     ));

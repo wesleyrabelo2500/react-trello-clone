@@ -3,17 +3,17 @@ import { Input } from 'antd';
 import React, { useState } from 'react';
 import { isEmptyText } from '../utils/board-utils';
 
-export const FormCreation = (props) => {
+export const CreateCardControl = (props) => {
     const [text, setText] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const handleCreate = async (event, callback, text) => {
+    const handleCreate = async (event, callback, title) => {
         event.preventDefault();
-        if (loading || isEmptyText(text)) {
+        if (loading || isEmptyText(title)) {
             return;
         }
         setLoading(true);
-        await callback(text);
+        await callback({ title });
         setText('');
         setLoading(false);
     };
@@ -31,7 +31,7 @@ export const FormCreation = (props) => {
     );
 };
 
-FormCreation.propTypes = {
+CreateCardControl.propTypes = {
     onCreate: PropTypes.func.isRequired,
     placeholder: PropTypes.string.isRequired,
 };

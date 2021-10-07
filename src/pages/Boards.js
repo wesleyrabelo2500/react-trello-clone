@@ -3,29 +3,34 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { withAuthorization } from '../utils/auth-hoc';
 import { Spinner } from '../components/common/Spinner';
-import { isEmpty, mergeDataWithKey } from '../utils/board-utils';
+import { isEmpty, objectToArray } from '../utils/board-utils';
 import { CreateBoardModal } from '../components/CreateBoardModal';
 import styled from 'styled-components';
 import { BoardLink } from '../components/common/BoardLink';
-import { createBoard, getBoards } from '../services/board';
+import { boardService } from '../services/board';
+import { LINK_COLOR } from '../constants';
 
 const BoardsPage = () => {
-    const [boards, setBoards] = useState([]);
+    const [boardsSnapshot, setBoardsSnapshot] = useState({});
     const [loading, setLoading] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
 
     useEffect(() => {
         setLoading(true);
         (async () => {
-            const snapshot = await getBoards();
-            setBoards(mergeDataWithKey(snapshot.val()));
+            await fetchBoards();
             setLoading(false);
         })();
     }, []);
 
-    const handleCreateBoard = async (board) => {
-        const response = await createBoard(board);
-        setBoards([...boards, response]);
+    const fetchBoards = async () => {
+        const result = await boardService.getBoards();
+        setBoardsSnapshot(result.val());
+    };
+
+    const createBoard = async (board) => {
+        await boardService.createBoard(board);
+        await fetchBoards();
         setModalVisible(false);
     };
 
@@ -33,7 +38,8 @@ const BoardsPage = () => {
         return <Spinner />;
     }
 
-    const starredBoards = boards.filter((board) => board.favorite);
+    const boards = objectToArray(boardsSnapshot);
+    const starredBoards = boards.filter((board) => board?.favorite);
 
     return (
         <div>
@@ -44,14 +50,10 @@ const BoardsPage = () => {
                         Starred Boards
                     </BoardTypeTitle>
 
-                    {starredBoards.map((board, index) => {
+                    {starredBoards.map(({ key, title, favorite }) => {
                         return (
-                            <Link to={`b/${board.key}`} key={index}>
-                                <BoardLink
-                                    title={board.title}
-                                    color="#0079BF"
-                                    favorite={board.favorite}
-                                />
+                            <Link key={key} to={`b/${key}`}>
+                                <BoardLink title={title} color={LINK_COLOR} favorite={favorite} />
                             </Link>
                         );
                     })}
@@ -65,18 +67,15 @@ const BoardsPage = () => {
                 </BoardTypeTitle>
 
                 <>
-                    {boards.map((board, index) => {
-                        return (
-                            <Link key={index} to={`b/${board.key}`}>
-                                <BoardLink
-                                    key={index}
-                                    title={board.title}
-                                    color="#0079BF"
-                                    favorite={board.favorite}
-                                />
-                            </Link>
-                        );
-                    })}
+                    {boards.map((board) => (
+                        <Link key={board.key} to={`b/${board?.key}`}>
+                            <BoardLink
+                                title={board.title}
+                                color={LINK_COLOR}
+                                favorite={board.favorite}
+                            />
+                        </Link>
+                    ))}
 
                     <StyledNewBoard color="#eee" onClick={() => setModalVisible(true)}>
                         <NewBoardContent>
@@ -87,7 +86,7 @@ const BoardsPage = () => {
             </BoardTypes>
 
             <CreateBoardModal
-                onCreateBoard={handleCreateBoard}
+                onCreateBoard={createBoard}
                 onCloseModal={() => setModalVisible(false)}
                 visible={modalVisible}
             />

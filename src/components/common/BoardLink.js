@@ -24,8 +24,8 @@ const Favorite = styled.div`
     bottom: 4px;
     right: 4px;
     transition: all 0.1s;
-    color: ${(props) => (props.favorite ? '#f2d600' : 'white')};
-    display: ${(props) => (props.favorite ? 'block' : 'none')};
+    color: ${(props) => (props?.favorite ? '#f2d600' : 'white')};
+    display: ${(props) => (props?.favorite ? 'block' : 'none')};
 `;
 
 const StyledBoardLink = styled.div`

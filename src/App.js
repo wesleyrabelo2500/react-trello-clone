@@ -6,7 +6,7 @@ import SignInPage from './pages/SignIn';
 import WrappedSignUpPage from './pages/SignUp';
 import { withAuthentication } from './utils/auth-hoc';
 import { AuthUserContext } from './utils/auth-user-context';
-import Nav from './components/Nav';
+import Nav from './components/Navbar';
 import BoardPage from './pages/Board';
 import BoardsPage from './pages/Boards';
 import { GlobalStyle } from './global-styles';

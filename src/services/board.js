@@ -1,50 +1,34 @@
 import { db } from '../firebase';
 import { getUser } from './auth';
 
-const boardsRef = db.ref('boards');
+export const userBoards = () => db.ref('users').child(getUser().uid).child('boards');
+export const userBoard = (board) => userBoards().child(board);
 
-export const deleteBoard = async (boardKey) => {
-    const uid = getUser().uid;
-    await boardsRef.child(uid).child(boardKey).remove();
+const updateBoard = (boardId, title) =>
+    userBoard(boardId).update({
+        ...title,
+    });
+
+const editBoard = (boardId, board) =>
+    userBoard(boardId).update({
+        ...board,
+    });
+
+const getBoard = (key) => {
+    return userBoard(key).once('value');
 };
 
-export const updateBoard = async (boardKey, title) => {
-    const uid = getUser().uid;
-    await boardsRef
-        .child(uid)
-        .child(boardKey)
-        .update({
-            ...title,
-        });
-};
+const createBoard = (board) => userBoards().push(board);
 
-export const editBoard = async (boardKey, board) => {
-    const uid = getUser().uid;
+const getBoards = () => userBoards().once('value');
 
-    await boardsRef
-        .child(uid)
-        .child(boardKey)
-        .update({
-            ...board,
-        });
-    return board;
-};
+const deleteBoard = (key) => userBoards().child(key).remove();
 
-export const getBoard = (key) => {
-    const uid = getUser().uid;
-
-    return boardsRef.child(uid).child(`${key}`).once('value');
-};
-
-export const createBoard = async (board) => {
-    const uid = getUser().uid;
-    const id = boardsRef.push().key;
-    await boardsRef.child(uid).child(id).set(board);
-    board.key = id;
-    return board;
-};
-
-export const getBoards = () => {
-    const uid = getUser().uid;
-    return boardsRef.child(uid).once('value');
+export const boardService = {
+    updateBoard,
+    editBoard,
+    getBoard,
+    createBoard,
+    getBoards,
+    deleteBoard,
 };

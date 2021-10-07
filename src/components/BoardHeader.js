@@ -9,14 +9,14 @@ import { StyledButton } from '../global-styles';
 const BoardHeader = (props) => {
     const [edit, setEdit] = useState(false);
     const [boardTitle, setBoardTitle] = useState('');
-    const { title, favorite, boardKey, onAddToFavorites, deleteBoard, updateBoard } = props;
+    const { title, favorite, boardId, onAddToFavorites, deleteBoard, updateBoard } = props;
 
-    const handleSubmitForm = async (event, callback, boardKey, title) => {
+    const handleSubmitForm = async (event, callback, boardId, title) => {
         event.preventDefault();
         if (!title) {
             return;
         }
-        await callback(boardKey, { title });
+        await callback(boardId, { title });
         setEdit(false);
     };
 
@@ -26,7 +26,7 @@ const BoardHeader = (props) => {
                 {edit ? (
                     <Form
                         onSubmit={(event) =>
-                            handleSubmitForm(event, updateBoard, boardKey, boardTitle)
+                            handleSubmitForm(event, updateBoard, boardId, boardTitle)
                         }
                         onBlur={() => setEdit(false)}
                     >
@@ -48,7 +48,7 @@ const BoardHeader = (props) => {
                 <Dropdown
                     overlay={
                         <Menu>
-                            <Menu.Item key="0" onClick={() => deleteBoard(boardKey)}>
+                            <Menu.Item key="0" onClick={() => deleteBoard(boardId)}>
                                 Delete board
                             </Menu.Item>
                         </Menu>
@@ -65,9 +65,9 @@ const BoardHeader = (props) => {
 };
 
 BoardHeader.propTypes = {
-    title: PropTypes.string.isRequired,
+    title: PropTypes.string,
     favorite: PropTypes.bool,
-    boardKey: PropTypes.string.isRequired,
+    boardId: PropTypes.string.isRequired,
     onAddToFavorites: PropTypes.func.isRequired,
     deleteBoard: PropTypes.func.isRequired,
     updateBoard: PropTypes.func.isRequired,
