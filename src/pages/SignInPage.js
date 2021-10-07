@@ -1,4 +1,4 @@
-import { Form, Input } from 'antd';
+import { Button, Form, Input } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -6,9 +6,6 @@ import { auth, provider } from '../firebase';
 import { actionTypes } from '../utils/reducer';
 import { useStateValue } from '../utils/state-provider';
 import { signInWithEmailAndPassword } from '../services/auth';
-import { ErrorMessage } from '../components/common/ErrorMessage';
-import { FormButton } from '../components/common/FormButton';
-import { FormContainer } from '../components/common/FormContainer';
 import { EMAIL_ERROR_TYPES, ROUTES } from '../constants';
 
 const SignInForm = () => {
@@ -35,7 +32,7 @@ const SignInForm = () => {
         }
     };
 
-    const onFinish = async (event) => {
+    const onFinish = async () => {
         const submitButton = document.querySelector('.login-form-button');
         setEmailInputErr({
             status: '',
@@ -45,7 +42,6 @@ const SignInForm = () => {
             submitButton.disabled = true;
             await signInWithEmailAndPassword(email, password);
             submitButton.disabled = false;
-            window.location = ROUTES.LANDING;
         } catch (error) {
             submitButton.disabled = false;
             setError(error.message);
@@ -60,8 +56,8 @@ const SignInForm = () => {
     };
 
     return (
-        <FormContainer>
-            <h1>Sign In</h1>
+        <div>
+            <h1 className={`text-xl mb-3 text-center`}>Sign In</h1>
 
             <Form onFinish={onFinish}>
                 <Form.Item
@@ -92,36 +88,34 @@ const SignInForm = () => {
 
                 <Form.Item>
                     <div className="login-buttons">
-                        <FormButton type="primary" htmlType="submit" className="login-form-button">
+                        <Button type="primary" htmlType="submit" className={`w-full`}>
                             Log in
-                        </FormButton>
+                        </Button>
                         or
-                        <FormButton
+                        <Button
                             type="danger"
                             htmlType="submit"
-                            className="login-form-button"
+                            className={`w-full`}
                             onClick={signInWithGoogle}
                         >
                             Continue with Google
-                        </FormButton>
+                        </Button>
                     </div>
                 </Form.Item>
 
-                <ErrorMessage>{error}</ErrorMessage>
+                <div className={`text-red-500`}>{error}</div>
             </Form>
-        </FormContainer>
+        </div>
     );
 };
 
-export const WrappedSignInForm = SignInForm;
-
-const SignInPage = ({ history }) => (
-    <FormContainer>
-        <WrappedSignInForm history={history} />
-        <p>
-            Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
-        </p>
-    </FormContainer>
+export const SignInPage = ({ history }) => (
+    <div className={`flex h-full`}>
+        <div className={`w-64 m-auto`}>
+            <SignInForm history={history} />
+            <p>
+                Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
+            </p>
+        </div>
+    </div>
 );
-
-export default SignInPage;

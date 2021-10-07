@@ -23,3 +23,13 @@ export const createUser = (id, username, email) =>
         username,
         email,
     });
+
+export const authService = {
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut,
+    passwordReset,
+    passwordUpdate,
+    getUser,
+    createUser,
+};

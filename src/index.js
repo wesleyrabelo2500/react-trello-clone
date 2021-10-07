@@ -1,15 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import App from './App';
 import reducer, { initialState } from './utils/reducer';
 import { StateProvider } from './utils/state-provider';
 import * as serviceWorker from './serviceWorker';
+import 'antd/dist/antd.css';
+import './index.css';
 
 ReactDOM.render(
     <React.StrictMode>
         <StateProvider initialState={initialState} reducer={reducer}>
-            <App />
+            <App className={`h-full`} />
         </StateProvider>
     </React.StrictMode>,
     document.getElementById('root')

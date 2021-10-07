@@ -1,14 +1,11 @@
-import { Form, Input } from 'antd';
+import { Button, Form, Input } from 'antd';
 import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
-import { createUser, createUserWithEmailAndPassword } from '../services/auth';
-import { ErrorMessage } from '../components/common/ErrorMessage';
-import { FormButton } from '../components/common/FormButton';
-import { FormContainer } from '../components/common/FormContainer';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { EMAIL_ERROR_TYPES, ROUTES } from '../constants';
+import { EMAIL_ERROR_TYPES } from '../constants';
+import { createUser, createUserWithEmailAndPassword } from '../services/auth';
 
-const SignUpForm = ({ form, onSubmit }) => {
+const SignUpForm = ({ onSubmit }) => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [newPassword, setNewPassword] = useState('');
@@ -19,7 +16,7 @@ const SignUpForm = ({ form, onSubmit }) => {
         message: null,
     });
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async () => {
         if (newPassword !== confirmPassword) {
             setError('new password and confirm password do not match');
             return;
@@ -39,7 +36,7 @@ const SignUpForm = ({ form, onSubmit }) => {
         }
     };
 
-    const handleEmailInputBlur = (event) => {
+    const handleEmailInputBlur = () => {
         setEmailInputErr({
             status: EMAIL_ERROR_TYPES.INVALID.STATUS,
             message: EMAIL_ERROR_TYPES.INVALID.MESSAGE,
@@ -47,8 +44,8 @@ const SignUpForm = ({ form, onSubmit }) => {
     };
 
     return (
-        <FormContainer>
-            <h1 className="title">Sign Up</h1>
+        <div>
+            <h1 className={`text-xl mb-3 text-center`}>Sign Up</h1>
             <Form onFinish={(event) => handleSubmit(event)} className="login-form">
                 <Form.Item
                     name="username"
@@ -98,30 +95,28 @@ const SignUpForm = ({ form, onSubmit }) => {
                 </Form.Item>
 
                 <Form.Item>
-                    <FormButton
-                        type="primary"
-                        htmlType="submit"
-                        className="login-form-button signup-form-button"
-                    >
+                    <Button type="primary" htmlType="submit" className={`w-full`}>
                         Sign Up
-                    </FormButton>
+                    </Button>
                 </Form.Item>
 
-                <ErrorMessage>{error}</ErrorMessage>
+                <div className={`text-red-500`}>{error}</div>
             </Form>
-        </FormContainer>
+        </div>
     );
 };
 
-function SignUpScreen() {
+export const SignUpPage = withRouter(() => {
     const onSubmit = async (email, password, username) => {
         const authUser = await createUserWithEmailAndPassword(email, password);
         await createUser(authUser.user.uid, username, email);
-        window.location = ROUTES.LANDING;
     };
 
-    const WrappedSignUpForm = SignUpForm;
-    return <WrappedSignUpForm onSubmit={onSubmit} />;
-}
-
-export default withRouter(SignUpScreen);
+    return (
+        <div className={`flex h-full`}>
+            <div className={`w-64 m-auto`}>
+                <SignUpForm onSubmit={onSubmit} />
+            </div>
+        </div>
+    );
+});
