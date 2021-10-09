@@ -9,8 +9,6 @@ const getBoard = (key) => userBoard(key).once('value');
 
 const addBoard = (board) => userBoards().push(board);
 
-const getBoards = () => userBoards().once('value');
-
 const deleteBoard = (key) => userBoards().child(key).remove();
 
 const getLanes = (key) => userBoard(key).once('value');
@@ -22,9 +20,9 @@ const starBoard = (key, starred) => userBoard(key).update({ starred });
 const getStarredBoards = () => userBoards().orderByChild('starred').equalTo(true).once('value');
 
 export const boardService = {
+    userBoards,
     getBoard,
     addBoard,
-    getBoards,
     deleteBoard,
     saveLanes,
     getLanes,
