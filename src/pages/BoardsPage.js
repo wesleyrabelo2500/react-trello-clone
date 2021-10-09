@@ -21,14 +21,17 @@ export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
     }, []);
 
     const fetchBoards = async () => {
-        const data = (await boardService.getBoards()).val();
-        setBoardsSnapshot(data || {});
+        await boardService.userBoards().on('value', (snapshot) => {
+            if (!snapshot) {
+                return;
+            }
+            setBoardsSnapshot(snapshot.val() || {});
+        });
     };
 
     const addBoard = async (board) => {
         await boardService.addBoard(board);
         setModalVisible(false);
-        await fetchBoards();
     };
 
     const objectToArray = (data) =>
