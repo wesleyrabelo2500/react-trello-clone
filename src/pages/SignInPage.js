@@ -49,10 +49,7 @@ const SignInForm = () => {
             <h1 className={`text-xl mb-3 text-center`}>Sign In</h1>
 
             <Form onFinish={onFinish}>
-                <Form.Item
-                    name="email"
-                    rules={[{ required: true, message: 'Please input your email' }]}
-                >
+                <Form.Item name="email">
                     <Input
                         prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                         placeholder="Email"
@@ -60,10 +57,7 @@ const SignInForm = () => {
                     />
                 </Form.Item>
 
-                <Form.Item
-                    name="password"
-                    rules={[{ required: true, message: 'Please input your Password' }]}
-                >
+                <Form.Item name="password">
                     <Input
                         prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                         onChange={(event) => setPassword(event.target.value)}

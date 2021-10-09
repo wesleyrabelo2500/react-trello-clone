@@ -1,8 +1,9 @@
 import { Button, Form, Input } from 'antd';
 import React, { useState } from 'react';
-import { withRouter } from 'react-router-dom';
+import { useHistory, withRouter } from 'react-router-dom';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { createUser, createUserWithEmailAndPassword } from '../services/auth';
+import { ROUTES } from '../constants';
 
 const SignUpForm = ({ onSubmit }) => {
     const [username, setUsername] = useState('');
@@ -26,30 +27,21 @@ const SignUpForm = ({ onSubmit }) => {
         <div>
             <h1 className={`text-xl mb-3 text-center`}>Sign Up</h1>
             <Form onFinish={(event) => handleSubmit(event)} className="login-form">
-                <Form.Item
-                    name="username"
-                    rules={[{ required: true, message: 'Please input your username!' }]}
-                >
+                <Form.Item name="username">
                     <Input
                         prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                         placeholder="Username"
                         onChange={(event) => setUsername(event.target.value)}
                     />
                 </Form.Item>
-                <Form.Item
-                    name="email"
-                    rules={[{ required: true, message: 'Please input your email!' }]}
-                >
+                <Form.Item name="email">
                     <Input
                         prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                         placeholder="Email"
                         onChange={(event) => setEmail(event.target.value)}
                     />
                 </Form.Item>
-                <Form.Item
-                    name="newPassword"
-                    rules={[{ required: true, message: 'Please input your new password!' }]}
-                >
+                <Form.Item name="newPassword">
                     <Input
                         prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                         type="password"
@@ -71,9 +63,12 @@ const SignUpForm = ({ onSubmit }) => {
 };
 
 export const SignUpPage = withRouter(() => {
+    const history = useHistory();
+
     const onSubmit = async (email, password, username) => {
         const authUser = await createUserWithEmailAndPassword(email, password);
         await createUser(authUser.user.uid, username, email);
+        history.push(ROUTES.BOARDS);
     };
 
     return (
