@@ -15,11 +15,13 @@ export const BoardPage = withRouter(
         useEffect(() => {
             (async () => {
                 setLoading(true);
-                const snapshot = await boardService.getBoard(boardId());
-                const value = snapshot.val();
+                const data = (await boardService.getBoard(boardId())).val();
                 const res = {
-                    ...value,
-                    lanes: value.lanes.map((lane) => ({ ...lane, cards: lane.cards || [] })),
+                    ...data,
+                    lanes: (data.lanes || []).map((lane) => ({
+                        ...lane,
+                        cards: lane.cards || [],
+                    })),
                 };
                 setBoard(res);
                 setLoading(false);
