@@ -16,9 +16,9 @@ const SignUpForm = ({ onSubmit }) => {
         try {
             setLoading(true);
             await onSubmit(email, newPassword, username);
+            setLoading(false);
         } catch (error) {
             setError(error.message);
-        } finally {
             setLoading(false);
         }
     };

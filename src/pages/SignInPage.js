@@ -26,10 +26,10 @@ const SignInForm = () => {
                 user: result.user,
             });
             history.push(ROUTES.BOARDS);
+            setLoading(false);
         } catch (error) {
             setError(error.message);
-        } finally {
-            setLoading(true);
+            setLoading(false);
         }
     };
 
@@ -39,7 +39,6 @@ const SignInForm = () => {
             await authService.signInWithEmailAndPassword(email, password);
         } catch (error) {
             setError(error.message);
-        } finally {
             setLoading(false);
         }
     };
