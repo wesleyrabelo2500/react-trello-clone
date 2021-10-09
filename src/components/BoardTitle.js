@@ -5,7 +5,7 @@ export const BoardTitle = ({ title, action, addition, starAction, starred }) => 
     <div
         role="button"
         tabIndex="0"
-        onKeyDown={() => action()}
+        onKeyDown={() => {}}
         onClick={() => action()}
         className={`h-32 rounded-md p-2 font-semibold flex ${
             addition ? 'bg-gray-200 text-gray-900' : 'bg-blue-500 text-white justify-between'
@@ -16,19 +16,17 @@ export const BoardTitle = ({ title, action, addition, starAction, starred }) => 
             <div
                 role="button"
                 tabIndex="-1"
+                className="flex"
                 onClick={(e) => {
                     e.stopPropagation();
                     starAction();
                 }}
-                onKeyDown={(e) => {
-                    e.stopPropagation();
-                    starAction();
-                }}
+                onKeyDown={() => {}}
             >
                 {starred ? (
-                    <StarFilled className="transform transition-all text-white text-opacity-75 hover:text-opacity-100 hover:translate-x-px scale-100 hover:scale-110" />
+                    <StarFilled className="transform transition-all text-white text-opacity-75 hover:text-opacity-100 hover:translate-x-px scale-100 hover:scale-110 mt-auto" />
                 ) : (
-                    <StarOutlined className="transform transition-all text-white text-opacity-75 hover:text-opacity-100 hover:translate-x-px scale-100 hover:scale-110" />
+                    <StarOutlined className="transform transition-all text-white text-opacity-75 hover:text-opacity-100 hover:translate-x-px scale-100 hover:scale-110 mt-auto" />
                 )}
             </div>
         )}

@@ -8,7 +8,6 @@ import { withAuthorization } from '../utils';
 
 export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
     const [boardsSnapshot, setBoardsSnapshot] = useState({});
-    const [starredBoardsSnapshot, setStarredBoardsSnapshot] = useState(null);
     const [loading, setLoading] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
     const history = useHistory();
@@ -17,7 +16,6 @@ export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
         setLoading(true);
         (async () => {
             await fetchBoards();
-            await fetchStarredBoards();
             setLoading(false);
         })();
     }, []);
@@ -31,20 +29,13 @@ export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
         });
     };
 
-    const fetchStarredBoards = async () => {
-        const starred = (await boardService.getStarredBoards()).val();
-        setStarredBoardsSnapshot(starred || null);
-    };
-
     const addBoard = async (board) => {
         await boardService.addBoard(board);
         setModalVisible(false);
     };
 
-    const starBoard = async (board, starVal) => {
-        await boardService.starBoard(board, starVal);
-        await fetchBoards();
-        await fetchStarredBoards();
+    const starBoard = async (board, starred) => {
+        await boardService.updateBoard(board, { starred });
     };
 
     const objectToArray = (data) =>
@@ -67,22 +58,24 @@ export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
 
     return (
         <div className={`pt-16 py-4 px-3`}>
-            {starredBoardsSnapshot && (
+            {objectToArray(boardsSnapshot).filter((e) => e.starred === true).length > 0 && (
                 <>
                     <div className="flex mb-3 items-center text-xl">
                         <StarOutlined className={`mr-2`} /> Starred Boards
                     </div>
 
-                    <div className="grid grid-cols-4 gap-4">
-                        {objectToArray(starredBoardsSnapshot).map((board) => (
-                            <BoardTitle
-                                key={board?.key}
-                                title={board.title}
-                                action={() => history.push(`boards/${board?.key}`)}
-                                starAction={() => starBoard(board?.key, !board.starred)}
-                                starred={board.starred}
-                            />
-                        ))}
+                    <div className="grid grid-cols-4 gap-4 mb-6">
+                        {objectToArray(boardsSnapshot)
+                            .filter((e) => e.starred === true)
+                            .map((board) => (
+                                <BoardTitle
+                                    key={board?.key}
+                                    title={board.title}
+                                    action={() => history.push(`boards/${board?.key}`)}
+                                    starAction={() => starBoard(board?.key, !board.starred)}
+                                    starred={board.starred}
+                                />
+                            ))}
                     </div>
                 </>
             )}
