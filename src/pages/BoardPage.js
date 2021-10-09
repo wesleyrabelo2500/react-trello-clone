@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import Board from 'react-trello';
+import { Button } from 'antd';
 import { boardService } from '../services';
 import { withAuthorization } from '../utils';
-import { Button } from 'antd';
 
 export const BoardPage = withRouter(
     withAuthorization((authUser) => !!authUser)((props) => {
@@ -13,18 +13,22 @@ export const BoardPage = withRouter(
         const [loading, setLoading] = useState(false);
 
         useEffect(() => {
-            setLoading(true);
-            boardService.getBoard(boardId()).then((snapshot) => {
-                setBoard(snapshot.val());
+            (async () => {
+                setLoading(true);
+                const snapshot = await boardService.getBoard(boardId());
+                const value = snapshot.val();
+                const res = {
+                    ...value,
+                    lanes: value.lanes.map((lane) => ({ ...lane, cards: lane.cards || [] })),
+                };
+                setBoard(res);
                 setLoading(false);
-            });
+            })();
         }, []);
 
         const boardId = () => props.match?.params?.board;
 
-        const handleDataChange = async (data) => {
-            await boardService.saveLanes(boardId(), data);
-        };
+        const handleDataChange = async (data) => await boardService.saveLanes(boardId(), data);
 
         if (loading) {
             return (
