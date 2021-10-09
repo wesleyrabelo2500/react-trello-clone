@@ -15,18 +15,22 @@ export const BoardPage = withRouter(
         useEffect(() => {
             (async () => {
                 setLoading(true);
-                const data = (await boardService.getBoard(boardId())).val();
-                const res = {
-                    ...data,
-                    lanes: (data.lanes || []).map((lane) => ({
-                        ...lane,
-                        cards: lane.cards || [],
-                    })),
-                };
-                setBoard(res);
+                await fetchBoard();
                 setLoading(false);
             })();
         }, []);
+
+        const fetchBoard = async () => {
+            const data = (await boardService.getBoard(boardId())).val();
+            const res = {
+                ...data,
+                lanes: (data?.lanes || []).map((lane) => ({
+                    ...lane,
+                    cards: lane?.cards || [],
+                })),
+            };
+            setBoard(res);
+        };
 
         const boardId = () => props.match?.params?.board;
 
