@@ -12,10 +12,6 @@ export const signInWithEmailAndPassword = (email, password) =>
 
 export const signOut = () => firebaseAuth().signOut();
 
-export const passwordReset = (email) => firebaseAuth().sendPasswordResetEmail(email);
-
-export const passwordUpdate = (password) => getUser().updatePassword(password);
-
 export const getUser = () => firebaseAuth().currentUser;
 
 export const createUser = (id, username, email) =>
@@ -28,8 +24,6 @@ export const authService = {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     signOut,
-    passwordReset,
-    passwordUpdate,
     getUser,
     createUser,
 };

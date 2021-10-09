@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Button } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
 import { BoardTitle, BoardModal } from '../components';
 import { boardService } from '../services';
 import { withAuthorization } from '../utils';
-import { UserOutlined } from '@ant-design/icons';
-import { Button } from 'antd';
 
 export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
     const [boardsSnapshot, setBoardsSnapshot] = useState({});

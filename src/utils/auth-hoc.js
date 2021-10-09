@@ -7,6 +7,7 @@ import { ROUTES } from '../constants';
 
 export const withAuthentication = (Component) => (props) => {
     const [authUser, setAuthUser] = useState(null);
+
     useEffect(() => {
         firebase.auth().onAuthStateChanged((authUser = null) => {
             setAuthUser(authUser);
@@ -20,8 +21,8 @@ export const withAuthentication = (Component) => (props) => {
     );
 };
 
-export const withAuthorization = (authCondition) => (Component) => {
-    const WithAuthorization = (props) => {
+export const withAuthorization = (authCondition) => (Component) =>
+    withRouter((props) => {
         useEffect(() => {
             firebase.auth().onAuthStateChanged((authUser) => {
                 if (!authCondition(authUser)) {
@@ -32,7 +33,4 @@ export const withAuthorization = (authCondition) => (Component) => {
         const authUser = useContext(AuthUserContext);
 
         return authUser ? <Component {...props} /> : null;
-    };
-
-    return withRouter(WithAuthorization);
-};
+    });
