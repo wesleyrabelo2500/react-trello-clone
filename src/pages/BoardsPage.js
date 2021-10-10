@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Button } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import { BoardTitle, BoardModal } from '../components';
+import { BoardTitle, BoardModal, BoardSkeleton } from '../components';
 import { boardService } from '../services';
 import { withAuthorization } from '../utils';
 
@@ -43,13 +42,7 @@ export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
               }));
 
     if (loading) {
-        return (
-            <div className={`flex h-full`}>
-                <div className={`m-auto`}>
-                    <Button shape="circle" loading />
-                </div>
-            </div>
-        );
+        return <BoardSkeleton/>
     }
 
     return (
