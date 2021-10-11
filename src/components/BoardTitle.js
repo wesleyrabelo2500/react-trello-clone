@@ -1,12 +1,18 @@
 import { StarFilled, StarOutlined } from '@ant-design/icons';
 import PropTypes from 'prop-types';
 
-export const BoardTitle = ({ title, action, addition, starAction, starred }) => (
+export const BoardTitle = ({
+    title,
+    handleBoardClick,
+    addition,
+    handleBoardStarToggling,
+    starred,
+}) => (
     <div
         role="button"
         tabIndex="0"
         onKeyDown={() => {}}
-        onClick={() => action()}
+        onClick={() => handleBoardClick()}
         className={`h-32 rounded-md p-2 font-semibold flex ${
             addition ? 'bg-gray-200 text-gray-900' : 'bg-blue-500 text-white justify-between'
         }`}
@@ -19,7 +25,7 @@ export const BoardTitle = ({ title, action, addition, starAction, starred }) => 
                 className="flex"
                 onClick={(e) => {
                     e.stopPropagation();
-                    starAction();
+                    handleBoardStarToggling();
                 }}
                 onKeyDown={() => {}}
             >
@@ -36,7 +42,7 @@ export const BoardTitle = ({ title, action, addition, starAction, starred }) => 
 BoardTitle.propTypes = {
     title: PropTypes.string.isRequired,
     addition: PropTypes.bool,
-    action: PropTypes.func,
-    starAction: PropTypes.func,
+    handleBoardClick: PropTypes.func,
+    handleBoardStarToggling: PropTypes.func,
     starred: PropTypes.bool,
 };

@@ -8,6 +8,7 @@ import { withAuthorization } from '../utils';
 
 export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
     const [boardsSnapshot, setBoardsSnapshot] = useState({});
+    const [starredBoards, setStarredBoards] = useState([]);
     const [loading, setLoading] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
     const history = useHistory();
@@ -26,6 +27,7 @@ export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
                 return;
             }
             setBoardsSnapshot(snapshot.val() || {});
+            setStarredBoards(objectToArray(snapshot.val() || {}).filter((board) => board.starred));
         });
     };
 
@@ -58,24 +60,24 @@ export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
 
     return (
         <div className={`pt-16 py-4 px-3`}>
-            {objectToArray(boardsSnapshot).filter((e) => e.starred === true).length > 0 && (
+            {starredBoards.length > 0 && (
                 <>
                     <div className="flex mb-3 items-center text-xl">
                         <StarOutlined className={`mr-2`} /> Starred Boards
                     </div>
 
                     <div className="grid grid-cols-4 gap-4 mb-6">
-                        {objectToArray(boardsSnapshot)
-                            .filter((e) => e.starred === true)
-                            .map((board) => (
-                                <BoardTitle
-                                    key={board?.key}
-                                    title={board.title}
-                                    action={() => history.push(`boards/${board?.key}`)}
-                                    starAction={() => starBoard(board?.key, !board.starred)}
-                                    starred={board.starred}
-                                />
-                            ))}
+                        {starredBoards.map((board) => (
+                            <BoardTitle
+                                key={board?.key}
+                                title={board.title}
+                                handleBoardClick={() => history.push(`boards/${board?.key}`)}
+                                handleBoardStarToggling={() =>
+                                    starBoard(board?.key, !board.starred)
+                                }
+                                starred={board.starred}
+                            />
+                        ))}
                     </div>
                 </>
             )}
@@ -89,15 +91,15 @@ export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
                     <BoardTitle
                         key={board?.key}
                         title={board.title}
-                        action={() => history.push(`boards/${board?.key}`)}
-                        starAction={() => starBoard(board?.key, !board.starred)}
+                        handleBoardClick={() => history.push(`boards/${board?.key}`)}
+                        handleBoardStarToggling={() => starBoard(board?.key, !board.starred)}
                         starred={board.starred}
                     />
                 ))}
                 <BoardTitle
                     title="Add new board"
                     addition={true}
-                    action={() => setModalVisible(true)}
+                    handleBoardClick={() => setModalVisible(true)}
                 />
             </div>
 
