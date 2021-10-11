@@ -1,0 +1,15 @@
+.notFoundText {
+    text-align: center;
+    margin-top: 2%;
+    font-family: Time new Roman;
+    font-size: 25px;
+}
+
+.notFoundImage {
+    display: block;
+    width: 60%;
+    height: 70%;
+    margin: auto;
+    margin-top: 5%;
+    color: red;
+}
