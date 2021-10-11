@@ -1,7 +1,8 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
+import PropTypes from 'prop-types'
 
-export const BoardSkeleton = () => {
+export const BoardSkeleton = (props) => {
     return (
         <div className={`pt-16 py-4 px-3`}>
             <div className="flex mb-3 items-center text-xl">
@@ -10,20 +11,16 @@ export const BoardSkeleton = () => {
             </div>
 
             <div className="grid grid-cols-4 gap-4">
-                <div className="rounded-md h-32">
-                    <Skeleton height="8rem"></Skeleton>
-                </div>
-                <div className="rounded-md h-32">
-                    <Skeleton height="8rem"></Skeleton>
-                </div>
-                <div className="rounded-md h-32">
-                    <Skeleton height="8rem"></Skeleton>
-                </div>
-                <div className="rounded-md h-32">
-                    <Skeleton height="8rem"></Skeleton>
-                </div>
+                {Array(props.count).fill(
+                    <div className="rounded-md h-32">
+                        <Skeleton height="8rem"></Skeleton>
+                    </div>
+                )}
             </div>
         </div>
     )
 }
 
+BoardSkeleton.propTypes = {
+    count: PropTypes.number.isRequired
+};

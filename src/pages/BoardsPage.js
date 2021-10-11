@@ -7,7 +7,7 @@ import { withAuthorization } from '../utils';
 
 export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
     const [boardsSnapshot, setBoardsSnapshot] = useState({});
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [modalVisible, setModalVisible] = useState(false);
     const history = useHistory();
 
@@ -15,7 +15,6 @@ export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
         setLoading(true);
         (async () => {
             await fetchBoards();
-            setLoading(false);
         })();
     }, []);
 
@@ -25,6 +24,7 @@ export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
                 return;
             }
             setBoardsSnapshot(snapshot.val() || {});
+            setLoading(false);
         });
     };
 
@@ -42,7 +42,7 @@ export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
               }));
 
     if (loading) {
-        return <BoardSkeleton/>
+        return <BoardSkeleton count={4}/>
     }
 
     return (
