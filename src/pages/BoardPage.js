@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import Board from 'react-trello';
-import { Button } from 'antd';
 import { boardService } from '../services';
 import { withAuthorization } from '../utils';
+import { BoardSkeleton } from '../components';
 
 export const BoardPage = withRouter(
     withAuthorization((authUser) => !!authUser)((props) => {
@@ -37,13 +37,7 @@ export const BoardPage = withRouter(
         const handleDataChange = async (data) => await boardService.saveLanes(boardId(), data);
 
         if (loading) {
-            return (
-                <div className={`flex h-full w-full`}>
-                    <div className={`m-auto`}>
-                        <Button shape="circle" loading />
-                    </div>
-                </div>
-            );
+            return <BoardSkeleton count={5}/>
         }
 
         return (
