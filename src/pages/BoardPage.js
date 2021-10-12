@@ -22,15 +22,19 @@ export const BoardPage = withRouter(
 
         const fetchBoard = async () => {
             const data = (await boardService.getBoard(boardId())).val();
-            const res = {
-                ...data,
-                lanes: (data?.lanes || []).map((lane) => ({
-                    ...lane,
-                    cards: lane?.cards || [],
-                })),
-            };
-            setBoard(res);
+            setBoard(prepareBoard(data));
         };
+
+        /**
+         * Fill empty properties that are important for Board component
+         */
+        const prepareBoard = (board) => ({
+            ...board,
+            lanes: (board?.lanes || []).map((lane) => ({
+                ...lane,
+                cards: lane?.cards || [],
+            })),
+        });
 
         const boardId = () => props.match?.params?.board;
 
