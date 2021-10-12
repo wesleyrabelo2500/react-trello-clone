@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Button } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import { BoardTitle, BoardModal } from '../components';
+import { nanoid } from 'nanoid';
+import { BoardTitle, BoardModal, BoardsPageSkeleton } from '../components';
 import { boardService } from '../services';
-import { withAuthorization } from '../utils';
+import { objectToArray, withAuthorization } from '../utils';
 
 export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
-    const [boardsSnapshot, setBoardsSnapshot] = useState({});
-    const [loading, setLoading] = useState(false);
+    const [boards, setBoards] = useState({});
+    const [loading, setLoading] = useState(true);
     const [modalVisible, setModalVisible] = useState(false);
     const history = useHistory();
 
@@ -16,7 +16,6 @@ export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
         setLoading(true);
         (async () => {
             await fetchBoards();
-            setLoading(false);
         })();
     }, []);
 
@@ -25,7 +24,8 @@ export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
             if (!snapshot) {
                 return;
             }
-            setBoardsSnapshot(snapshot.val() || {});
+            setBoards(objectToArray(snapshot.val() || {}));
+            setLoading(false);
         });
     };
 
@@ -34,22 +34,8 @@ export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
         setModalVisible(false);
     };
 
-    const objectToArray = (data) =>
-        !data
-            ? []
-            : Object.values(data).map((value, index) => ({
-                  ...value,
-                  key: Object.keys(data)[index],
-              }));
-
     if (loading) {
-        return (
-            <div className={`flex h-full`}>
-                <div className={`m-auto`}>
-                    <Button shape="circle" loading />
-                </div>
-            </div>
-        );
+        return <BoardsPageSkeleton count={4} />;
     }
 
     return (
@@ -59,9 +45,10 @@ export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
             </div>
 
             <div className="grid grid-cols-4 gap-4">
-                {objectToArray(boardsSnapshot).map((board) => (
+                {boards.map((board) => (
                     <BoardTitle
                         title={board.title}
+                        key={nanoid()}
                         action={() => history.push(`boards/${board?.key}`)}
                     />
                 ))}
