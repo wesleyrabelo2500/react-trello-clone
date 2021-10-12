@@ -7,7 +7,7 @@ import { boardService } from '../services';
 import { withAuthorization } from '../utils';
 
 export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
-    const [boardsSnapshot, setBoardsSnapshot] = useState({});
+    const [boards, setBoards] = useState({});
     const [loading, setLoading] = useState(true);
     const [modalVisible, setModalVisible] = useState(false);
     const history = useHistory();
@@ -24,7 +24,7 @@ export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
             if (!snapshot) {
                 return;
             }
-            setBoardsSnapshot(snapshot.val() || {});
+            setBoards(snapshot.val() || {});
             setLoading(false);
         });
     };
@@ -53,7 +53,7 @@ export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
             </div>
 
             <div className="grid grid-cols-4 gap-4">
-                {objectToArray(boardsSnapshot).map((board) => (
+                {objectToArray(boards).map((board) => (
                     <BoardTitle
                         title={board.title}
                         key={nanoid()}
