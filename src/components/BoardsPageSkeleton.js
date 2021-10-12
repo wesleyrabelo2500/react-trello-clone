@@ -3,7 +3,7 @@ import Skeleton from 'react-loading-skeleton';
 import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 
-export const BoardSkeleton = (props) => {
+export const BoardsPageSkeleton = (props) => {
     const boardTitles = Array(props.count).fill({});
 
     return (
@@ -24,6 +24,6 @@ export const BoardSkeleton = (props) => {
     );
 };
 
-BoardSkeleton.propTypes = {
+BoardsPageSkeleton.propTypes = {
     count: PropTypes.number.isRequired,
 };

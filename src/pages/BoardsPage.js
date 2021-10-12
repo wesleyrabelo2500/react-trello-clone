@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { UserOutlined } from '@ant-design/icons';
 import { nanoid } from 'nanoid';
-import { BoardTitle, BoardModal, BoardSkeleton } from '../components';
+import { BoardTitle, BoardModal, BoardsPageSkeleton } from '../components';
 import { boardService } from '../services';
 import { withAuthorization } from '../utils';
 
@@ -43,7 +43,7 @@ export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
               }));
 
     if (loading) {
-        return <BoardSkeleton count={4} />;
+        return <BoardsPageSkeleton count={4} />;
     }
 
     return (
