@@ -4,7 +4,7 @@ import { UserOutlined } from '@ant-design/icons';
 import { nanoid } from 'nanoid';
 import { BoardTitle, BoardModal, BoardsPageSkeleton } from '../components';
 import { boardService } from '../services';
-import { withAuthorization } from '../utils';
+import { objectToArray, withAuthorization } from '../utils';
 
 export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
     const [boards, setBoards] = useState({});
@@ -33,14 +33,6 @@ export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
         await boardService.addBoard(board);
         setModalVisible(false);
     };
-
-    const objectToArray = (data) =>
-        !data
-            ? []
-            : Object.values(data).map((value, index) => ({
-                  ...value,
-                  key: Object.keys(data)[index],
-              }));
 
     if (loading) {
         return <BoardsPageSkeleton count={4} />;
