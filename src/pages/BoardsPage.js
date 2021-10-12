@@ -24,7 +24,7 @@ export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
             if (!snapshot) {
                 return;
             }
-            setBoards(snapshot.val() || {});
+            setBoards(objectToArray(snapshot.val() || {}));
             setLoading(false);
         });
     };
@@ -45,7 +45,7 @@ export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
             </div>
 
             <div className="grid grid-cols-4 gap-4">
-                {objectToArray(boards).map((board) => (
+                {boards.map((board) => (
                     <BoardTitle
                         title={board.title}
                         key={nanoid()}
