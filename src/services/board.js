@@ -11,8 +11,6 @@ const addBoard = (board) => userBoards().push(board);
 
 const deleteBoard = (key) => userBoards().child(key).remove();
 
-const getLanes = (key) => userBoard(key).once('value');
-
 const updateBoard = (key, data) => userBoard(key).update(data);
 
 export const boardService = {
@@ -20,6 +18,5 @@ export const boardService = {
     getBoard,
     addBoard,
     deleteBoard,
-    getLanes,
     updateBoard,
 };

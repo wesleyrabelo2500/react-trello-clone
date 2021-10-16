@@ -7,7 +7,6 @@ import { objectToArray, withAuthorization } from '../utils';
 
 export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
     const [boards, setBoards] = useState({});
-    const [starredBoards, setStarredBoards] = useState([]);
     const [loading, setLoading] = useState(true);
     const [modalVisible, setModalVisible] = useState(false);
     const history = useHistory();
@@ -25,7 +24,6 @@ export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
                 return;
             }
             setBoards(objectToArray(snapshot.val() || {}));
-            setStarredBoards(objectToArray(snapshot.val() || {}).filter((board) => board.starred));
             setLoading(false);
         });
     };
@@ -43,9 +41,11 @@ export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
         return <BoardsPageSkeleton count={4} />;
     }
 
+    const starredBoards = boards.filter((board) => board.starred);
+
     return (
         <div className={`pt-16 py-4 px-3`}>
-            {starredBoards.length > 0 && (
+            {!!starredBoards.length && (
                 <>
                     <div className="flex mb-3 items-center text-xl">
                         <StarOutlined className={`mr-2`} /> Starred Boards
