@@ -13,13 +13,13 @@ const deleteBoard = (key) => userBoards().child(key).remove();
 
 const getLanes = (key) => userBoard(key).once('value');
 
-const saveLanes = (key, lanes) => userBoard(key).update(lanes);
+const updateBoard = (key, data) => userBoard(key).update(data);
 
 export const boardService = {
     userBoards,
     getBoard,
     addBoard,
     deleteBoard,
-    saveLanes,
     getLanes,
+    updateBoard,
 };

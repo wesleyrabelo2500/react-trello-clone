@@ -38,10 +38,10 @@ export const BoardPage = withRouter(
 
         const boardId = () => props.match?.params?.board;
 
-        const handleDataChange = async (data) => await boardService.saveLanes(boardId(), data);
+        const handleDataChange = async (data) => await boardService.updateBoard(boardId(), data);
 
         if (loading) {
-            return <BoardSkeleton count={5}/>
+            return <BoardSkeleton count={5} />;
         }
 
         return (
