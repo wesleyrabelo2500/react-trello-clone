@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { UserOutlined } from '@ant-design/icons';
-import { nanoid } from 'nanoid';
+import { UserOutlined, StarOutlined } from '@ant-design/icons';
 import { BoardTitle, BoardModal, BoardsPageSkeleton } from '../components';
 import { boardService } from '../services';
 import { objectToArray, withAuthorization } from '../utils';
 
 export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
     const [boards, setBoards] = useState({});
+    const [starredBoards, setStarredBoards] = useState([]);
     const [loading, setLoading] = useState(true);
     const [modalVisible, setModalVisible] = useState(false);
     const history = useHistory();
@@ -25,6 +25,7 @@ export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
                 return;
             }
             setBoards(objectToArray(snapshot.val() || {}));
+            setStarredBoards(objectToArray(snapshot.val() || {}).filter((board) => board.starred));
             setLoading(false);
         });
     };
@@ -34,12 +35,38 @@ export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
         setModalVisible(false);
     };
 
+    const starBoard = async (board, starred) => {
+        await boardService.updateBoard(board, { starred });
+    };
+
     if (loading) {
         return <BoardsPageSkeleton count={4} />;
     }
 
     return (
         <div className={`pt-16 py-4 px-3`}>
+            {starredBoards.length > 0 && (
+                <>
+                    <div className="flex mb-3 items-center text-xl">
+                        <StarOutlined className={`mr-2`} /> Starred Boards
+                    </div>
+
+                    <div className="grid grid-cols-4 gap-4 mb-6">
+                        {starredBoards.map((board) => (
+                            <BoardTitle
+                                key={board?.key}
+                                title={board.title}
+                                handleBoardClick={() => history.push(`boards/${board?.key}`)}
+                                handleBoardStarToggling={() =>
+                                    starBoard(board?.key, !board.starred)
+                                }
+                                starred={board.starred}
+                            />
+                        ))}
+                    </div>
+                </>
+            )}
+
             <div className="flex mb-3 items-center text-xl">
                 <UserOutlined className={`mr-2`} /> Personal Boards
             </div>
@@ -47,15 +74,17 @@ export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
             <div className="grid grid-cols-4 gap-4">
                 {boards.map((board) => (
                     <BoardTitle
+                        key={board?.key}
                         title={board.title}
-                        key={nanoid()}
-                        action={() => history.push(`boards/${board?.key}`)}
+                        handleBoardClick={() => history.push(`boards/${board?.key}`)}
+                        handleBoardStarToggling={() => starBoard(board?.key, !board.starred)}
+                        starred={board.starred}
                     />
                 ))}
                 <BoardTitle
                     title="Add new board"
                     addition={true}
-                    action={() => setModalVisible(true)}
+                    handleBoardClick={() => setModalVisible(true)}
                 />
             </div>
 
