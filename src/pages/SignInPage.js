@@ -2,11 +2,11 @@ import { Button, Form, Input } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { auth, provider } from '../firebase';
-import { actionTypes } from '../utils/reducer';
-import { useStateValue } from '../utils/state-provider';
-import { authService } from '../services';
-import { ROUTES } from '../constants';
+import { auth, provider } from '../application/services/firebase';
+import { actionTypes } from '../auth/reducer';
+import { useStateValue } from '../application/state-provider';
+import { authService } from '../application/services';
+import { ROUTES } from '../application/constants';
 
 const SignInForm = () => {
     const [email, setEmail] = useState('');

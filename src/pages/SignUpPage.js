@@ -2,8 +2,8 @@ import { Button, Form, Input } from 'antd';
 import React, { useState } from 'react';
 import { useHistory, withRouter } from 'react-router-dom';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { createUser, createUserWithEmailAndPassword } from '../services/auth';
-import { ROUTES } from '../constants';
+import { createUser, createUserWithEmailAndPassword } from '../application/services/auth';
+import { ROUTES } from '../application/constants';
 
 const SignUpForm = ({ onSubmit }) => {
     const [username, setUsername] = useState('');

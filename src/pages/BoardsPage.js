@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { UserOutlined, StarOutlined } from '@ant-design/icons';
-import { BoardTitle, BoardModal, BoardsPageSkeleton } from '../components';
-import { boardService } from '../services';
-import { objectToArray, withAuthorization } from '../utils';
+import { boardService } from '../application/services';
+import { withAuthorization } from '../auth/auth-hoc';
+import { BoardTitle } from '../components/BoardTitle';
+import { BoardModal } from '../components/BoardModal';
+import { BoardsPageSkeleton } from '../components/BoardsPageSkeleton';
 
 export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
     const [boards, setBoards] = useState({});
@@ -36,6 +38,14 @@ export const BoardsPage = withAuthorization((authUser) => !!authUser)(() => {
     const starBoard = async (board, starred) => {
         await boardService.updateBoard(board, { starred });
     };
+
+    const objectToArray = (data) =>
+        !data
+            ? []
+            : Object.values(data).map((value, index) => ({
+                  ...value,
+                  key: Object.keys(data)[index],
+              }));
 
     if (loading) {
         return <BoardsPageSkeleton count={4} />;

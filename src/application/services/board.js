@@ -1,4 +1,4 @@
-import { db } from '../firebase';
+import { db } from './firebase';
 import { getUser } from './auth';
 
 const userBoards = () => db.ref('users').child(getUser().uid).child('boards');

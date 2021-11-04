@@ -1,12 +1,13 @@
 import { Button, Input, Modal } from 'antd';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { isEmptyText } from '../utils';
 
 export const BoardModal = (props) => {
     const { closeModal, action, visible } = props;
     const [boardTitle, setBoardTitle] = useState('');
     const [loading, setLoading] = useState(false);
+
+    const isEmptyText = (text) => !text || !text.trim();
 
     const handleCreateBoard = async (event) => {
         setLoading(true);

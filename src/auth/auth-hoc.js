@@ -3,7 +3,7 @@ import 'firebase/compat/auth';
 import React, { useEffect, useState, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import { AuthUserContext } from './auth-user-context';
-import { ROUTES } from '../constants';
+import { ROUTES } from '../application/constants';
 
 export const withAuthentication = (Component) => (props) => {
     const [authUser, setAuthUser] = useState(null);

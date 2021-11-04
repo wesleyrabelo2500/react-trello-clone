@@ -2,8 +2,8 @@ import { Dropdown, Menu } from 'antd';
 import { HomeOutlined, SettingOutlined } from '@ant-design/icons';
 import { Link, withRouter } from 'react-router-dom';
 import React from 'react';
-import { signOut } from '../services/auth';
-import { ROUTES } from '../constants';
+import { signOut } from '../application/services/auth';
+import { ROUTES } from '../application/constants';
 
 export const Navbar = withRouter(() => {
     return (
