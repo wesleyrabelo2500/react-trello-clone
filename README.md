@@ -22,13 +22,7 @@ $ cd react-trello-clone
 
 Here you can to run development environment in the two ways.
 
-### Automatic (by docker-compose)
-
-```
-$ docker-compose up --build
-```
-
-### Manual
+### Setup
 
 Install npm dependencies
 
