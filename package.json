@@ -42,7 +42,7 @@
         "firebase": "^9.0.1",
         "husky": "^7.0.2",
         "lint-staged": "^11.1.2",
-        "postcss": "^7.0.39",
+        "postcss": "^8.4.31",
         "prettier": "2.3.2",
         "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.16",
         "webpack-bundle-analyzer": "^4.4.2"
